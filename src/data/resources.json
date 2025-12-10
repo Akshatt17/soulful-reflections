@@ -1,0 +1,95 @@
+{
+  "downloads": [
+    {
+      "id": "1",
+      "title": "Daily Reflection Journal Template",
+      "description": "A beautifully designed PDF template to guide your daily journaling practice.",
+      "type": "PDF",
+      "size": "2.4 MB",
+      "downloadUrl": "/downloads/journal-template.pdf",
+      "category": "Journaling"
+    },
+    {
+      "id": "2",
+      "title": "Mindfulness Starter Guide",
+      "description": "A comprehensive guide for beginners to start their mindfulness journey.",
+      "type": "PDF",
+      "size": "3.1 MB",
+      "downloadUrl": "/downloads/mindfulness-guide.pdf",
+      "category": "Guides"
+    },
+    {
+      "id": "3",
+      "title": "Stress Management Workbook",
+      "description": "Interactive worksheets and exercises for managing daily stress.",
+      "type": "PDF",
+      "size": "4.5 MB",
+      "downloadUrl": "/downloads/stress-workbook.pdf",
+      "category": "Workbooks"
+    },
+    {
+      "id": "4",
+      "title": "Self-Care Planning Template",
+      "description": "Plan your weekly self-care activities with this structured template.",
+      "type": "PDF",
+      "size": "1.8 MB",
+      "downloadUrl": "/downloads/self-care-template.pdf",
+      "category": "Planning"
+    },
+    {
+      "id": "5",
+      "title": "Breathing Exercises Quick Reference",
+      "description": "A printable card with step-by-step breathing techniques.",
+      "type": "PDF",
+      "size": "0.5 MB",
+      "downloadUrl": "/downloads/breathing-exercises.pdf",
+      "category": "Quick Reference"
+    }
+  ],
+  "externalResources": [
+    {
+      "id": "1",
+      "title": "National Alliance on Mental Illness (NAMI)",
+      "description": "Comprehensive mental health information and support resources.",
+      "url": "https://www.nami.org",
+      "category": "Support Organizations"
+    },
+    {
+      "id": "2",
+      "title": "Mindful.org",
+      "description": "Daily practices, articles, and courses on mindfulness meditation.",
+      "url": "https://www.mindful.org",
+      "category": "Mindfulness"
+    },
+    {
+      "id": "3",
+      "title": "Psychology Today - Find a Therapist",
+      "description": "Search for mental health professionals in your area.",
+      "url": "https://www.psychologytoday.com/us/therapists",
+      "category": "Professional Help"
+    }
+  ],
+  "crisisResources": [
+    {
+      "id": "1",
+      "title": "988 Suicide and Crisis Lifeline",
+      "description": "24/7 free and confidential support for people in distress.",
+      "phone": "988",
+      "url": "https://988lifeline.org"
+    },
+    {
+      "id": "2",
+      "title": "Crisis Text Line",
+      "description": "Text HOME to 741741 to connect with a trained crisis counselor.",
+      "phone": "Text HOME to 741741",
+      "url": "https://www.crisistextline.org"
+    },
+    {
+      "id": "3",
+      "title": "SAMHSA National Helpline",
+      "description": "Free, confidential, 24/7 treatment referral and information service.",
+      "phone": "1-800-662-4357",
+      "url": "https://www.samhsa.gov/find-help/national-helpline"
+    }
+  ]
+}

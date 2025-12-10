@@ -1,0 +1,105 @@
+{
+  "audio": [
+    {
+      "id": "1",
+      "slug": "morning-gratitude",
+      "title": "Morning Gratitude",
+      "description": "Start your day with intentional thankfulness and set a positive tone.",
+      "duration": "5:32",
+      "category": "Morning",
+      "audioUrl": "/audio/morning-gratitude.mp3",
+      "transcript": "Welcome to this morning gratitude practice. Find a comfortable position, either sitting or lying down. Close your eyes and take three deep breaths...",
+      "publishedDate": "2024-01-10"
+    },
+    {
+      "id": "2",
+      "slug": "midday-reset",
+      "title": "Midday Reset",
+      "description": "A quick pause to recenter your focus and release tension.",
+      "duration": "3:45",
+      "category": "Midday",
+      "audioUrl": "/audio/midday-reset.mp3",
+      "transcript": "Take a moment to pause wherever you are. Notice your breath. You don't need to change it, just observe...",
+      "publishedDate": "2024-01-08"
+    },
+    {
+      "id": "3",
+      "slug": "evening-wind-down",
+      "title": "Evening Wind Down",
+      "description": "Release the day's tensions and prepare for restful sleep.",
+      "duration": "8:12",
+      "category": "Evening",
+      "audioUrl": "/audio/evening-wind-down.mp3",
+      "transcript": "As this day comes to a close, give yourself permission to let go of everything that happened...",
+      "publishedDate": "2024-01-05"
+    },
+    {
+      "id": "4",
+      "slug": "body-scan-relaxation",
+      "title": "Body Scan Relaxation",
+      "description": "A guided journey through your body to release held tension.",
+      "duration": "12:00",
+      "category": "Relaxation",
+      "audioUrl": "/audio/body-scan.mp3",
+      "transcript": "Begin by bringing your attention to the top of your head. Notice any sensations there...",
+      "publishedDate": "2024-01-03"
+    },
+    {
+      "id": "5",
+      "slug": "loving-kindness-meditation",
+      "title": "Loving Kindness Meditation",
+      "description": "Cultivate compassion for yourself and others.",
+      "duration": "10:15",
+      "category": "Meditation",
+      "audioUrl": "/audio/loving-kindness.mp3",
+      "transcript": "Find a comfortable seat and close your eyes. Begin by directing love and kindness toward yourself...",
+      "publishedDate": "2024-01-01"
+    }
+  ],
+  "video": [
+    {
+      "id": "1",
+      "slug": "guided-visualization",
+      "title": "Guided Visualization",
+      "description": "A journey through calming imagery to reduce stress.",
+      "duration": "15:00",
+      "category": "Visualization",
+      "thumbnail": "/placeholder.svg",
+      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "publishedDate": "2024-01-12"
+    },
+    {
+      "id": "2",
+      "slug": "breath-work-basics",
+      "title": "Breath Work Basics",
+      "description": "Foundation techniques for relaxation and stress relief.",
+      "duration": "12:30",
+      "category": "Breathing",
+      "thumbnail": "/placeholder.svg",
+      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "publishedDate": "2024-01-10"
+    },
+    {
+      "id": "3",
+      "slug": "yoga-for-anxiety",
+      "title": "Gentle Yoga for Anxiety",
+      "description": "Calming poses to soothe your nervous system.",
+      "duration": "20:00",
+      "category": "Movement",
+      "thumbnail": "/placeholder.svg",
+      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "publishedDate": "2024-01-08"
+    },
+    {
+      "id": "4",
+      "slug": "sleep-meditation",
+      "title": "Sleep Meditation Journey",
+      "description": "Drift into peaceful sleep with this guided meditation.",
+      "duration": "25:00",
+      "category": "Sleep",
+      "thumbnail": "/placeholder.svg",
+      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "publishedDate": "2024-01-05"
+    }
+  ]
+}
