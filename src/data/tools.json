@@ -1,0 +1,259 @@
+{
+  "tools": [
+    {
+      "id": "mood-tracker",
+      "title": "Mood Tracker",
+      "description": "Monitor your emotional patterns over time to gain valuable insights into your mental well-being and identify triggers.",
+      "icon": "Activity",
+      "color": "sage",
+      "disclaimer": "This tool is for self-reflection purposes only and is not a diagnostic instrument. Results should not be used as a substitute for professional mental health care.",
+      "questions": [
+        {
+          "id": 1,
+          "question": "How would you describe your overall mood today?",
+          "options": [
+            { "label": "Very Low", "value": 1 },
+            { "label": "Low", "value": 2 },
+            { "label": "Neutral", "value": 3 },
+            { "label": "Good", "value": 4 },
+            { "label": "Excellent", "value": 5 }
+          ]
+        },
+        {
+          "id": 2,
+          "question": "How well did you sleep last night?",
+          "options": [
+            { "label": "Very Poorly", "value": 1 },
+            { "label": "Poorly", "value": 2 },
+            { "label": "Average", "value": 3 },
+            { "label": "Well", "value": 4 },
+            { "label": "Very Well", "value": 5 }
+          ]
+        },
+        {
+          "id": 3,
+          "question": "How anxious or worried have you felt today?",
+          "options": [
+            { "label": "Extremely", "value": 1 },
+            { "label": "Very", "value": 2 },
+            { "label": "Moderately", "value": 3 },
+            { "label": "Slightly", "value": 4 },
+            { "label": "Not at all", "value": 5 }
+          ]
+        },
+        {
+          "id": 4,
+          "question": "How connected do you feel to others today?",
+          "options": [
+            { "label": "Very Disconnected", "value": 1 },
+            { "label": "Somewhat Disconnected", "value": 2 },
+            { "label": "Neutral", "value": 3 },
+            { "label": "Somewhat Connected", "value": 4 },
+            { "label": "Very Connected", "value": 5 }
+          ]
+        },
+        {
+          "id": 5,
+          "question": "How much energy do you have right now?",
+          "options": [
+            { "label": "Exhausted", "value": 1 },
+            { "label": "Low Energy", "value": 2 },
+            { "label": "Moderate", "value": 3 },
+            { "label": "Energized", "value": 4 },
+            { "label": "Very Energized", "value": 5 }
+          ]
+        }
+      ],
+      "results": {
+        "low": {
+          "range": [5, 12],
+          "title": "Time for Extra Self-Care",
+          "message": "Your responses suggest you might be going through a challenging time. Remember, it's okay to not be okay. Consider reaching out to supportive people in your life or exploring our resources for additional support.",
+          "recommendations": ["Practice gentle self-compassion", "Consider speaking with a mental health professional", "Try our Evening Wind Down audio reflection", "Read: The Art of Letting Go"]
+        },
+        "moderate": {
+          "range": [13, 19],
+          "title": "Finding Balance",
+          "message": "You're experiencing a mix of highs and lows, which is a normal part of life. Consider incorporating some of our mindfulness practices to help maintain equilibrium.",
+          "recommendations": ["Try our Midday Reset meditation", "Explore journaling for clarity", "Read: 5 Morning Rituals for a Centered Day", "Practice gratitude daily"]
+        },
+        "high": {
+          "range": [20, 25],
+          "title": "Thriving",
+          "message": "You're doing well! Keep nurturing the habits and connections that support your well-being. Consider sharing your positive energy with others.",
+          "recommendations": ["Maintain your current practices", "Try our Loving Kindness Meditation", "Share your journey with others", "Explore new growth opportunities"]
+        }
+      }
+    },
+    {
+      "id": "stress-inventory",
+      "title": "Stress Inventory",
+      "description": "Evaluate your current stress levels and discover personalized strategies for managing and reducing daily pressures.",
+      "icon": "Brain",
+      "color": "sage",
+      "disclaimer": "This assessment provides general guidance and is not a clinical evaluation. If you're experiencing significant stress, please consult a healthcare professional.",
+      "questions": [
+        {
+          "id": 1,
+          "question": "How often do you feel overwhelmed by your responsibilities?",
+          "options": [
+            { "label": "Almost Always", "value": 1 },
+            { "label": "Often", "value": 2 },
+            { "label": "Sometimes", "value": 3 },
+            { "label": "Rarely", "value": 4 },
+            { "label": "Almost Never", "value": 5 }
+          ]
+        },
+        {
+          "id": 2,
+          "question": "How well are you able to relax when you have free time?",
+          "options": [
+            { "label": "Not at all", "value": 1 },
+            { "label": "With difficulty", "value": 2 },
+            { "label": "Somewhat", "value": 3 },
+            { "label": "Fairly well", "value": 4 },
+            { "label": "Very easily", "value": 5 }
+          ]
+        },
+        {
+          "id": 3,
+          "question": "How often do physical symptoms of stress affect you (headaches, muscle tension, etc.)?",
+          "options": [
+            { "label": "Daily", "value": 1 },
+            { "label": "Several times a week", "value": 2 },
+            { "label": "Weekly", "value": 3 },
+            { "label": "Monthly", "value": 4 },
+            { "label": "Rarely or never", "value": 5 }
+          ]
+        },
+        {
+          "id": 4,
+          "question": "How confident do you feel in handling unexpected problems?",
+          "options": [
+            { "label": "Not confident", "value": 1 },
+            { "label": "Slightly confident", "value": 2 },
+            { "label": "Moderately confident", "value": 3 },
+            { "label": "Quite confident", "value": 4 },
+            { "label": "Very confident", "value": 5 }
+          ]
+        },
+        {
+          "id": 5,
+          "question": "How often do you make time for activities you enjoy?",
+          "options": [
+            { "label": "Never", "value": 1 },
+            { "label": "Rarely", "value": 2 },
+            { "label": "Sometimes", "value": 3 },
+            { "label": "Often", "value": 4 },
+            { "label": "Daily", "value": 5 }
+          ]
+        }
+      ],
+      "results": {
+        "low": {
+          "range": [5, 12],
+          "title": "High Stress Levels",
+          "message": "Your responses indicate you may be experiencing significant stress. It's important to prioritize stress management and consider seeking support.",
+          "recommendations": ["Practice daily breathing exercises", "Consider professional support", "Try our Body Scan Relaxation", "Read: Mindful Breathing Techniques for Anxiety"]
+        },
+        "moderate": {
+          "range": [13, 19],
+          "title": "Moderate Stress",
+          "message": "You're managing but could benefit from additional stress-reduction strategies. Small changes can make a big difference.",
+          "recommendations": ["Schedule regular breaks", "Try our Midday Reset meditation", "Explore nature for stress relief", "Practice setting boundaries"]
+        },
+        "high": {
+          "range": [20, 25],
+          "title": "Well-Managed Stress",
+          "message": "You're handling stress effectively. Continue your healthy practices and stay mindful of maintaining balance.",
+          "recommendations": ["Maintain your current practices", "Share strategies with others", "Explore advanced meditation techniques", "Continue prioritizing self-care"]
+        }
+      }
+    },
+    {
+      "id": "balance-check",
+      "title": "Balance Check",
+      "description": "Assess the harmony between different areas of your life and find opportunities for creating better equilibrium.",
+      "icon": "Scale",
+      "color": "sage",
+      "disclaimer": "This tool helps identify areas for growth and is not a clinical assessment. For personalized guidance, consider consulting a life coach or therapist.",
+      "questions": [
+        {
+          "id": 1,
+          "question": "How satisfied are you with your work-life balance?",
+          "options": [
+            { "label": "Very Unsatisfied", "value": 1 },
+            { "label": "Unsatisfied", "value": 2 },
+            { "label": "Neutral", "value": 3 },
+            { "label": "Satisfied", "value": 4 },
+            { "label": "Very Satisfied", "value": 5 }
+          ]
+        },
+        {
+          "id": 2,
+          "question": "How much time do you dedicate to your physical health?",
+          "options": [
+            { "label": "None", "value": 1 },
+            { "label": "Very little", "value": 2 },
+            { "label": "Some", "value": 3 },
+            { "label": "A good amount", "value": 4 },
+            { "label": "Plenty", "value": 5 }
+          ]
+        },
+        {
+          "id": 3,
+          "question": "How fulfilled do you feel in your relationships?",
+          "options": [
+            { "label": "Very Unfulfilled", "value": 1 },
+            { "label": "Unfulfilled", "value": 2 },
+            { "label": "Neutral", "value": 3 },
+            { "label": "Fulfilled", "value": 4 },
+            { "label": "Very Fulfilled", "value": 5 }
+          ]
+        },
+        {
+          "id": 4,
+          "question": "How often do you engage in personal growth activities?",
+          "options": [
+            { "label": "Never", "value": 1 },
+            { "label": "Rarely", "value": 2 },
+            { "label": "Sometimes", "value": 3 },
+            { "label": "Often", "value": 4 },
+            { "label": "Very Often", "value": 5 }
+          ]
+        },
+        {
+          "id": 5,
+          "question": "How aligned do your daily activities feel with your values?",
+          "options": [
+            { "label": "Not aligned", "value": 1 },
+            { "label": "Slightly aligned", "value": 2 },
+            { "label": "Somewhat aligned", "value": 3 },
+            { "label": "Mostly aligned", "value": 4 },
+            { "label": "Fully aligned", "value": 5 }
+          ]
+        }
+      ],
+      "results": {
+        "low": {
+          "range": [5, 12],
+          "title": "Seeking Balance",
+          "message": "Your life may feel out of balance in several areas. Start by identifying one area to focus on and make small, sustainable changes.",
+          "recommendations": ["Identify your top priority area", "Create small daily rituals", "Try our Self-Care Planning Template", "Read: Setting Boundaries as Self-Respect"]
+        },
+        "moderate": {
+          "range": [13, 19],
+          "title": "Growing Balance",
+          "message": "You're making progress toward balance. Continue nurturing the areas that are working and gently address those that need attention.",
+          "recommendations": ["Celebrate your progress", "Focus on one growth area", "Try our Morning Gratitude practice", "Explore our journaling resources"]
+        },
+        "high": {
+          "range": [20, 25],
+          "title": "Living in Balance",
+          "message": "You've created meaningful harmony across life areas. Your practices are serving you well—continue to nurture and refine them.",
+          "recommendations": ["Maintain your practices", "Mentor others seeking balance", "Explore deeper growth opportunities", "Share your journey through journaling"]
+        }
+      }
+    }
+  ]
+}
