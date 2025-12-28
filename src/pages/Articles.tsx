@@ -1,27 +1,61 @@
 import { useState, useMemo } from "react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import ArticleCard from "@/components/ArticleCard";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import articlesData from "@/data/articles.json";
 
 const ITEMS_PER_PAGE = 6;
 
+// Extract unique categories from articles
+const categories = ["All Topics", ...new Set(articlesData.map((a) => a.category))];
+
 const Articles = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All Topics");
+  const [sortBy, setSortBy] = useState<string>("latest");
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const categories = useMemo(() => {
-    const cats = new Set(articlesData.map((a) => a.category));
-    return ["All", ...Array.from(cats)];
-  }, []);
+  const filteredAndSortedArticles = useMemo(() => {
+    let result = [...articlesData];
 
-  const filteredArticles = useMemo(() => {
-    if (selectedCategory === "All") return articlesData;
-    return articlesData.filter((a) => a.category === selectedCategory);
-  }, [selectedCategory]);
+    // Filter by category
+    if (selectedCategory !== "All Topics") {
+      result = result.filter((a) => a.category === selectedCategory);
+    }
 
-  const totalPages = Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
-  const paginatedArticles = filteredArticles.slice(
+    // Filter by search query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(
+        (a) =>
+          a.title.toLowerCase().includes(query) ||
+          a.excerpt.toLowerCase().includes(query) ||
+          a.tags.some((tag) => tag.toLowerCase().includes(query))
+      );
+    }
+
+    // Sort articles
+    if (sortBy === "latest") {
+      result.sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime());
+    } else if (sortBy === "oldest") {
+      result.sort((a, b) => new Date(a.publishedDate).getTime() - new Date(b.publishedDate).getTime());
+    }
+    // "most-read" would require view counts - keeping same order for now
+
+    return result;
+  }, [selectedCategory, sortBy, searchQuery]);
+
+  const totalPages = Math.ceil(filteredAndSortedArticles.length / ITEMS_PER_PAGE);
+  const paginatedArticles = filteredAndSortedArticles.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
@@ -31,37 +65,79 @@ const Articles = () => {
     setCurrentPage(1);
   };
 
+  const handleSortChange = (value: string) => {
+    setSortBy(value);
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1);
+  };
+
   return (
     <PageLayout>
-      {/* Hero */}
-      <section className="bg-muted py-16">
+      {/* Page Header */}
+      <section className="bg-muted py-16 lg:py-20">
         <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
-            Articles
+            Reflections
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Insights and guidance to support your personal growth journey.
+            A dedicated space for long-form reading. Explore insights on mindfulness, 
+            self-care, and personal growth at your own pace.
           </p>
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="bg-card border-b border-border">
-        <div className="container-custom px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => handleCategoryChange(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  selectedCategory === cat
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-muted text-muted-foreground hover:bg-primary/10"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+      {/* Filter & Sort Bar */}
+      <section className="bg-card border-b border-border sticky top-16 lg:top-20 z-40">
+        <div className="container-custom px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+            {/* Topic Filters */}
+            <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => handleCategoryChange(cat)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                    selectedCategory === cat
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Search & Sort */}
+            <div className="flex gap-3 w-full lg:w-auto">
+              {/* Search Input */}
+              <div className="relative flex-1 lg:w-64">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Search articles..."
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className="pl-10 bg-muted border-border"
+                />
+              </div>
+
+              {/* Sort Dropdown */}
+              <Select value={sortBy} onValueChange={handleSortChange}>
+                <SelectTrigger className="w-36 bg-muted border-border">
+                  <SlidersHorizontal className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="latest">Latest</SelectItem>
+                  <SelectItem value="oldest">Oldest</SelectItem>
+                  <SelectItem value="most-read">Most Read</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </section>
@@ -70,11 +146,28 @@ const Articles = () => {
       <section className="section-padding bg-background">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           {paginatedArticles.length === 0 ? (
-            <p className="text-center text-muted-foreground py-12">
-              No articles found in this category.
-            </p>
+            <div className="text-center py-16">
+              <p className="text-muted-foreground text-lg mb-4">
+                No articles found matching your criteria.
+              </p>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setSelectedCategory("All Topics");
+                  setSearchQuery("");
+                }}
+              >
+                Clear Filters
+              </Button>
+            </div>
           ) : (
             <>
+              {/* Results Count */}
+              <p className="text-sm text-muted-foreground mb-8">
+                Showing {paginatedArticles.length} of {filteredAndSortedArticles.length} articles
+              </p>
+
+              {/* Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                 {paginatedArticles.map((article) => (
                   <ArticleCard
@@ -91,7 +184,7 @@ const Articles = () => {
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <div className="flex justify-center gap-2">
+                <div className="flex justify-center items-center gap-2">
                   <Button
                     variant="outline"
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
@@ -99,16 +192,20 @@ const Articles = () => {
                   >
                     Previous
                   </Button>
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                    <Button
-                      key={page}
-                      variant={currentPage === page ? "hero" : "outline"}
-                      onClick={() => setCurrentPage(page)}
-                      className="w-10"
-                    >
-                      {page}
-                    </Button>
-                  ))}
+                  
+                  <div className="flex gap-1">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <Button
+                        key={page}
+                        variant={currentPage === page ? "hero" : "ghost"}
+                        onClick={() => setCurrentPage(page)}
+                        className="w-10 h-10"
+                      >
+                        {page}
+                      </Button>
+                    ))}
+                  </div>
+
                   <Button
                     variant="outline"
                     onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
@@ -118,6 +215,15 @@ const Articles = () => {
                   </Button>
                 </div>
               )}
+
+              {/* Load More Alternative (for future infinite scroll) */}
+              {/* 
+              <div className="text-center">
+                <Button variant="sage" size="lg">
+                  Load More Articles
+                </Button>
+              </div>
+              */}
             </>
           )}
         </div>
