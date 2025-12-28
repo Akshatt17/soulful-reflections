@@ -15,7 +15,15 @@ const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
         ref={ref}
         to={to}
         className={({ isActive, isPending }) =>
-          cn(className, isActive && activeClassName, isPending && pendingClassName)
+          cn(
+            "text-sm font-medium transition-colors duration-200",
+            isActive 
+              ? "text-primary" 
+              : "text-foreground/80 hover:text-primary",
+            className, 
+            isActive && activeClassName, 
+            isPending && pendingClassName
+          )
         }
         {...props}
       />
@@ -26,3 +34,4 @@ const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
 NavLink.displayName = "NavLink";
 
 export { NavLink };
+export default NavLink;

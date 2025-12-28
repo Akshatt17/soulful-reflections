@@ -1,15 +1,17 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { NavLink } from "./NavLink";
 
 const navItems = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#" },
-  { label: "Articles", href: "#" },
-  { label: "Tools", href: "#" },
-  { label: "Media", href: "#" },
-  { label: "Resources", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Articles", href: "/articles" },
+  { label: "Tools", href: "/tools" },
+  { label: "Media", href: "/media" },
+  { label: "Resources", href: "/resources" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const Header = () => {
@@ -20,28 +22,26 @@ const Header = () => {
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 lg:h-20 px-4 sm:px-6 lg:px-8">
           {/* Logo */}
-          <a href="#" className="font-serif text-xl lg:text-2xl font-semibold text-primary">
+          <Link to="/" className="font-serif text-xl lg:text-2xl font-semibold text-primary">
             Soulful Reflections
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
             {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors duration-200"
-              >
+              <NavLink key={item.label} to={item.href}>
                 {item.label}
-              </a>
+              </NavLink>
             ))}
           </nav>
 
           {/* Desktop CTA */}
           <div className="hidden lg:block">
-            <Button variant="hero" size="default">
-              Get Started
-            </Button>
+            <Link to="/tools">
+              <Button variant="hero" size="default">
+                Get Started
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -60,18 +60,20 @@ const Header = () => {
         <div className="lg:hidden bg-card border-t border-border animate-fade-in">
           <nav className="container-custom px-4 py-6 space-y-4">
             {navItems.map((item) => (
-              <a
+              <NavLink
                 key={item.label}
-                href={item.href}
-                className="block text-base font-medium text-foreground/80 hover:text-primary transition-colors duration-200 py-2"
+                to={item.href}
+                className="block text-base py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.label}
-              </a>
+              </NavLink>
             ))}
-            <Button variant="hero" size="lg" className="w-full mt-4">
-              Get Started
-            </Button>
+            <Link to="/tools" onClick={() => setMobileMenuOpen(false)}>
+              <Button variant="hero" size="lg" className="w-full mt-4">
+                Get Started
+              </Button>
+            </Link>
           </nav>
         </div>
       )}
