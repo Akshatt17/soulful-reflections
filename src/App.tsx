@@ -15,6 +15,8 @@ import VideoDetail from "./pages/VideoDetail";
 import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
+import Disclaimer from "./pages/Disclaimer";
+import Crisis from "./pages/Crisis";
 import Booking from "./pages/Booking";
 import NotFound from "./pages/NotFound";
 
@@ -39,6 +41,8 @@ const App = () => (
           <Route path="/resources" element={<Resources />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/crisis" element={<Crisis />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

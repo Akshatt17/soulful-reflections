@@ -12,6 +12,7 @@ interface QuizStepProps {
   onSelect: (value: number) => void;
   onNext: () => void;
   onPrevious: () => void;
+  onExit: () => void;
   isFirst: boolean;
   isLast: boolean;
 }
@@ -23,6 +24,7 @@ const QuizStep = ({
   onSelect,
   onNext,
   onPrevious,
+  onExit,
   isFirst,
   isLast,
 }: QuizStepProps) => {
@@ -48,15 +50,24 @@ const QuizStep = ({
         ))}
       </div>
 
-      <div className="flex justify-between pt-4">
+      <div className="flex items-center justify-between pt-4">
         <Button
           variant="outline"
           onClick={onPrevious}
           disabled={isFirst}
           className={isFirst ? "invisible" : ""}
         >
-          Previous
+          Back
         </Button>
+        
+        <Button
+          variant="ghost"
+          onClick={onExit}
+          className="text-muted-foreground hover:text-foreground"
+        >
+          Exit
+        </Button>
+        
         <Button
           variant="hero"
           onClick={onNext}
