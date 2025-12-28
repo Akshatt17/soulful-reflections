@@ -148,11 +148,18 @@ const About = () => {
             <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
               Explore our collection of articles, tools, and resources designed to support your growth.
             </p>
-            <Link to="/articles">
-              <Button variant="hero" size="lg">
-                Explore Articles
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/articles">
+                <Button variant="hero" size="lg">
+                  Read Reflections
+                </Button>
+              </Link>
+              <Link to="/tools">
+                <Button variant="outline" size="lg">
+                  Explore Tools
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

@@ -1,12 +1,15 @@
 import { Instagram, Twitter, Facebook } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const footerLinks = [
-  { label: "About", href: "#" },
-  { label: "Articles", href: "#" },
-  { label: "Media Library", href: "#" },
-  { label: "Resources", href: "#" },
-  { label: "Privacy Policy", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "About", href: "/about" },
+  { label: "Articles", href: "/articles" },
+  { label: "Media Library", href: "/media" },
+  { label: "Resources", href: "/resources" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Disclaimer", href: "/disclaimer" },
+  { label: "Crisis Resources", href: "/crisis" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const socialLinks = [
@@ -36,13 +39,13 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <nav className="space-y-3">
               {footerLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
-                  href={link.href}
+                  to={link.href}
                   className="block text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-200"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
