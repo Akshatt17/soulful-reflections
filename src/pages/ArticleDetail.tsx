@@ -145,6 +145,25 @@ const ArticleDetail = () => {
           </div>
         </section>
       )}
+
+      {/* Soft Call-to-Action */}
+      <section className="section-padding bg-muted">
+        <div className="container-custom px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto text-center">
+            <h3 className="font-serif text-2xl font-bold text-primary mb-4">
+              Ready to Explore Yourself Further?
+            </h3>
+            <p className="text-muted-foreground mb-6">
+              Our self-assessment tools can help you gain deeper insights into your emotional patterns and well-being.
+            </p>
+            <Link to="/tools">
+              <Button variant="hero" size="lg">
+                Try a Self-Assessment
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
     </PageLayout>
   );
 };
