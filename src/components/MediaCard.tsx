@@ -33,9 +33,10 @@ interface VideoCardProps {
   title: string;
   description: string;
   thumbnail: string;
+  duration?: string;
 }
 
-export const VideoCard = ({ slug, title, description, thumbnail }: VideoCardProps) => {
+export const VideoCard = ({ slug, title, description, thumbnail, duration }: VideoCardProps) => {
   return (
     <Link
       to={`/media/video/${slug}`}
@@ -53,6 +54,11 @@ export const VideoCard = ({ slug, title, description, thumbnail }: VideoCardProp
             <PlayCircle className="w-10 h-10 text-primary" />
           </div>
         </div>
+        {duration && (
+          <div className="absolute bottom-3 right-3 px-2 py-1 bg-foreground/80 text-card text-xs font-medium rounded">
+            {duration}
+          </div>
+        )}
       </div>
       <div className="bg-muted p-5">
         <h4 className="font-medium text-foreground mb-1">{title}</h4>

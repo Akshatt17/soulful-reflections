@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Clock } from "lucide-react";
 import { Activity, Brain, Scale, LucideIcon } from "lucide-react";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -12,9 +13,10 @@ interface ToolCardProps {
   title: string;
   description: string;
   icon: string;
+  duration?: string;
 }
 
-const ToolCard = ({ id, title, description, icon }: ToolCardProps) => {
+const ToolCard = ({ id, title, description, icon, duration }: ToolCardProps) => {
   const IconComponent = iconMap[icon] || Activity;
 
   return (
@@ -23,12 +25,18 @@ const ToolCard = ({ id, title, description, icon }: ToolCardProps) => {
         <IconComponent className="w-7 h-7 text-sage" />
       </div>
       <h3 className="font-serif text-xl font-bold text-primary mb-3">{title}</h3>
-      <p className="text-muted-foreground leading-relaxed mb-5">{description}</p>
+      <p className="text-muted-foreground leading-relaxed mb-4">{description}</p>
+      {duration && (
+        <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-5">
+          <Clock className="w-4 h-4" />
+          <span>{duration}</span>
+        </div>
+      )}
       <Link
         to={`/tools/${id}`}
-        className="text-primary font-medium hover:underline underline-offset-4 transition-all duration-200"
+        className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-opacity"
       >
-        Begin Assessment →
+        Start
       </Link>
     </div>
   );

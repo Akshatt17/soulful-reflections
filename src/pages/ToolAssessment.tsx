@@ -109,21 +109,42 @@ const ToolAssessment = () => {
                   {tool.description}
                 </p>
 
-                <div className="bg-muted rounded-2xl p-6 mb-8 text-left">
-                  <h3 className="font-semibold text-foreground mb-2">Before You Begin</h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {tool.disclaimer}
+                {/* What this helps with */}
+                <div className="bg-card rounded-2xl p-6 mb-6 text-left shadow-soft">
+                  <h3 className="font-semibold text-foreground mb-3">What This Helps With</h3>
+                  <p className="text-muted-foreground">
+                    This self-reflection tool helps you gain insights into your current emotional state, 
+                    identify patterns, and discover personalized resources to support your well-being journey.
                   </p>
-                  <ul className="text-sm text-muted-foreground space-y-2">
-                    <li>• This assessment takes about 2-3 minutes</li>
-                    <li>• Answer based on how you've felt recently</li>
-                    <li>• There are no right or wrong answers</li>
-                    <li>• Your responses are stored only on your device</li>
+                </div>
+
+                {/* Before you begin - bullet points */}
+                <div className="bg-muted rounded-2xl p-6 mb-8 text-left">
+                  <h3 className="font-semibold text-foreground mb-3">Before You Begin</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3 text-muted-foreground">
+                      <span className="w-5 h-5 bg-sage/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="w-2 h-2 bg-sage rounded-full"></span>
+                      </span>
+                      <span><strong>Anonymous:</strong> Your responses stay on your device only</span>
+                    </li>
+                    <li className="flex items-start gap-3 text-muted-foreground">
+                      <span className="w-5 h-5 bg-sage/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="w-2 h-2 bg-sage rounded-full"></span>
+                      </span>
+                      <span><strong>Non-diagnostic:</strong> This is for self-reflection, not clinical assessment</span>
+                    </li>
+                    <li className="flex items-start gap-3 text-muted-foreground">
+                      <span className="w-5 h-5 bg-sage/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="w-2 h-2 bg-sage rounded-full"></span>
+                      </span>
+                      <span><strong>Your pace:</strong> Take about 2-3 minutes, and you can stop anytime</span>
+                    </li>
                   </ul>
                 </div>
 
                 <Button variant="hero" size="lg" onClick={handleStart}>
-                  Begin Assessment
+                  Start Assessment
                 </Button>
 
                 <div className="mt-8">
