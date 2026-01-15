@@ -8,72 +8,19 @@ const About = () => {
       {/* Hero Section */}
       <section className="bg-muted py-16 lg:py-24">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-6">
-                About Soulful Reflections
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                A sanctuary for healing, reflection, and personal growth. We believe 
-                that everyone deserves access to tools and resources that support 
-                their journey toward inner peace and transformation.
-              </p>
-            </div>
-            <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-elevated bg-card">
-                <img
-                  src="/placeholder.svg"
-                  alt="Dr. Sarah Mitchell"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -z-10 -bottom-4 -right-4 w-full h-full bg-primary/10 rounded-2xl" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission Section */}
-      <section className="section-padding bg-card">
-        <div className="container-custom px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-serif text-3xl font-bold text-primary mb-6">Our Mission</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              To create a compassionate space where individuals can explore their inner landscape, 
-              develop self-awareness, and cultivate the tools needed for lasting well-being. 
-              We combine evidence-based practices with timeless wisdom to support your unique journey.
-            </p>
-            <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
-          </div>
-        </div>
-      </section>
-
-      {/* Story Section */}
-      <section className="section-padding bg-background">
-        <div className="container-custom px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="font-serif text-3xl font-bold text-primary mb-8 text-center">
-              Our Story
-            </h2>
-            <div className="prose prose-lg max-w-none text-muted-foreground">
-              <p className="mb-6">
-                Soulful Reflections was born from a deeply personal journey. After years of working 
-                in clinical settings, I witnessed countless individuals struggling to find accessible, 
-                meaningful resources for their mental health and personal growth.
-              </p>
-              <p className="mb-6">
-                I saw people who wanted to understand themselves better but didn't know where to start. 
-                I met those who needed gentle guidance but couldn't access traditional therapy. 
-                And I observed how small moments of reflection could spark profound transformation.
-              </p>
-              <p className="mb-6">
-                This platform is my offering to those seekers—a carefully curated collection of 
-                self-assessment tools, reflective practices, articles, and media designed to meet 
-                you wherever you are on your journey.
+          <div className="max-w-4xl mx-auto text-center">
+            <span className="inline-block text-sm font-medium text-primary/80 uppercase tracking-wider mb-4">
+              ABOUT
+            </span>
+            <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-8">
+              About Soulful Reflections
+            </h1>
+            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed text-left">
+              <p>
+                Soulful Reflections is a space for people who think deeply, feel intensely, and often find themselves searching for meaning in their emotions. It is meant for moments when you don't need answers immediately—but need understanding first.
               </p>
               <p>
-                Whether you're taking your first steps toward self-discovery or deepening an 
-                existing practice, I'm honored to be part of your path.
+                Here, thoughts are explored without rushing, emotions are acknowledged without labeling them as right or wrong, and the mind is seen as something to be understood rather than fixed. It is a place to read slowly, reflect quietly, and reconnect with yourself in a way that feels grounding and honest.
               </p>
             </div>
           </div>
@@ -81,65 +28,95 @@ const About = () => {
       </section>
 
       {/* Philosophy Section */}
-      <section className="section-padding bg-muted">
+      <section className="section-padding bg-card">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
-          <h2 className="font-serif text-3xl font-bold text-primary mb-12 text-center">
-            Our Philosophy
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Compassionate Inquiry",
-                description: "We believe in approaching ourselves with kindness and curiosity, not judgment."
-              },
-              {
-                title: "Holistic Well-being",
-                description: "True wellness encompasses mind, body, and spirit—all interconnected and worthy of attention."
-              },
-              {
-                title: "Accessible Growth",
-                description: "Personal development should be available to everyone, regardless of background or resources."
-              }
-            ].map((item) => (
-              <div key={item.title} className="bg-card rounded-2xl p-8 shadow-card">
-                <h3 className="font-serif text-xl font-bold text-primary mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
+          <div className="max-w-4xl mx-auto">
+            <h2 className="font-serif text-3xl font-bold text-primary mb-8 text-center">
+              Our Philosophy
+            </h2>
+            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-10">
+              <p>
+                The mind is not fragile—it is adaptive, resilient, and capable of growth.
+              </p>
+              <p>
+                Healing does not always mean eliminating pain; sometimes it means understanding it, responding to it differently, and learning to move forward with awareness.
+              </p>
+            </div>
+            <div className="bg-muted rounded-2xl p-8">
+              <p className="text-lg text-foreground mb-6">
+                At Soulful Reflections, we believe that:
+              </p>
+              <ul className="space-y-4 text-muted-foreground">
+                <li className="flex items-start gap-3">
+                  <span className="w-2 h-2 bg-primary rounded-full mt-2.5 flex-shrink-0"></span>
+                  <span className="text-lg">Insight brings empowerment</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-2 h-2 bg-primary rounded-full mt-2.5 flex-shrink-0"></span>
+                  <span className="text-lg">Compassion creates change</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-2 h-2 bg-primary rounded-full mt-2.5 flex-shrink-0"></span>
+                  <span className="text-lg">Awareness makes recovery possible</span>
+                </li>
+              </ul>
+              <p className="text-lg text-muted-foreground mt-6">
+                Every mental health journey is unique, and every step—small or uncertain—is still movement.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Credentials Section */}
-      <section className="section-padding bg-card">
+      {/* Mission Section */}
+      <section className="section-padding bg-background">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <h2 className="font-serif text-3xl font-bold text-primary mb-8 text-center">
-              Credentials & Background
+              Our Mission
             </h2>
-            <div className="bg-muted rounded-2xl p-8">
-              <h3 className="font-serif text-xl font-bold text-primary mb-4">
-                Dr. Sarah Mitchell, PsyD
-              </h3>
-              <ul className="space-y-3 text-muted-foreground">
-                <li>• Doctorate in Clinical Psychology, Stanford University</li>
-                <li>• Certified Mindfulness-Based Stress Reduction (MBSR) Teacher</li>
-                <li>• 15+ years of clinical experience</li>
-                <li>• Specialization in anxiety, depression, and life transitions</li>
-                <li>• Published author on mindfulness and self-compassion</li>
-                <li>• Member, American Psychological Association</li>
-              </ul>
+            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+              <p>
+                To make mental health understanding accessible, humane, and stigma-free.
+              </p>
+              <p>
+                To help individuals recognise emotional distress early, understand psychiatric conditions with clarity, and feel confident seeking help when needed.
+              </p>
+              <p>
+                To bridge science with empathy—so awareness leads to action, not avoidance.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Story Section */}
+      <section className="section-padding bg-muted">
+        <div className="container-custom px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="font-serif text-3xl font-bold text-primary mb-8 text-center">
+              Our Story
+            </h2>
+            <div className="prose prose-lg max-w-none text-muted-foreground space-y-6">
+              <p>
+                Soulful Reflections grew from something I kept witnessing again and again—people struggling to find words for what they were feeling inside.
+              </p>
+              <p>
+                As a psychiatrist, I often noticed that long before any diagnosis entered the conversation, people wanted something much simpler and much deeper: to be heard, to feel understood, and to make sense of their emotions without fear or self-judgment. Many carried questions they had never voiced out loud. Many were afraid of labels, yet quietly searching for clarity and reassurance.
+              </p>
+              <p>
+                Over time, it became clear to me that mental health needed a quieter, gentler space—one where understanding could begin even before a consultation, and continue long after it ends.
+              </p>
+              <p>
+                I created Soulful Reflections with the hope that you feel a little less afraid of your own mind. This space is meant to help you understand your thoughts, emotions, and struggles with kindness rather than judgment. Mental health, to me, is not only about illness—it is about awareness, courage, and knowing when to seek support without shame. If this platform helps you pause, reflect, and feel more confident about caring for your mental well-being, then it has fulfilled the purpose I envisioned.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-card">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="font-serif text-3xl font-bold text-primary mb-4">
