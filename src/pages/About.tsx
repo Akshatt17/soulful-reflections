@@ -3,23 +3,21 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Heart, Sparkles, Eye, GraduationCap, Award, Briefcase } from "lucide-react";
 import drNiharika from "@/assets/dr-niharika-bhaskar.jpg";
-
 const About = () => {
-  return (
-    <PageLayout>
+  return <PageLayout>
       {/* Hero Section */}
       <section className="bg-muted">
         <div className="container-custom px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
           <div className="max-w-4xl mx-auto">
             <div className="text-center animate-fade-in-up">
-              <span className="inline-block text-xs font-semibold tracking-wider text-sage uppercase mb-4">
-                ABOUT
-              </span>
+              
               <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-primary leading-tight text-balance mb-8">
                 About Soulful Reflections
               </h1>
             </div>
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed animate-fade-in-up" style={{
+            animationDelay: "0.1s"
+          }}>
               <p>
                 Soulful Reflections is a space for people who think deeply, feel intensely, and often find themselves searching for meaning in their emotions. It is meant for moments when you don't need answers immediately—but need understanding first.
               </p>
@@ -105,25 +103,18 @@ const About = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {[
-              {
-                title: "Accessible Understanding",
-                description: "To make mental health understanding accessible, humane, and stigma-free."
-              },
-              {
-                title: "Early Recognition",
-                description: "To help individuals recognise emotional distress early, understand psychiatric conditions with clarity, and feel confident seeking help when needed."
-              },
-              {
-                title: "Science & Empathy",
-                description: "To bridge science with empathy—so awareness leads to action, not avoidance."
-              }
-            ].map((item, index) => (
-              <div 
-                key={item.title} 
-                className="bg-card rounded-2xl p-8 shadow-card hover:shadow-elevated transition-smooth"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
+            {[{
+            title: "Accessible Understanding",
+            description: "To make mental health understanding accessible, humane, and stigma-free."
+          }, {
+            title: "Early Recognition",
+            description: "To help individuals recognise emotional distress early, understand psychiatric conditions with clarity, and feel confident seeking help when needed."
+          }, {
+            title: "Science & Empathy",
+            description: "To bridge science with empathy—so awareness leads to action, not avoidance."
+          }].map((item, index) => <div key={item.title} className="bg-card rounded-2xl p-8 shadow-card hover:shadow-elevated transition-smooth" style={{
+            animationDelay: `${index * 0.1}s`
+          }}>
                 <div className="w-12 h-12 bg-sage/20 rounded-xl flex items-center justify-center mb-5">
                   <div className="w-3 h-3 bg-sage rounded-full" />
                 </div>
@@ -133,8 +124,7 @@ const About = () => {
                 <p className="text-muted-foreground leading-relaxed">
                   {item.description}
                 </p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -154,11 +144,7 @@ const About = () => {
             {/* Left - Photo */}
             <div className="relative animate-scale-in">
               <div className="relative rounded-2xl overflow-hidden shadow-elevated">
-                <img
-                  src={drNiharika}
-                  alt="Dr. Niharika Bhaskar"
-                  className="w-full h-auto object-cover aspect-[4/5]"
-                />
+                <img src={drNiharika} alt="Dr. Niharika Bhaskar" className="w-full h-auto object-cover aspect-[4/5]" />
               </div>
               {/* Decorative element */}
               <div className="absolute -z-10 -bottom-6 -right-6 w-full h-full bg-sage/20 rounded-2xl" />
@@ -167,9 +153,7 @@ const About = () => {
             {/* Right - Credentials */}
             <div className="space-y-6">
               <div>
-                <span className="text-xs font-semibold tracking-wider text-sage uppercase">
-                  Your Guide
-                </span>
+                
                 <h3 className="font-serif text-3xl font-bold text-primary mt-2">
                   Dr. Niharika Bhaskar
                 </h3>
@@ -283,8 +267,6 @@ const About = () => {
           </div>
         </div>
       </section>
-    </PageLayout>
-  );
+    </PageLayout>;
 };
-
 export default About;
