@@ -1,7 +1,8 @@
 import PageLayout from "@/components/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Heart, Sparkles, Eye } from "lucide-react";
+import { Heart, Sparkles, Eye, GraduationCap, Award, Briefcase } from "lucide-react";
+import drNiharika from "@/assets/dr-niharika-bhaskar.jpg";
 
 const About = () => {
   return (
@@ -138,8 +139,87 @@ const About = () => {
         </div>
       </section>
 
-      {/* Story Section */}
+      {/* Meet the Founder Section */}
       <section className="section-padding bg-muted">
+        <div className="container-custom px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-14">
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-4">
+              Meet the Founder
+            </h2>
+            <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left - Photo */}
+            <div className="relative animate-scale-in">
+              <div className="relative rounded-2xl overflow-hidden shadow-elevated">
+                <img
+                  src={drNiharika}
+                  alt="Dr. Niharika Bhaskar"
+                  className="w-full h-auto object-cover aspect-[4/5]"
+                />
+              </div>
+              {/* Decorative element */}
+              <div className="absolute -z-10 -bottom-6 -right-6 w-full h-full bg-sage/20 rounded-2xl" />
+            </div>
+
+            {/* Right - Credentials */}
+            <div className="space-y-6">
+              <div>
+                <span className="text-xs font-semibold tracking-wider text-sage uppercase">
+                  Your Guide
+                </span>
+                <h3 className="font-serif text-3xl font-bold text-primary mt-2">
+                  Dr. Niharika Bhaskar
+                </h3>
+                <p className="text-lg text-muted-foreground mt-1">
+                  Psychiatrist & Mental Health Advocate
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-start gap-4 bg-card rounded-xl p-4 shadow-card">
+                  <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                    <GraduationCap className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground">Education</h4>
+                    <p className="text-muted-foreground text-sm">MBBS, MD Psychiatry</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 bg-card rounded-xl p-4 shadow-card">
+                  <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                    <Briefcase className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground">Specialization</h4>
+                    <p className="text-muted-foreground text-sm">Anxiety, Depression, Stress Management & Emotional Well-being</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 bg-card rounded-xl p-4 shadow-card">
+                  <div className="flex-shrink-0 w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                    <Award className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground">Approach</h4>
+                    <p className="text-muted-foreground text-sm">Compassionate, evidence-based care with focus on holistic mental wellness</p>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-muted-foreground leading-relaxed">
+                With years of clinical experience and a deep commitment to destigmatizing mental health, Dr. Niharika created Soulful Reflections to extend support beyond the consultation room.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Story Section */}
+      <section className="section-padding bg-card">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-14">
