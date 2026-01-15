@@ -1,6 +1,13 @@
 import { Play, PlayCircle } from "lucide-react";
 import videoMeditation from "@/assets/video-meditation.jpg";
 import videoBreathing from "@/assets/video-breathing.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const audioReflections = [
   {
@@ -84,43 +91,48 @@ const MicroReflections = () => {
             </div>
           </div>
 
-          {/* Video Reflections */}
+          {/* Video Reflections with Carousel */}
           <div>
             <h3 className="font-serif text-xl font-semibold text-primary mb-6">
               Video Reflections
             </h3>
-            <div className="space-y-4">
-              {videoReflections.map((video) => (
-                <div
-                  key={video.title}
-                  className="rounded-xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-300 cursor-pointer group"
-                >
-                  {/* Thumbnail */}
-                  <div className="relative aspect-video">
-                    <img
-                      src={video.thumbnail}
-                      alt={video.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-foreground/20 flex items-center justify-center">
-                      <div className="w-16 h-16 bg-card/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-                        <PlayCircle className="w-10 h-10 text-primary" />
+            <Carousel className="w-full">
+              <CarouselContent>
+                {videoReflections.map((video) => (
+                  <CarouselItem key={video.title}>
+                    <div className="rounded-xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-300 cursor-pointer group">
+                      {/* Thumbnail */}
+                      <div className="relative aspect-video">
+                        <img
+                          src={video.thumbnail}
+                          alt={video.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-foreground/20 flex items-center justify-center">
+                          <div className="w-16 h-16 bg-card/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                            <PlayCircle className="w-10 h-10 text-primary" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Info */}
+                      <div className="bg-muted p-5">
+                        <h4 className="font-medium text-foreground mb-1">
+                          {video.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          {video.description}
+                        </p>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Info */}
-                  <div className="bg-muted p-5">
-                    <h4 className="font-medium text-foreground mb-1">
-                      {video.title}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {video.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-center gap-2 mt-4">
+                <CarouselPrevious className="static translate-y-0" />
+                <CarouselNext className="static translate-y-0" />
+              </div>
+            </Carousel>
           </div>
         </div>
       </div>
