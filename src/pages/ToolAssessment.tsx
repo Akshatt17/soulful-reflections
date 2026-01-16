@@ -192,12 +192,15 @@ const ToolAssessment = () => {
 
             {/* Quiz Screen */}
             {screen === "quiz" && (
-              <div>
-                <ProgressBar
-                  current={currentQuestion + 1}
-                  total={tool.questions.length}
-                />
-                <div className="mt-8">
+              <div className="relative">
+                {/* Decorative background */}
+                <div className="absolute inset-0 -mx-4 sm:-mx-6 lg:-mx-8 -my-8 bg-gradient-to-br from-blush/30 via-background to-sage/10 rounded-3xl pointer-events-none" />
+                
+                <div className="relative space-y-8">
+                  <ProgressBar
+                    current={currentQuestion + 1}
+                    total={tool.questions.length}
+                  />
                   <QuizStep
                     question={tool.questions[currentQuestion].question}
                     context={(tool.questions[currentQuestion] as { context?: string }).context}
