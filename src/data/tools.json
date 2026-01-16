@@ -1,87 +1,132 @@
 {
   "tools": [
     {
-      "id": "mood-tracker",
-      "title": "Mood Tracker",
-      "description": "Monitor your emotional patterns over time to gain valuable insights into your mental well-being and identify triggers.",
-      "icon": "Activity",
+      "id": "phq9",
+      "title": "PHQ-9 Self-Reflection Questionnaire",
+      "description": "A brief set of questions to help you reflect on how you've been feeling emotionally over the past two weeks.",
+      "icon": "Heart",
       "color": "sage",
-      "disclaimer": "This tool is for self-reflection purposes only and is not a diagnostic instrument. Results should not be used as a substitute for professional mental health care.",
+      "disclaimer": "This questionnaire is widely used to understand patterns of low mood and emotional distress. It is not a diagnosis and does not replace speaking with a mental health professional.",
       "questions": [
         {
           "id": 1,
-          "question": "How would you describe your overall mood today?",
+          "question": "Little interest or pleasure in doing things",
+          "context": "Over the last 2 weeks, how often have you been bothered by this?",
           "options": [
-            { "label": "Very Low", "value": 1 },
-            { "label": "Low", "value": 2 },
-            { "label": "Neutral", "value": 3 },
-            { "label": "Good", "value": 4 },
-            { "label": "Excellent", "value": 5 }
+            { "label": "Not at all", "value": 0 },
+            { "label": "Several days", "value": 1 },
+            { "label": "More than half the days", "value": 2 },
+            { "label": "Nearly every day", "value": 3 }
           ]
         },
         {
           "id": 2,
-          "question": "How well did you sleep last night?",
+          "question": "Feeling down, depressed, or hopeless",
+          "context": "Over the last 2 weeks, how often have you been bothered by this?",
           "options": [
-            { "label": "Very Poorly", "value": 1 },
-            { "label": "Poorly", "value": 2 },
-            { "label": "Average", "value": 3 },
-            { "label": "Well", "value": 4 },
-            { "label": "Very Well", "value": 5 }
+            { "label": "Not at all", "value": 0 },
+            { "label": "Several days", "value": 1 },
+            { "label": "More than half the days", "value": 2 },
+            { "label": "Nearly every day", "value": 3 }
           ]
         },
         {
           "id": 3,
-          "question": "How anxious or worried have you felt today?",
+          "question": "Trouble falling or staying asleep, or sleeping too much",
+          "context": "Over the last 2 weeks, how often have you been bothered by this?",
           "options": [
-            { "label": "Extremely", "value": 1 },
-            { "label": "Very", "value": 2 },
-            { "label": "Moderately", "value": 3 },
-            { "label": "Slightly", "value": 4 },
-            { "label": "Not at all", "value": 5 }
+            { "label": "Not at all", "value": 0 },
+            { "label": "Several days", "value": 1 },
+            { "label": "More than half the days", "value": 2 },
+            { "label": "Nearly every day", "value": 3 }
           ]
         },
         {
           "id": 4,
-          "question": "How connected do you feel to others today?",
+          "question": "Feeling tired or having little energy",
+          "context": "Over the last 2 weeks, how often have you been bothered by this?",
           "options": [
-            { "label": "Very Disconnected", "value": 1 },
-            { "label": "Somewhat Disconnected", "value": 2 },
-            { "label": "Neutral", "value": 3 },
-            { "label": "Somewhat Connected", "value": 4 },
-            { "label": "Very Connected", "value": 5 }
+            { "label": "Not at all", "value": 0 },
+            { "label": "Several days", "value": 1 },
+            { "label": "More than half the days", "value": 2 },
+            { "label": "Nearly every day", "value": 3 }
           ]
         },
         {
           "id": 5,
-          "question": "How much energy do you have right now?",
+          "question": "Poor appetite or overeating",
+          "context": "Over the last 2 weeks, how often have you been bothered by this?",
           "options": [
-            { "label": "Exhausted", "value": 1 },
-            { "label": "Low Energy", "value": 2 },
-            { "label": "Moderate", "value": 3 },
-            { "label": "Energized", "value": 4 },
-            { "label": "Very Energized", "value": 5 }
+            { "label": "Not at all", "value": 0 },
+            { "label": "Several days", "value": 1 },
+            { "label": "More than half the days", "value": 2 },
+            { "label": "Nearly every day", "value": 3 }
+          ]
+        },
+        {
+          "id": 6,
+          "question": "Feeling bad about yourself — or that you are a failure or have let yourself or your family down",
+          "context": "Over the last 2 weeks, how often have you been bothered by this?",
+          "options": [
+            { "label": "Not at all", "value": 0 },
+            { "label": "Several days", "value": 1 },
+            { "label": "More than half the days", "value": 2 },
+            { "label": "Nearly every day", "value": 3 }
+          ]
+        },
+        {
+          "id": 7,
+          "question": "Trouble concentrating on things, such as reading the newspaper or watching television",
+          "context": "Over the last 2 weeks, how often have you been bothered by this?",
+          "options": [
+            { "label": "Not at all", "value": 0 },
+            { "label": "Several days", "value": 1 },
+            { "label": "More than half the days", "value": 2 },
+            { "label": "Nearly every day", "value": 3 }
+          ]
+        },
+        {
+          "id": 8,
+          "question": "Moving or speaking so slowly that other people could have noticed. Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual",
+          "context": "Over the last 2 weeks, how often have you been bothered by this?",
+          "options": [
+            { "label": "Not at all", "value": 0 },
+            { "label": "Several days", "value": 1 },
+            { "label": "More than half the days", "value": 2 },
+            { "label": "Nearly every day", "value": 3 }
+          ]
+        },
+        {
+          "id": 9,
+          "question": "Thoughts that you would be better off dead, or of hurting yourself",
+          "context": "Over the last 2 weeks, how often have you been bothered by this?",
+          "options": [
+            { "label": "Not at all", "value": 0 },
+            { "label": "Several days", "value": 1 },
+            { "label": "More than half the days", "value": 2 },
+            { "label": "Nearly every day", "value": 3 }
           ]
         }
       ],
       "results": {
         "low": {
-          "range": [5, 12],
-          "title": "Time for Extra Self-Care",
-          "message": "Your responses suggest you might be going through a challenging time. Remember, it's okay to not be okay. Consider reaching out to supportive people in your life or exploring our resources for additional support.",
-          "recommendations": ["Practice gentle self-compassion", "Consider speaking with a mental health professional", "Try our Evening Wind Down audio reflection", "Read: The Art of Letting Go"]
+          "range": [0, 4],
+          "title": "A Moment of Clarity",
+          "message": "Your responses suggest you may be experiencing minimal emotional strain at this time. This is a positive sign, but remember that self-care and emotional awareness are ongoing practices worth nurturing.",
+          "recommendations": ["Continue your current self-care practices", "Explore our mindfulness audio reflections", "Read: 5 Morning Rituals for a Centered Day", "Check in with yourself regularly"]
         },
         "moderate": {
-          "range": [13, 19],
-          "title": "Finding Balance",
-          "message": "You're experiencing a mix of highs and lows, which is a normal part of life. Consider incorporating some of our mindfulness practices to help maintain equilibrium.",
-          "recommendations": ["Try our Midday Reset meditation", "Explore journaling for clarity", "Read: 5 Morning Rituals for a Centered Day", "Practice gratitude daily"]
+          "range": [5, 14],
+          "title": "A Time for Gentle Attention",
+          "message": "Your responses suggest you may be experiencing some emotional strain. This is not uncommon, and acknowledging how you feel is an important first step. Consider exploring supportive resources and speaking with someone you trust.",
+          "recommendations": ["Practice gentle self-compassion", "Try our Evening Wind Down audio reflection", "Read: The Art of Letting Go", "Consider speaking with a mental health professional"]
         },
         "high": {
-          "range": [20, 25],
-          "title": "Thriving",
-          "message": "You're doing well! Keep nurturing the habits and connections that support your well-being. Consider sharing your positive energy with others.",
-          "recommendations": ["Maintain your current practices", "Try our Loving Kindness Meditation", "Share your journey with others", "Explore new growth opportunities"]
+          "range": [15, 27],
+          "title": "You Deserve Support",
+          "message": "Your responses suggest you may be going through a particularly challenging time emotionally. Please know that you're not alone, and seeking support is a sign of strength, not weakness. We encourage you to reach out to a mental health professional who can provide personalized guidance.",
+          "recommendations": ["Reach out to a trusted friend or family member", "Consider speaking with a mental health professional", "Explore our crisis resources", "Practice small acts of self-kindness each day"],
+          "showCrisisResources": true
         }
       }
     },

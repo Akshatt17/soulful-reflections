@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { Clock } from "lucide-react";
-import { Activity, Brain, Scale, LucideIcon } from "lucide-react";
+import { Activity, Brain, Scale, Heart, LucideIcon } from "lucide-react";
 
 const iconMap: Record<string, LucideIcon> = {
   Activity,
   Brain,
   Scale,
+  Heart,
 };
 
 interface ToolCardProps {
@@ -14,9 +15,10 @@ interface ToolCardProps {
   description: string;
   icon: string;
   duration?: string;
+  ctaText?: string;
 }
 
-const ToolCard = ({ id, title, description, icon, duration }: ToolCardProps) => {
+const ToolCard = ({ id, title, description, icon, duration, ctaText = "Begin Reflection" }: ToolCardProps) => {
   const IconComponent = iconMap[icon] || Activity;
 
   return (
@@ -36,7 +38,7 @@ const ToolCard = ({ id, title, description, icon, duration }: ToolCardProps) => 
         to={`/tools/${id}`}
         className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-full font-medium hover:opacity-90 transition-opacity"
       >
-        Start
+        {ctaText}
       </Link>
     </div>
   );

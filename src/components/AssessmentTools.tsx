@@ -1,20 +1,24 @@
-import { Activity, Brain, Scale } from "lucide-react";
+import { Heart, Brain, Scale } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const tools = [
   {
-    icon: Activity,
-    title: "Mood Tracker",
-    description: "Monitor your emotional patterns over time to gain valuable insights into your mental well-being and identify triggers.",
-    link: "Begin Assessment →",
+    icon: Heart,
+    id: "phq9",
+    title: "PHQ-9 Self-Reflection Questionnaire",
+    description: "A brief set of questions to help you reflect on how you've been feeling emotionally over the past two weeks.",
+    link: "Begin Reflection →",
   },
   {
     icon: Brain,
+    id: "stress-inventory",
     title: "Stress Inventory",
     description: "Evaluate your current stress levels and discover personalized strategies for managing and reducing daily pressures.",
     link: "Begin Assessment →",
   },
   {
     icon: Scale,
+    id: "balance-check",
     title: "Balance Check",
     description: "Assess the harmony between different areas of your life and find opportunities for creating better equilibrium.",
     link: "Begin Assessment →",
@@ -57,12 +61,12 @@ const AssessmentTools = () => {
               </p>
 
               {/* Link */}
-              <a
-                href="#"
+              <Link
+                to={`/tools/${tool.id}`}
                 className="text-primary font-medium hover:underline underline-offset-4 transition-all duration-200"
               >
                 {tool.link}
-              </a>
+              </Link>
             </div>
           ))}
         </div>
