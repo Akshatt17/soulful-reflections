@@ -7,6 +7,7 @@ interface QuestionOption {
 
 interface QuizStepProps {
   question: string;
+  context?: string;
   options: QuestionOption[];
   selectedValue: number | null;
   onSelect: (value: number) => void;
@@ -19,6 +20,7 @@ interface QuizStepProps {
 
 const QuizStep = ({
   question,
+  context,
   options,
   selectedValue,
   onSelect,
@@ -30,6 +32,9 @@ const QuizStep = ({
 }: QuizStepProps) => {
   return (
     <div className="space-y-8">
+      {context && (
+        <p className="text-muted-foreground text-sm text-center">{context}</p>
+      )}
       <h2 className="font-serif text-2xl font-bold text-primary text-center">
         {question}
       </h2>

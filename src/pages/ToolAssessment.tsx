@@ -7,7 +7,7 @@ import CrisisBox from "@/components/CrisisBox";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowLeft, CheckCircle, Mail, Eye, Lock, BookOpen, Wrench, AlertTriangle } from "lucide-react";
+import { ArrowLeft, CheckCircle, Mail, Eye, Lock, BookOpen, Wrench, AlertTriangle, Clock, Shield, Heart } from "lucide-react";
 import toolsData from "@/data/tools.json";
 
 type Screen = "intro" | "quiz" | "results-gate" | "brief-summary" | "email-capture" | "full-results";
@@ -56,8 +56,15 @@ const ToolAssessment = () => {
     return results.low;
   }, [totalScore, tool]);
 
-  // Check if crisis resources should be shown (high score)
-  const showCrisisResources = totalScore >= tool.results.high.range[0];
+  // Check if crisis resources should be shown based on high score or question 9 answered positively
+  const showCrisisResources = useMemo(() => {
+    // For PHQ-9, show crisis resources if question 9 (thoughts of self-harm) was answered > 0
+    if (tool.id === "phq9" && answers[8] > 0) {
+      return true;
+    }
+    // Also show if score is in high range
+    return totalScore >= tool.results.high.range[0];
+  }, [tool.id, answers, totalScore, tool.results.high.range]);
 
   const handleStart = () => setScreen("quiz");
 
@@ -67,7 +74,6 @@ const ToolAssessment = () => {
 
   const handleNext = () => {
     if (currentQuestion === tool.questions.length - 1) {
-      // Go to results gate instead of showing results directly
       setScreen("results-gate");
     } else {
       setCurrentQuestion((prev) => prev + 1);
@@ -89,7 +95,6 @@ const ToolAssessment = () => {
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email && consent) {
-      // Save to localStorage with email
       const resultData = {
         toolId: tool.id,
         score: totalScore,
@@ -113,6 +118,8 @@ const ToolAssessment = () => {
     setConsent(false);
     setScreen("intro");
   };
+
+  const isPHQ9 = tool.id === "phq9";
 
   return (
     <PageLayout>
@@ -138,12 +145,13 @@ const ToolAssessment = () => {
                   {tool.description}
                 </p>
 
-                {/* What this helps with */}
+                {/* Tool explanation */}
                 <div className="bg-card rounded-2xl p-6 mb-6 text-left shadow-soft">
-                  <h3 className="font-semibold text-foreground mb-3">What This Helps With</h3>
+                  <h3 className="font-semibold text-foreground mb-3">
+                    {isPHQ9 ? "About This Questionnaire" : "What This Helps With"}
+                  </h3>
                   <p className="text-muted-foreground">
-                    This self-reflection tool helps you gain insights into your current emotional state, 
-                    identify patterns, and discover personalized resources to support your well-being journey.
+                    {tool.disclaimer}
                   </p>
                 </div>
 
@@ -153,27 +161,27 @@ const ToolAssessment = () => {
                   <ul className="space-y-3">
                     <li className="flex items-start gap-3 text-muted-foreground">
                       <span className="w-5 h-5 bg-sage/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="w-2 h-2 bg-sage rounded-full"></span>
+                        <Shield className="w-3 h-3 text-sage" />
                       </span>
                       <span><strong>Anonymous:</strong> Your responses stay on your device only</span>
                     </li>
                     <li className="flex items-start gap-3 text-muted-foreground">
                       <span className="w-5 h-5 bg-sage/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="w-2 h-2 bg-sage rounded-full"></span>
+                        <Heart className="w-3 h-3 text-sage" />
                       </span>
                       <span><strong>Non-diagnostic:</strong> This is for self-reflection, not clinical assessment</span>
                     </li>
                     <li className="flex items-start gap-3 text-muted-foreground">
                       <span className="w-5 h-5 bg-sage/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <span className="w-2 h-2 bg-sage rounded-full"></span>
+                        <Clock className="w-3 h-3 text-sage" />
                       </span>
-                      <span><strong>Your pace:</strong> Take about 2-3 minutes, and you can stop anytime</span>
+                      <span><strong>Your pace:</strong> Takes 2-3 minutes, and you can stop anytime</span>
                     </li>
                   </ul>
                 </div>
 
                 <Button variant="hero" size="lg" onClick={handleStart}>
-                  Start Assessment
+                  {isPHQ9 ? "Start Questionnaire" : "Start Assessment"}
                 </Button>
 
                 <div className="mt-8">
@@ -192,6 +200,7 @@ const ToolAssessment = () => {
                 <div className="mt-8">
                   <QuizStep
                     question={tool.questions[currentQuestion].question}
+                    context={(tool.questions[currentQuestion] as { context?: string }).context}
                     options={tool.questions[currentQuestion].options}
                     selectedValue={answers[currentQuestion] ?? null}
                     onSelect={handleSelect}
@@ -205,7 +214,7 @@ const ToolAssessment = () => {
               </div>
             )}
 
-            {/* Screen 8: Results Gate */}
+            {/* Screen: Results Gate */}
             {screen === "results-gate" && (
               <div className="text-center">
                 <div className="w-20 h-20 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -213,7 +222,7 @@ const ToolAssessment = () => {
                 </div>
 
                 <h1 className="font-serif text-3xl font-bold text-primary mb-4">
-                  Your Responses Are Ready
+                  Thank You for Taking a Moment to Reflect
                 </h1>
                 <p className="text-lg text-muted-foreground mb-8">
                   Choose how you'd like to view your results
@@ -250,7 +259,7 @@ const ToolAssessment = () => {
                       <div>
                         <h3 className="font-semibold text-foreground mb-1">Save & Receive Full Results</h3>
                         <p className="text-sm text-muted-foreground">
-                          Get detailed insights and personalized recommendations via email.
+                          Get detailed insights and keep a record for yourself.
                         </p>
                       </div>
                     </div>
@@ -263,7 +272,7 @@ const ToolAssessment = () => {
               </div>
             )}
 
-            {/* Screen 9: Brief Results Summary (Anonymous) */}
+            {/* Screen: Brief Results Summary (Anonymous) */}
             {screen === "brief-summary" && (
               <div className="text-center">
                 <div className="w-20 h-20 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -271,23 +280,52 @@ const ToolAssessment = () => {
                 </div>
 
                 <h1 className="font-serif text-3xl font-bold text-primary mb-2">
-                  Your Brief Summary
+                  Your Reflection Summary
                 </h1>
                 <p className="text-muted-foreground text-sm mb-8">
                   <Lock className="w-4 h-4 inline mr-1" />
                   This summary is anonymous and not stored
                 </p>
 
-                {/* High-level insight - neutral language, no scores */}
+                {/* High-level insight - supportive language, no scores */}
                 <div className="bg-card rounded-2xl p-8 mb-8 text-left shadow-soft">
                   <p className="text-lg text-foreground leading-relaxed">
                     {result.message}
                   </p>
+                  <p className="text-sm text-muted-foreground mt-4 italic">
+                    This is not a diagnosis. If you're feeling overwhelmed or distressed, please consider reaching out to a mental health professional.
+                  </p>
                 </div>
+
+                {/* Crisis resources if needed */}
+                {showCrisisResources && (
+                  <div className="bg-destructive/5 border border-destructive/20 rounded-2xl p-6 text-left mb-6">
+                    <div className="flex items-start gap-3">
+                      <AlertTriangle className="w-6 h-6 text-destructive flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h3 className="font-semibold text-foreground mb-2">We Care About Your Well-being</h3>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Based on your responses, we want to make sure you have access to support:
+                        </p>
+                        <div className="space-y-2 text-sm">
+                          <a href="tel:988" className="block text-primary font-medium hover:underline">
+                            988 Suicide & Crisis Lifeline
+                          </a>
+                          <a href="https://www.crisistextline.org" target="_blank" rel="noopener noreferrer" className="block text-primary font-medium hover:underline">
+                            Crisis Text Line - Text HOME to 741741
+                          </a>
+                          <Link to="/crisis" className="block text-primary font-medium hover:underline">
+                            View All Crisis Resources
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Suggested next steps */}
                 <div className="bg-muted rounded-2xl p-6 mb-8 text-left">
-                  <h3 className="font-semibold text-foreground mb-4">Suggested Next Steps</h3>
+                  <h3 className="font-semibold text-foreground mb-4">You May Find These Helpful</h3>
                   <div className="grid gap-3">
                     <Link 
                       to="/articles" 
@@ -297,11 +335,18 @@ const ToolAssessment = () => {
                       <span className="text-foreground">Explore related articles</span>
                     </Link>
                     <Link 
+                      to="/media" 
+                      className="flex items-center gap-3 p-3 bg-card rounded-xl hover:bg-primary/5 transition-colors"
+                    >
+                      <Eye className="w-5 h-5 text-primary" />
+                      <span className="text-foreground">Listen to audio reflections</span>
+                    </Link>
+                    <Link 
                       to="/tools" 
                       className="flex items-center gap-3 p-3 bg-card rounded-xl hover:bg-primary/5 transition-colors"
                     >
                       <Wrench className="w-5 h-5 text-primary" />
-                      <span className="text-foreground">Try other self-assessment tools</span>
+                      <span className="text-foreground">Try other self-reflection tools</span>
                     </Link>
                   </div>
                 </div>
@@ -319,7 +364,7 @@ const ToolAssessment = () => {
               </div>
             )}
 
-            {/* Screen 10: Email Capture */}
+            {/* Screen: Email Capture */}
             {screen === "email-capture" && (
               <div className="text-center">
                 <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -330,8 +375,8 @@ const ToolAssessment = () => {
                   Receive Your Full Results
                 </h1>
                 <p className="text-muted-foreground mb-8">
-                  Enter your email to receive a detailed breakdown of your results, 
-                  personalized recommendations, and suggested resources.
+                  Enter your email to receive a detailed breakdown of your results 
+                  and personalized recommendations.
                 </p>
 
                 <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto text-left">
@@ -407,7 +452,7 @@ const ToolAssessment = () => {
               </div>
             )}
 
-            {/* Screen 11: Full Results */}
+            {/* Screen: Full Results */}
             {screen === "full-results" && (
               <div className="text-center">
                 <div className="w-20 h-20 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -429,9 +474,29 @@ const ToolAssessment = () => {
                   </p>
                 </div>
 
-                {/* Breakdown / Explanation */}
+                {/* Score information - for full results only */}
+                {isPHQ9 && (
+                  <div className="bg-muted/50 border border-border rounded-2xl p-6 text-left mb-6">
+                    <h3 className="font-semibold text-foreground mb-3">Your Score: {totalScore} out of 27</h3>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      This score is for informational purposes only and does not constitute a diagnosis.
+                    </p>
+                    <div className="text-sm text-muted-foreground space-y-1">
+                      <p><strong>0-4:</strong> Minimal emotional strain</p>
+                      <p><strong>5-9:</strong> Mild emotional strain</p>
+                      <p><strong>10-14:</strong> Moderate emotional strain</p>
+                      <p><strong>15-19:</strong> Moderately severe emotional strain</p>
+                      <p><strong>20-27:</strong> Severe emotional strain</p>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-4 italic">
+                      If your score suggests significant distress, please consider speaking with a mental health professional.
+                    </p>
+                  </div>
+                )}
+
+                {/* Breakdown / Recommendations */}
                 <div className="bg-muted rounded-2xl p-6 text-left mb-6">
-                  <h3 className="font-semibold text-foreground mb-4">Detailed Recommendations</h3>
+                  <h3 className="font-semibold text-foreground mb-4">Personalized Recommendations</h3>
                   <ul className="space-y-3">
                     {result.recommendations.map((rec, i) => (
                       <li key={i} className="flex items-start gap-3 text-muted-foreground">
@@ -467,7 +532,7 @@ const ToolAssessment = () => {
                       className="flex items-center gap-3 p-3 bg-muted rounded-xl hover:bg-primary/5 transition-colors"
                     >
                       <Wrench className="w-5 h-5 text-primary" />
-                      <span className="text-foreground">Try other assessment tools</span>
+                      <span className="text-foreground">Try other self-reflection tools</span>
                     </Link>
                   </div>
                 </div>
@@ -478,9 +543,9 @@ const ToolAssessment = () => {
                     <div className="flex items-start gap-3">
                       <AlertTriangle className="w-6 h-6 text-destructive flex-shrink-0 mt-0.5" />
                       <div>
-                        <h3 className="font-semibold text-foreground mb-2">Important Resources</h3>
+                        <h3 className="font-semibold text-foreground mb-2">Important Support Resources</h3>
                         <p className="text-sm text-muted-foreground mb-3">
-                          Based on your responses, we want to make sure you have access to additional support:
+                          Based on your responses, we want to make sure you have access to additional support. Please know that help is available:
                         </p>
                         <div className="space-y-2 text-sm">
                           <a href="tel:988" className="block text-primary font-medium hover:underline">
@@ -489,7 +554,7 @@ const ToolAssessment = () => {
                           <a href="https://www.crisistextline.org" target="_blank" rel="noopener noreferrer" className="block text-primary font-medium hover:underline">
                             Crisis Text Line - Text HOME to 741741
                           </a>
-                          <Link to="/resources" className="block text-primary font-medium hover:underline">
+                          <Link to="/crisis" className="block text-primary font-medium hover:underline">
                             View All Crisis Resources
                           </Link>
                         </div>
