@@ -1,16 +1,86 @@
 import { useState, useMemo } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import PageLayout from "@/components/PageLayout";
-import ProgressBar from "@/components/ProgressBar";
-import QuizStep from "@/components/QuizStep";
 import CrisisBox from "@/components/CrisisBox";
+import PHQ9QuestionRow from "@/components/PHQ9QuestionRow";
+import PHQ9ScoringDialog from "@/components/PHQ9ScoringDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowLeft, CheckCircle, Mail, Eye, Lock, BookOpen, Wrench, AlertTriangle, Clock, Shield, Heart } from "lucide-react";
+import { 
+  ArrowLeft, 
+  CheckCircle, 
+  Mail, 
+  Eye, 
+  Lock, 
+  BookOpen, 
+  Wrench, 
+  AlertTriangle, 
+  Clock, 
+  Shield, 
+  Heart 
+} from "lucide-react";
 import toolsData from "@/data/tools.json";
 
-type Screen = "intro" | "quiz" | "results-gate" | "brief-summary" | "email-capture" | "full-results";
+type Screen = "intro" | "quiz" | "results";
+
+// PHQ-9 softened question wording as per user requirements
+const PHQ9_QUESTIONS = [
+  "Little interest or pleasure in things you usually enjoy.",
+  "Feeling down, low, or emotionally heavy.",
+  "Trouble falling asleep, staying asleep, or sleeping too much.",
+  "Feeling tired, low on energy, or slowed down.",
+  "Changes in appetite - eating less than usual or eating more for comfort.",
+  "Feeling disappointed in yourself, or feeling like you have let yourself or your loved ones down.",
+  "Trouble focusing (for example, while reading, working, or watching something).",
+  "Moving or speaking more slowly than usual, or feeling unusually restless or fidgety.",
+  "Thoughts that you would be better off not here, or thoughts of harming yourself.",
+];
+
+// Score interpretation based on user-provided scoring guide
+const getScoreInterpretation = (score: number) => {
+  if (score <= 4) {
+    return {
+      range: "0-4",
+      title: "Minimal or No Depression",
+      description: "Your responses suggest your emotional state is fairly balanced right now. Occasional low days may still happen, but they do not seem to be weighing heavily on your daily life.",
+      reflection: "You appear to have emotional resilience at this moment. Keep nurturing yourself through rest, connection, and self-care.",
+      severity: "minimal",
+    };
+  } else if (score <= 9) {
+    return {
+      range: "5-9",
+      title: "Mild Depressive Symptoms",
+      description: "Your answers suggest subtle emotional heaviness - perhaps low motivation, disturbed sleep, or moments of sadness that come and go.",
+      reflection: "Your mind may be asking for gentle attention. If these feelings persist or grow, consider speaking with a mental health professional.",
+      severity: "mild",
+    };
+  } else if (score <= 14) {
+    return {
+      range: "10-14",
+      title: "Moderate Depression",
+      description: "Your responses indicate distress that may be affecting sleep, energy, focus, or enjoyment. Daily tasks may feel heavier.",
+      reflection: "You are not weak - you may be overwhelmed. We strongly recommend consulting a mental health professional for support.",
+      severity: "moderate",
+    };
+  } else if (score <= 19) {
+    return {
+      range: "15-19",
+      title: "Moderately Severe Depression",
+      description: "Your answers suggest significant emotional pain that may be interfering with personal, professional, or social life.",
+      reflection: "This is a moment to reach out. Please seek professional support as soon as possible. Therapy and/or medical support can help you regain stability and hope.",
+      severity: "moderately-severe",
+    };
+  } else {
+    return {
+      range: "20-27",
+      title: "Severe Depression",
+      description: "Your responses indicate intense distress that is likely affecting multiple areas of life. Support is not just recommended - it is necessary and available.",
+      reflection: "Please consult a psychiatrist or mental health professional urgently. If you are having thoughts of harming yourself, seek immediate help from emergency services or someone you trust nearby.",
+      severity: "severe",
+    };
+  }
+};
 
 const ToolAssessment = () => {
   const { toolId } = useParams<{ toolId: string }>();
@@ -18,11 +88,11 @@ const ToolAssessment = () => {
   const tool = toolsData.tools.find((t) => t.id === toolId);
 
   const [screen, setScreen] = useState<Screen>("intro");
-  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [consent, setConsent] = useState(false);
+  const [showEmailCapture, setShowEmailCapture] = useState(false);
 
   if (!tool) {
     return (
@@ -42,54 +112,42 @@ const ToolAssessment = () => {
     );
   }
 
+  const isPHQ9 = tool.id === "phq9";
+
   const totalScore = useMemo(() => {
     return Object.values(answers).reduce((sum, val) => sum + val, 0);
   }, [answers]);
 
-  const result = useMemo(() => {
-    const { results } = tool;
-    if (totalScore >= results.high.range[0] && totalScore <= results.high.range[1]) {
-      return results.high;
-    } else if (totalScore >= results.moderate.range[0] && totalScore <= results.moderate.range[1]) {
-      return results.moderate;
+  const allQuestionsAnswered = useMemo(() => {
+    if (isPHQ9) {
+      return Object.keys(answers).length === 9;
     }
-    return results.low;
-  }, [totalScore, tool]);
+    return Object.keys(answers).length === tool.questions.length;
+  }, [answers, isPHQ9, tool.questions.length]);
 
-  // Check if crisis resources should be shown based on high score or question 9 answered positively
+  const scoreInterpretation = useMemo(() => {
+    return getScoreInterpretation(totalScore);
+  }, [totalScore]);
+
+  // Check if question 9 was answered > 0 (thoughts of self-harm)
+  const question9Flagged = useMemo(() => {
+    return answers[8] !== undefined && answers[8] > 0;
+  }, [answers]);
+
   const showCrisisResources = useMemo(() => {
-    // For PHQ-9, show crisis resources if question 9 (thoughts of self-harm) was answered > 0
-    if (tool.id === "phq9" && answers[8] > 0) {
-      return true;
-    }
-    // Also show if score is in high range
-    return totalScore >= tool.results.high.range[0];
-  }, [tool.id, answers, totalScore, tool.results.high.range]);
+    return question9Flagged || totalScore >= 15;
+  }, [question9Flagged, totalScore]);
 
   const handleStart = () => setScreen("quiz");
 
-  const handleSelect = (value: number) => {
-    setAnswers((prev) => ({ ...prev, [currentQuestion]: value }));
+  const handleSelect = (questionIndex: number, value: number) => {
+    setAnswers((prev) => ({ ...prev, [questionIndex]: value }));
   };
 
-  const handleNext = () => {
-    if (currentQuestion === tool.questions.length - 1) {
-      setScreen("results-gate");
-    } else {
-      setCurrentQuestion((prev) => prev + 1);
+  const handleSubmit = () => {
+    if (allQuestionsAnswered) {
+      setScreen("results");
     }
-  };
-
-  const handlePrevious = () => {
-    setCurrentQuestion((prev) => Math.max(0, prev - 1));
-  };
-
-  const handleViewBriefSummary = () => {
-    setScreen("brief-summary");
-  };
-
-  const handleSaveResults = () => {
-    setScreen("email-capture");
   };
 
   const handleEmailSubmit = (e: React.FormEvent) => {
@@ -106,26 +164,24 @@ const ToolAssessment = () => {
       const stored = localStorage.getItem("assessmentResults");
       const existing = stored ? JSON.parse(stored) : [];
       localStorage.setItem("assessmentResults", JSON.stringify([...existing, resultData]));
-      setScreen("full-results");
+      setShowEmailCapture(false);
     }
   };
 
   const handleRetake = () => {
     setAnswers({});
-    setCurrentQuestion(0);
     setEmail("");
     setName("");
     setConsent(false);
+    setShowEmailCapture(false);
     setScreen("intro");
   };
-
-  const isPHQ9 = tool.id === "phq9";
 
   return (
     <PageLayout>
       <section className="section-padding bg-background min-h-[70vh]">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             {/* Back Link */}
             <Link
               to="/tools"
@@ -138,50 +194,92 @@ const ToolAssessment = () => {
             {/* Intro Screen */}
             {screen === "intro" && (
               <div className="text-center">
-                <h1 className="font-serif text-3xl lg:text-4xl font-bold text-primary mb-4">
-                  {tool.title}
+                <p className="text-sm text-muted-foreground mb-2">Soulful Reflections</p>
+                <h1 className="font-serif text-3xl lg:text-4xl font-bold text-primary mb-2">
+                  PHQ-9: Gentle Check-In for Low Mood
                 </h1>
                 <p className="text-lg text-muted-foreground mb-8">
-                  {tool.description}
+                  A self-reflection tool for the past 2 weeks
                 </p>
 
-                {/* Tool explanation */}
+                {/* About section */}
                 <div className="bg-card rounded-2xl p-6 mb-6 text-left shadow-soft">
-                  <h3 className="font-semibold text-foreground mb-3">
-                    {isPHQ9 ? "About This Questionnaire" : "What This Helps With"}
-                  </h3>
                   <p className="text-muted-foreground">
-                    {tool.disclaimer}
+                    This questionnaire helps you notice patterns in mood, energy, sleep, and self-worth 
+                    over the past two weeks. It is not a diagnosis. It is a screening and reflection tool 
+                    that can guide you toward support if needed.
                   </p>
                 </div>
 
-                {/* Before you begin - bullet points */}
+                {/* How to answer */}
                 <div className="bg-muted rounded-2xl p-6 mb-8 text-left">
+                  <h3 className="font-semibold text-foreground mb-3">How to Answer</h3>
+                  <ul className="space-y-2 text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary">•</span>
+                      Think about the last 2 weeks (including today).
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary">•</span>
+                      Choose one option for each statement.
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary">•</span>
+                      Answer as honestly as you can - there are no right or wrong answers.
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Response options legend */}
+                <div className="bg-card border border-border rounded-2xl p-6 mb-8">
+                  <h3 className="font-semibold text-foreground mb-4">Response Options</h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div className="text-center p-3 bg-muted rounded-xl">
+                      <div className="text-2xl font-bold text-primary mb-1">0</div>
+                      <div className="text-sm text-muted-foreground">Not at all</div>
+                    </div>
+                    <div className="text-center p-3 bg-muted rounded-xl">
+                      <div className="text-2xl font-bold text-primary mb-1">1</div>
+                      <div className="text-sm text-muted-foreground">Several days</div>
+                    </div>
+                    <div className="text-center p-3 bg-muted rounded-xl">
+                      <div className="text-2xl font-bold text-primary mb-1">2</div>
+                      <div className="text-sm text-muted-foreground">More than half the days</div>
+                    </div>
+                    <div className="text-center p-3 bg-muted rounded-xl">
+                      <div className="text-2xl font-bold text-primary mb-1">3</div>
+                      <div className="text-sm text-muted-foreground">Nearly every day</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Before you begin */}
+                <div className="bg-sage/10 rounded-2xl p-6 mb-8 text-left">
                   <h3 className="font-semibold text-foreground mb-3">Before You Begin</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-3 text-muted-foreground">
-                      <span className="w-5 h-5 bg-sage/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="w-5 h-5 bg-sage/30 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                         <Shield className="w-3 h-3 text-sage" />
                       </span>
                       <span><strong>Anonymous:</strong> Your responses stay on your device only</span>
                     </li>
                     <li className="flex items-start gap-3 text-muted-foreground">
-                      <span className="w-5 h-5 bg-sage/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="w-5 h-5 bg-sage/30 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                         <Heart className="w-3 h-3 text-sage" />
                       </span>
                       <span><strong>Non-diagnostic:</strong> This is for self-reflection, not clinical assessment</span>
                     </li>
                     <li className="flex items-start gap-3 text-muted-foreground">
-                      <span className="w-5 h-5 bg-sage/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="w-5 h-5 bg-sage/30 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                         <Clock className="w-3 h-3 text-sage" />
                       </span>
-                      <span><strong>Your pace:</strong> Takes 2-3 minutes, and you can stop anytime</span>
+                      <span><strong>Your pace:</strong> Takes 2-3 minutes</span>
                     </li>
                   </ul>
                 </div>
 
                 <Button variant="hero" size="lg" onClick={handleStart}>
-                  {isPHQ9 ? "Start Questionnaire" : "Start Assessment"}
+                  Start Questionnaire
                 </Button>
 
                 <div className="mt-8">
@@ -190,84 +288,68 @@ const ToolAssessment = () => {
               </div>
             )}
 
-            {/* Quiz Screen */}
-            {screen === "quiz" && (
-              <div className="relative">
-                {/* Decorative background */}
-                <div className="absolute inset-0 -mx-4 sm:-mx-6 lg:-mx-8 -my-8 bg-gradient-to-br from-blush/30 via-background to-sage/10 rounded-3xl pointer-events-none" />
-                
-                <div className="relative space-y-8">
-                  <ProgressBar
-                    current={currentQuestion + 1}
-                    total={tool.questions.length}
-                  />
-                  <QuizStep
-                    question={tool.questions[currentQuestion].question}
-                    context={(tool.questions[currentQuestion] as { context?: string }).context}
-                    options={tool.questions[currentQuestion].options}
-                    selectedValue={answers[currentQuestion] ?? null}
-                    onSelect={handleSelect}
-                    onNext={handleNext}
-                    onPrevious={handlePrevious}
-                    onExit={() => navigate("/tools")}
-                    isFirst={currentQuestion === 0}
-                    isLast={currentQuestion === tool.questions.length - 1}
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* Screen: Results Gate */}
-            {screen === "results-gate" && (
-              <div className="text-center">
-                <div className="w-20 h-20 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <CheckCircle className="w-10 h-10 text-sage" />
+            {/* Quiz Screen - All questions on one page */}
+            {screen === "quiz" && isPHQ9 && (
+              <div>
+                <div className="text-center mb-8">
+                  <p className="text-sm text-muted-foreground mb-2">Soulful Reflections</p>
+                  <h1 className="font-serif text-2xl lg:text-3xl font-bold text-primary mb-2">
+                    PHQ-9: Gentle Check-In
+                  </h1>
+                  <p className="text-muted-foreground">
+                    Over the last 2 weeks, how often have you been bothered by these?
+                  </p>
                 </div>
 
-                <h1 className="font-serif text-3xl font-bold text-primary mb-4">
-                  Thank You for Taking a Moment to Reflect
-                </h1>
-                <p className="text-lg text-muted-foreground mb-8">
-                  Choose how you'd like to view your results
-                </p>
+                {/* Response legend - compact */}
+                <div className="bg-muted rounded-xl p-4 mb-6">
+                  <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
+                    <span><strong className="text-primary">0</strong> = Not at all</span>
+                    <span><strong className="text-primary">1</strong> = Several days</span>
+                    <span><strong className="text-primary">2</strong> = More than half</span>
+                    <span><strong className="text-primary">3</strong> = Nearly every day</span>
+                  </div>
+                </div>
 
-                <div className="grid gap-4 max-w-md mx-auto">
-                  {/* Option A: Brief Summary */}
-                  <button
-                    onClick={handleViewBriefSummary}
-                    className="bg-card border border-border rounded-2xl p-6 text-left hover:border-primary/50 transition-all group"
+                {/* Questions */}
+                <div className="bg-card rounded-2xl p-4 sm:p-6 shadow-soft mb-6">
+                  {PHQ9_QUESTIONS.map((question, index) => (
+                    <PHQ9QuestionRow
+                      key={index}
+                      questionNumber={index + 1}
+                      questionText={question}
+                      selectedValue={answers[index] ?? null}
+                      onSelect={(value) => handleSelect(index, value)}
+                      isLastQuestion={index === 8}
+                    />
+                  ))}
+                </div>
+
+                {/* Scoring popup link */}
+                <div className="flex justify-center mb-6">
+                  <PHQ9ScoringDialog />
+                </div>
+
+                {/* Submit button */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button variant="outline" onClick={() => setScreen("intro")}>
+                    Back
+                  </Button>
+                  <Button 
+                    variant="hero" 
+                    size="lg" 
+                    onClick={handleSubmit}
+                    disabled={!allQuestionsAnswered}
                   >
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-muted rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 transition-colors">
-                        <Eye className="w-6 h-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-foreground mb-1">View Brief Summary</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Get a quick overview of your results. No data is stored.
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-
-                  {/* Option B: Save & Full Results */}
-                  <button
-                    onClick={handleSaveResults}
-                    className="bg-primary/5 border border-primary/20 rounded-2xl p-6 text-left hover:bg-primary/10 transition-all group"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-primary/30 transition-colors">
-                        <Mail className="w-6 h-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-foreground mb-1">Save & Receive Full Results</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Get detailed insights and keep a record for yourself.
-                        </p>
-                      </div>
-                    </div>
-                  </button>
+                    View My Results
+                  </Button>
                 </div>
+
+                {!allQuestionsAnswered && (
+                  <p className="text-center text-sm text-muted-foreground mt-4">
+                    Please answer all 9 questions to see your results
+                  </p>
+                )}
 
                 <div className="mt-8">
                   <CrisisBox />
@@ -275,30 +357,59 @@ const ToolAssessment = () => {
               </div>
             )}
 
-            {/* Screen: Brief Results Summary (Anonymous) */}
-            {screen === "brief-summary" && (
+            {/* Results Screen */}
+            {screen === "results" && isPHQ9 && (
               <div className="text-center">
                 <div className="w-20 h-20 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Eye className="w-10 h-10 text-sage" />
+                  <CheckCircle className="w-10 h-10 text-sage" />
                 </div>
 
                 <h1 className="font-serif text-3xl font-bold text-primary mb-2">
-                  Your Reflection Summary
+                  Your Reflection Results
                 </h1>
-                <p className="text-muted-foreground text-sm mb-8">
+                <p className="text-muted-foreground mb-8">
                   <Lock className="w-4 h-4 inline mr-1" />
-                  This summary is anonymous and not stored
+                  Your responses are private and stored only on your device
                 </p>
 
-                {/* High-level insight - supportive language, no scores */}
-                <div className="bg-card rounded-2xl p-8 mb-8 text-left shadow-soft">
-                  <p className="text-lg text-foreground leading-relaxed">
-                    {result.message}
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-4 italic">
-                    This is not a diagnosis. If you're feeling overwhelmed or distressed, please consider reaching out to a mental health professional.
-                  </p>
+                {/* Score display */}
+                <div className="bg-card rounded-2xl p-6 mb-6 shadow-soft">
+                  <div className="text-center mb-4">
+                    <div className="text-5xl font-bold text-primary mb-2">{totalScore}</div>
+                    <div className="text-sm text-muted-foreground">out of 27</div>
+                  </div>
+                  <div className="border-t border-border pt-4">
+                    <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-3">
+                      <span className="font-semibold text-primary">{scoreInterpretation.title}</span>
+                    </div>
+                    <p className="text-muted-foreground">{scoreInterpretation.description}</p>
+                  </div>
                 </div>
+
+                {/* Soulful Reflection */}
+                <div className="bg-sage/10 border border-sage/20 rounded-2xl p-6 mb-6 text-left">
+                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                    <Heart className="w-5 h-5 text-sage" />
+                    Soulful Reflection
+                  </h3>
+                  <p className="text-muted-foreground italic">{scoreInterpretation.reflection}</p>
+                </div>
+
+                {/* Question 9 Warning if flagged */}
+                {question9Flagged && (
+                  <div className="bg-destructive/10 border border-destructive/30 rounded-2xl p-6 mb-6 text-left">
+                    <div className="flex items-start gap-3">
+                      <AlertTriangle className="w-6 h-6 text-destructive flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h3 className="font-semibold text-foreground mb-2">Important Notice About Question 9</h3>
+                        <p className="text-sm text-muted-foreground">
+                          You indicated experiencing thoughts about harming yourself. Regardless of your total score, 
+                          please seek help immediately. <strong>Your safety matters more than any number.</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Crisis resources if needed */}
                 {showCrisisResources && (
@@ -306,7 +417,7 @@ const ToolAssessment = () => {
                     <div className="flex items-start gap-3">
                       <AlertTriangle className="w-6 h-6 text-destructive flex-shrink-0 mt-0.5" />
                       <div>
-                        <h3 className="font-semibold text-foreground mb-2">We Care About Your Well-being</h3>
+                        <h3 className="font-semibold text-foreground mb-2">Support Resources</h3>
                         <p className="text-sm text-muted-foreground mb-3">
                           Based on your responses, we want to make sure you have access to support:
                         </p>
@@ -326,7 +437,85 @@ const ToolAssessment = () => {
                   </div>
                 )}
 
-                {/* Suggested next steps */}
+                {/* Gentle Reminder - shown in ALL results */}
+                <div className="bg-blush/30 border border-primary/20 rounded-2xl p-6 mb-6 text-left">
+                  <h3 className="font-semibold text-foreground mb-2">A Gentle Reminder</h3>
+                  <p className="text-muted-foreground">
+                    Mental health exists on a spectrum. Needing help is not a weakness - it is wisdom. 
+                    If your score suggests moderate to severe symptoms, reaching out early can change the course of your journey.
+                  </p>
+                </div>
+
+                {/* Save Results Option */}
+                {!showEmailCapture ? (
+                  <div className="bg-card border border-border rounded-2xl p-6 mb-6">
+                    <div className="flex flex-col sm:flex-row items-center gap-4">
+                      <div className="flex-1 text-left">
+                        <h3 className="font-semibold text-foreground mb-1">Save Your Results</h3>
+                        <p className="text-sm text-muted-foreground">
+                          Receive a copy of your results via email to keep for yourself.
+                        </p>
+                      </div>
+                      <Button variant="outline" onClick={() => setShowEmailCapture(true)}>
+                        <Mail className="w-4 h-4 mr-2" />
+                        Save via Email
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <form onSubmit={handleEmailSubmit} className="bg-card border border-border rounded-2xl p-6 mb-6 text-left">
+                    <h3 className="font-semibold text-foreground mb-4">Enter Your Email</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                          Email Address <span className="text-destructive">*</span>
+                        </label>
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="you@example.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                          Name <span className="text-muted-foreground">(optional)</span>
+                        </label>
+                        <Input
+                          id="name"
+                          type="text"
+                          placeholder="Your name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <Checkbox
+                          id="consent"
+                          checked={consent}
+                          onCheckedChange={(checked) => setConsent(checked as boolean)}
+                          className="mt-1"
+                        />
+                        <label htmlFor="consent" className="text-sm text-muted-foreground cursor-pointer">
+                          I agree to receive my results via email and understand that my responses 
+                          will be saved to personalize my experience.
+                        </label>
+                      </div>
+                      <div className="flex gap-3">
+                        <Button type="button" variant="outline" onClick={() => setShowEmailCapture(false)}>
+                          Cancel
+                        </Button>
+                        <Button type="submit" variant="hero" disabled={!email || !consent}>
+                          Save Results
+                        </Button>
+                      </div>
+                    </div>
+                  </form>
+                )}
+
+                {/* Suggested Resources */}
                 <div className="bg-muted rounded-2xl p-6 mb-8 text-left">
                   <h3 className="font-semibold text-foreground mb-4">You May Find These Helpful</h3>
                   <div className="grid gap-3">
@@ -354,217 +543,10 @@ const ToolAssessment = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                  <Button variant="outline" onClick={handleRetake}>
-                    Take Again
-                  </Button>
-                  <Button variant="hero" onClick={handleSaveResults}>
-                    Get Full Results via Email
-                  </Button>
+                {/* Scoring Guide Link */}
+                <div className="flex justify-center mb-6">
+                  <PHQ9ScoringDialog />
                 </div>
-
-                <CrisisBox />
-              </div>
-            )}
-
-            {/* Screen: Email Capture */}
-            {screen === "email-capture" && (
-              <div className="text-center">
-                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Mail className="w-10 h-10 text-primary" />
-                </div>
-
-                <h1 className="font-serif text-3xl font-bold text-primary mb-4">
-                  Receive Your Full Results
-                </h1>
-                <p className="text-muted-foreground mb-8">
-                  Enter your email to receive a detailed breakdown of your results 
-                  and personalized recommendations.
-                </p>
-
-                <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto text-left">
-                  <div className="space-y-4 mb-6">
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                        Email Address <span className="text-destructive">*</span>
-                      </label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="you@example.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="w-full"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                        Name <span className="text-muted-foreground">(optional)</span>
-                      </label>
-                      <Input
-                        id="name"
-                        type="text"
-                        placeholder="Your name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full"
-                      />
-                    </div>
-
-                    <div className="flex items-start gap-3">
-                      <Checkbox
-                        id="consent"
-                        checked={consent}
-                        onCheckedChange={(checked) => setConsent(checked as boolean)}
-                        className="mt-1"
-                      />
-                      <label htmlFor="consent" className="text-sm text-muted-foreground cursor-pointer">
-                        I agree to receive my results via email and understand that my responses 
-                        will be saved to personalize my experience. 
-                        <Link to="/privacy" className="text-primary hover:underline ml-1">
-                          Privacy Policy
-                        </Link>
-                      </label>
-                    </div>
-                  </div>
-
-                  <Button 
-                    type="submit" 
-                    variant="hero" 
-                    size="lg" 
-                    className="w-full"
-                    disabled={!email || !consent}
-                  >
-                    View My Results
-                  </Button>
-
-                  <button
-                    type="button"
-                    onClick={handleViewBriefSummary}
-                    className="w-full mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Skip and view brief summary instead
-                  </button>
-                </form>
-
-                <div className="mt-8">
-                  <CrisisBox />
-                </div>
-              </div>
-            )}
-
-            {/* Screen: Full Results */}
-            {screen === "full-results" && (
-              <div className="text-center">
-                <div className="w-20 h-20 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <CheckCircle className="w-10 h-10 text-sage" />
-                </div>
-
-                <h1 className="font-serif text-3xl font-bold text-primary mb-2">
-                  {result.title}
-                </h1>
-                <p className="text-muted-foreground text-sm mb-6">
-                  Your results have been saved {name ? `for ${name}` : ""}
-                </p>
-
-                {/* Summary Section */}
-                <div className="bg-card rounded-2xl p-8 mb-6 text-left shadow-soft">
-                  <h3 className="font-semibold text-foreground mb-3">Summary</h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {result.message}
-                  </p>
-                </div>
-
-                {/* Score information - for full results only */}
-                {isPHQ9 && (
-                  <div className="bg-muted/50 border border-border rounded-2xl p-6 text-left mb-6">
-                    <h3 className="font-semibold text-foreground mb-3">Your Score: {totalScore} out of 27</h3>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      This score is for informational purposes only and does not constitute a diagnosis.
-                    </p>
-                    <div className="text-sm text-muted-foreground space-y-1">
-                      <p><strong>0-4:</strong> Minimal emotional strain</p>
-                      <p><strong>5-9:</strong> Mild emotional strain</p>
-                      <p><strong>10-14:</strong> Moderate emotional strain</p>
-                      <p><strong>15-19:</strong> Moderately severe emotional strain</p>
-                      <p><strong>20-27:</strong> Severe emotional strain</p>
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-4 italic">
-                      If your score suggests significant distress, please consider speaking with a mental health professional.
-                    </p>
-                  </div>
-                )}
-
-                {/* Breakdown / Recommendations */}
-                <div className="bg-muted rounded-2xl p-6 text-left mb-6">
-                  <h3 className="font-semibold text-foreground mb-4">Personalized Recommendations</h3>
-                  <ul className="space-y-3">
-                    {result.recommendations.map((rec, i) => (
-                      <li key={i} className="flex items-start gap-3 text-muted-foreground">
-                        <span className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 text-xs text-primary font-semibold">
-                          {i + 1}
-                        </span>
-                        {rec}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Suggested Content */}
-                <div className="bg-card border border-border rounded-2xl p-6 text-left mb-6">
-                  <h3 className="font-semibold text-foreground mb-4">Suggested Resources</h3>
-                  <div className="grid gap-3">
-                    <Link 
-                      to="/articles" 
-                      className="flex items-center gap-3 p-3 bg-muted rounded-xl hover:bg-primary/5 transition-colors"
-                    >
-                      <BookOpen className="w-5 h-5 text-primary" />
-                      <span className="text-foreground">Browse articles on related topics</span>
-                    </Link>
-                    <Link 
-                      to="/media" 
-                      className="flex items-center gap-3 p-3 bg-muted rounded-xl hover:bg-primary/5 transition-colors"
-                    >
-                      <Eye className="w-5 h-5 text-primary" />
-                      <span className="text-foreground">Explore guided meditations</span>
-                    </Link>
-                    <Link 
-                      to="/tools" 
-                      className="flex items-center gap-3 p-3 bg-muted rounded-xl hover:bg-primary/5 transition-colors"
-                    >
-                      <Wrench className="w-5 h-5 text-primary" />
-                      <span className="text-foreground">Try other self-reflection tools</span>
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Crisis Resources (conditionally shown) */}
-                {showCrisisResources && (
-                  <div className="bg-destructive/5 border border-destructive/20 rounded-2xl p-6 text-left mb-6">
-                    <div className="flex items-start gap-3">
-                      <AlertTriangle className="w-6 h-6 text-destructive flex-shrink-0 mt-0.5" />
-                      <div>
-                        <h3 className="font-semibold text-foreground mb-2">Important Support Resources</h3>
-                        <p className="text-sm text-muted-foreground mb-3">
-                          Based on your responses, we want to make sure you have access to additional support. Please know that help is available:
-                        </p>
-                        <div className="space-y-2 text-sm">
-                          <a href="tel:988" className="block text-primary font-medium hover:underline">
-                            988 Suicide & Crisis Lifeline
-                          </a>
-                          <a href="https://www.crisistextline.org" target="_blank" rel="noopener noreferrer" className="block text-primary font-medium hover:underline">
-                            Crisis Text Line - Text HOME to 741741
-                          </a>
-                          <Link to="/crisis" className="block text-primary font-medium hover:underline">
-                            View All Crisis Resources
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                   <Button variant="outline" onClick={handleRetake}>
@@ -576,6 +558,29 @@ const ToolAssessment = () => {
                 </div>
 
                 <CrisisBox />
+              </div>
+            )}
+
+            {/* Non-PHQ9 tools - keep original flow */}
+            {screen === "quiz" && !isPHQ9 && (
+              <div className="text-center">
+                <p className="text-muted-foreground">
+                  This assessment flow is coming soon for {tool.title}.
+                </p>
+                <Button variant="outline" className="mt-4" onClick={() => navigate("/tools")}>
+                  Back to Tools
+                </Button>
+              </div>
+            )}
+
+            {screen === "results" && !isPHQ9 && (
+              <div className="text-center">
+                <p className="text-muted-foreground">
+                  Results coming soon for {tool.title}.
+                </p>
+                <Button variant="outline" className="mt-4" onClick={() => navigate("/tools")}>
+                  Back to Tools
+                </Button>
               </div>
             )}
           </div>
