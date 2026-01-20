@@ -31,8 +31,8 @@ const HeroSection = () => {
             <div className="relative rounded-2xl overflow-hidden shadow-elevated">
               <img
                 src={heroImage}
-                alt="Woman meditating peacefully in a bright room"
-                className="w-full h-auto object-cover aspect-[4/5]"
+                alt="Two people in a calm therapy session with warm lighting"
+                className="w-full h-auto object-contain"
               />
             </div>
             {/* Decorative element */}
