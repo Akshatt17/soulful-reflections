@@ -131,6 +131,15 @@
       }
     },
     {
+      "id": "gad7",
+      "title": "GAD-7: A Gentle Check-In for Anxiety",
+      "description": "A short self-reflection tool to help you notice how often anxiety-related feelings and thoughts have been showing up in your life.",
+      "icon": "Brain",
+      "color": "sage",
+      "disclaimer": "This is not a diagnosis. It is a screening and reflection tool. If your results feel concerning, or if you are struggling to cope, consider reaching out to a mental health professional.",
+      "questions": []
+    },
+    {
       "id": "stress-inventory",
       "title": "Stress Inventory",
       "description": "Evaluate your current stress levels and discover personalized strategies for managing and reducing daily pressures.",
