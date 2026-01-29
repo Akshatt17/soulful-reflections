@@ -140,6 +140,15 @@
       "questions": []
     },
     {
+      "id": "pss",
+      "title": "PSS — Perceived Stress Scale",
+      "description": "A reflective tool to help you notice how stressful life has felt recently. Understand your stress patterns over the last month.",
+      "icon": "Activity",
+      "color": "sage",
+      "disclaimer": "This is not a diagnosis. It is a reflective tool for self-awareness. If stress feels overwhelming, consider reaching out to a mental health professional.",
+      "questions": []
+    },
+    {
       "id": "stress-inventory",
       "title": "Stress Inventory",
       "description": "Evaluate your current stress levels and discover personalized strategies for managing and reducing daily pressures.",

@@ -1,4 +1,4 @@
-import { Heart, Brain, Scale } from "lucide-react";
+import { Heart, Brain, Scale, Activity } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const tools = [
@@ -11,10 +11,17 @@ const tools = [
   },
   {
     icon: Brain,
-    id: "stress-inventory",
-    title: "Stress Inventory",
-    description: "Evaluate your current stress levels and discover personalized strategies for managing and reducing daily pressures.",
-    link: "Begin Assessment →",
+    id: "gad7",
+    title: "GAD-7: A Gentle Check-In for Anxiety",
+    description: "A short self-reflection tool to help you notice how often anxiety-related feelings and thoughts have been showing up.",
+    link: "Begin Reflection →",
+  },
+  {
+    icon: Activity,
+    id: "pss",
+    title: "PSS — Perceived Stress Scale",
+    description: "A reflective tool to help you notice how stressful life has felt recently over the last month.",
+    link: "Begin Reflection →",
   },
   {
     icon: Scale,
