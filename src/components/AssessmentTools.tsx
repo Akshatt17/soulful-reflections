@@ -1,4 +1,4 @@
-import { Heart, Brain, Scale, Activity } from "lucide-react";
+import { Heart, Brain, Activity } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const tools = [
@@ -22,13 +22,6 @@ const tools = [
     title: "PSS — Perceived Stress Scale",
     description: "A reflective tool to help you notice how stressful life has felt recently over the last month.",
     link: "Begin Reflection →",
-  },
-  {
-    icon: Scale,
-    id: "balance-check",
-    title: "Balance Check",
-    description: "Assess the harmony between different areas of your life and find opportunities for creating better equilibrium.",
-    link: "Begin Assessment →",
   },
 ];
 
