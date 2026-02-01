@@ -1,12 +1,35 @@
 import { Link } from "react-router-dom";
 import { Clock } from "lucide-react";
-import { Activity, Brain, Scale, Heart, LucideIcon } from "lucide-react";
+import { 
+  Activity, 
+  Brain, 
+  Scale, 
+  Heart, 
+  Moon, 
+  Sun, 
+  Sparkles, 
+  Smile, 
+  Users, 
+  Zap,
+  Shield,
+  Target,
+  LucideIcon 
+} from "lucide-react";
 
+// Icon map for tool cards - add new icons here as needed
 const iconMap: Record<string, LucideIcon> = {
   Activity,
   Brain,
   Scale,
   Heart,
+  Moon,
+  Sun,
+  Sparkles,
+  Smile,
+  Users,
+  Zap,
+  Shield,
+  Target,
 };
 
 interface ToolCardProps {

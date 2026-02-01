@@ -147,6 +147,42 @@
       "color": "sage",
       "disclaimer": "This is not a diagnosis. It is a reflective tool for self-awareness. If stress feels overwhelming, consider reaching out to a mental health professional.",
       "questions": []
+    },
+    {
+      "id": "isi",
+      "title": "ISI – Insomnia Severity Index",
+      "description": "A gentle reflective tool to help you understand how sleep has been feeling for you recently—both at night and during the day.",
+      "icon": "Moon",
+      "color": "sage",
+      "disclaimer": "This self-check is adapted from the Insomnia Severity Index. It is not a diagnosis. If your score suggests moderate to severe insomnia, seeking professional help can make a real difference.",
+      "questions": []
+    },
+    {
+      "id": "oci-r",
+      "title": "OCI-R – Obsessive-Compulsive Inventory–Revised",
+      "description": "A gentle reflective self-check inspired by the OCI-R, a widely used screening measure for obsessive-compulsive symptoms.",
+      "icon": "Target",
+      "color": "sage",
+      "disclaimer": "This is not a diagnosis. A higher score suggests stronger OCD-like symptoms and is a sign to consider a professional assessment—especially if these experiences consume time or cause distress.",
+      "questions": []
+    },
+    {
+      "id": "mdq",
+      "title": "MDQ – Mood Disorder Questionnaire",
+      "description": "A gentle reflective self-check based on the Mood Disorder Questionnaire, a commonly used screening tool for possible bipolar spectrum symptoms.",
+      "icon": "Zap",
+      "color": "sage",
+      "disclaimer": "This is not a diagnosis. A positive screen simply means it may be worth having a professional evaluation—especially if mood shifts have impacted your life, relationships, sleep, or decisions.",
+      "questions": []
+    },
+    {
+      "id": "assist",
+      "title": "ASSIST (WHO) – Substance Use Self-Check",
+      "description": "A gentle reflective tool adapted from the WHO ASSIST to help you notice patterns of substance use and its impact.",
+      "icon": "Shield",
+      "color": "sage",
+      "disclaimer": "This is not a diagnosis. If your results suggest moderate to high risk, it's a sign to reach out for professional support.",
+      "questions": []
     }
   ]
 }
