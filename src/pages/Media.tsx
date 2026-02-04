@@ -56,10 +56,10 @@ const Media = () => {
       <section className="bg-muted py-16">
         <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
-            Audio, Video & Image Reflections
+            Micro Reflections
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Immerse yourself in guided audio reflections, calming video content, and visual reflections designed to support your mindfulness journey.
+            Brief moments of mindfulness through audio, video, and visual content designed to support your daily wellbeing.
           </p>
         </div>
       </section>
