@@ -1,0 +1,64 @@
+{
+  "imageReflections": [
+    {
+      "id": "1",
+      "slug": "insomnia-disorder",
+      "title": "Insomnia Disorder",
+      "description": "Insomnia is more than an occasional restless night. It is a persistent difficulty in falling asleep, staying asleep, or waking too early despite having the opportunity to rest. Over time, it becomes not just a night problem but a day problem. The body feels heavy, the mind foggy, patience thinner, and emotions closer to the surface.",
+      "fullText": "Insomnia is more than an occasional restless night. It is a persistent difficulty in falling asleep, staying asleep, or waking too early despite having the opportunity to rest. Over time, it becomes not just a night problem but a day problem. The body feels heavy, the mind foggy, patience thinner, and emotions closer to the surface.\n\nMany people with insomnia describe feeling exhausted but wired — as if the mind refuses to power down. When sleep difficulty occurs at least three nights a week for months and begins affecting mood, concentration, productivity, or relationships, it may indicate insomnia disorder rather than temporary stress.\n\nChronic sleep disruption increases vulnerability to anxiety, depression, irritability, and physical health strain. Recognising insomnia early is important because sleep is foundational to emotional stability and wellbeing.",
+      "imagePath": "insomnia-disorder.jpg",
+      "category": "Sleep",
+      "publishedDate": "2024-01-15"
+    },
+    {
+      "id": "2",
+      "slug": "body-dysmorphic-disorder",
+      "title": "Body Dysmorphic Disorder (BDD)",
+      "description": "Body Dysmorphic Disorder is not vanity. It is a condition where a perceived flaw in appearance becomes magnified in the mind. The concern feels intrusive and distressing, often occupying hours of the day.",
+      "fullText": "Body Dysmorphic Disorder is not vanity. It is a condition where a perceived flaw in appearance becomes magnified in the mind. The concern feels intrusive and distressing, often occupying hours of the day.\n\nPeople may repeatedly check mirrors, avoid them, compare themselves constantly, or seek reassurance. Relief is brief because the struggle is not with the body itself, but with the mind's interpretation of it.\n\nIt becomes a disorder when preoccupation is time-consuming, emotionally painful, and interferes with relationships, work, or daily functioning. Recognising this pattern helps separate self-worth from distorted self-perception.",
+      "imagePath": "body-dysmorphic-disorder.jpg",
+      "category": "Body Image",
+      "publishedDate": "2024-01-14"
+    },
+    {
+      "id": "3",
+      "slug": "bipolar-disorder",
+      "title": "Bipolar Disorder",
+      "description": "Bipolar disorder involves significant shifts in mood, energy, and activity levels that go beyond ordinary ups and downs. During elevated phases, a person may feel unusually energetic, confident, restless, or require very little sleep.",
+      "fullText": "Bipolar disorder involves significant shifts in mood, energy, and activity levels that go beyond ordinary ups and downs. During elevated phases, a person may feel unusually energetic, confident, restless, or require very little sleep. Thoughts may race and decisions may feel urgent.\n\nDuring depressive phases, low mood, fatigue, hopelessness, and loss of interest may dominate. These episodes are distinct and can disrupt relationships, work, and sleep patterns.\n\nIt becomes a disorder when these mood changes are recurrent, intense, and impair daily life. Awareness helps differentiate bipolar disorder from normal emotional variability.",
+      "imagePath": "bipolar-disorder.jpg",
+      "category": "Mood",
+      "publishedDate": "2024-01-13"
+    },
+    {
+      "id": "4",
+      "slug": "ptsd",
+      "title": "Post-Traumatic Stress Disorder (PTSD)",
+      "description": "PTSD can develop after experiencing or witnessing deeply threatening events such as violence, accidents, abuse, disasters, or repeated trauma. The nervous system remains stuck in survival mode even after danger has passed.",
+      "fullText": "PTSD can develop after experiencing or witnessing deeply threatening events such as violence, accidents, abuse, disasters, or repeated trauma. The nervous system remains stuck in survival mode even after danger has passed.\n\nIntrusive memories, nightmares, avoidance of reminders, emotional numbness, irritability, and hypervigilance are common. The body reacts as if the threat is still present.\n\nWhen these reactions persist beyond a month and interfere with daily functioning, it may indicate PTSD. Recognising persistent trauma responses is an important step toward awareness.",
+      "imagePath": "ptsd.jpg",
+      "category": "Trauma",
+      "publishedDate": "2024-01-12"
+    },
+    {
+      "id": "5",
+      "slug": "anxiety-disorders",
+      "title": "Anxiety Disorders",
+      "description": "Anxiety disorders occur when fear and worry become persistent, excessive, and difficult to control. The mind anticipates danger, and the body responds with palpitations, breathlessness, restlessness, or muscle tension.",
+      "fullText": "Anxiety disorders occur when fear and worry become persistent, excessive, and difficult to control. The mind anticipates danger, and the body responds with palpitations, breathlessness, restlessness, or muscle tension.\n\nThe anxiety loop often follows this pattern: a worrying thought triggers physical sensations; the sensations increase fear; avoidance reinforces the cycle. Over time, anxiety can shrink one's world.\n\nWhen worry consumes significant time, disrupts life, or feels uncontrollable, it may have shifted from temperament into disorder.",
+      "imagePath": "anxiety-disorders.jpg",
+      "category": "Anxiety",
+      "publishedDate": "2024-01-11"
+    },
+    {
+      "id": "6",
+      "slug": "ocd",
+      "title": "Obsessive–Compulsive Disorder (OCD)",
+      "description": "OCD involves unwanted, intrusive thoughts that create anxiety, along with repetitive behaviors performed to reduce that distress. Washing, checking, counting, repeating, arranging, or mental rituals are common.",
+      "fullText": "OCD involves unwanted, intrusive thoughts that create anxiety, along with repetitive behaviors performed to reduce that distress. Washing, checking, counting, repeating, arranging, or mental rituals are common.\n\nRelief after rituals is temporary, reinforcing the cycle. Magical thinking may appear — the belief that certain thoughts or actions can prevent harm.\n\nOCD differs from personality traits because the thoughts feel intrusive and unwanted, and daily life begins revolving around preventing feared outcomes. When rituals feel driven rather than chosen, it has likely crossed into disorder.",
+      "imagePath": "ocd.jpg",
+      "category": "OCD",
+      "publishedDate": "2024-01-10"
+    }
+  ]
+}

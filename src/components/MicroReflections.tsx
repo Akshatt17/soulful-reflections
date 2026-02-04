@@ -1,4 +1,4 @@
-import { Play, PlayCircle } from "lucide-react";
+import { Play, PlayCircle, ImageIcon } from "lucide-react";
 import videoMeditation from "@/assets/video-meditation.jpg";
 import videoBreathing from "@/assets/video-breathing.jpg";
 import {
@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { ImageReflectionsGallery } from "@/components/micro-reflections/images";
 
 const audioReflections = [
   {
@@ -54,8 +55,8 @@ const MicroReflections = () => {
           </p>
         </div>
 
-        {/* Two Column Layout */}
-        <div className="grid lg:grid-cols-2 gap-10">
+        {/* Three Column Layout */}
+        <div className="grid lg:grid-cols-3 gap-10">
           {/* Audio Reflections */}
           <div>
             <h3 className="font-serif text-xl font-semibold text-primary mb-6">
@@ -133,6 +134,14 @@ const MicroReflections = () => {
                 <CarouselNext className="static translate-y-0" />
               </div>
             </Carousel>
+          </div>
+
+          {/* Image Reflections */}
+          <div>
+            <h3 className="font-serif text-xl font-semibold text-primary mb-6">
+              Image Reflections
+            </h3>
+            <ImageReflectionsGallery limit={2} columns={2} />
           </div>
         </div>
       </div>
