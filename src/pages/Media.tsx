@@ -1,12 +1,11 @@
 import { useState, useMemo } from "react";
 import PageLayout from "@/components/PageLayout";
 import { AudioCard, VideoCard } from "@/components/MediaCard";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Filter } from "lucide-react";
 import mediaData from "@/data/media.json";
+import { ImageReflectionsGallery } from "@/components/micro-reflections/images";
 
-type MediaType = "all" | "audio" | "video";
+type MediaType = "all" | "audio" | "video" | "images";
 
 const Media = () => {
   const [mediaType, setMediaType] = useState<MediaType>("all");
@@ -22,7 +21,7 @@ const Media = () => {
 
   // Filter media
   const filteredAudio = useMemo(() => {
-    if (mediaType === "video") return [];
+    if (mediaType === "video" || mediaType === "images") return [];
     return mediaData.audio.filter((item) => {
       if (categoryFilter !== "all" && item.category !== categoryFilter) return false;
       if (durationFilter !== "all") {
@@ -36,7 +35,7 @@ const Media = () => {
   }, [mediaType, categoryFilter, durationFilter]);
 
   const filteredVideo = useMemo(() => {
-    if (mediaType === "audio") return [];
+    if (mediaType === "audio" || mediaType === "images") return [];
     return mediaData.video.filter((item) => {
       if (categoryFilter !== "all" && item.category !== categoryFilter) return false;
       if (durationFilter !== "all") {
@@ -49,16 +48,18 @@ const Media = () => {
     });
   }, [mediaType, categoryFilter, durationFilter]);
 
+  const showImages = mediaType === "all" || mediaType === "images";
+
   return (
     <PageLayout>
       {/* Hero */}
       <section className="bg-muted py-16">
         <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
-            Audio & Video Reflections
+            Audio, Video & Image Reflections
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Immerse yourself in guided audio reflections and calming video content designed to support your mindfulness journey.
+            Immerse yourself in guided audio reflections, calming video content, and visual reflections designed to support your mindfulness journey.
           </p>
         </div>
       </section>
@@ -68,7 +69,7 @@ const Media = () => {
         <div className="container-custom px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Type Filter */}
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <Button
                 variant={mediaType === "all" ? "hero" : "outline"}
                 size="sm"
@@ -90,32 +91,41 @@ const Media = () => {
               >
                 Video
               </Button>
+              <Button
+                variant={mediaType === "images" ? "hero" : "outline"}
+                size="sm"
+                onClick={() => setMediaType("images")}
+              >
+                Images
+              </Button>
             </div>
 
-            {/* Category & Duration Filters */}
-            <div className="flex gap-3 items-center">
-              <select
-                value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
-                className="px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
-              >
-                <option value="all">All Topics</option>
-                {categories.map((cat) => (
-                  <option key={cat} value={cat}>{cat}</option>
-                ))}
-              </select>
+            {/* Category & Duration Filters (hidden for images) */}
+            {mediaType !== "images" && (
+              <div className="flex gap-3 items-center">
+                <select
+                  value={categoryFilter}
+                  onChange={(e) => setCategoryFilter(e.target.value)}
+                  className="px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
+                >
+                  <option value="all">All Topics</option>
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
 
-              <select
-                value={durationFilter}
-                onChange={(e) => setDurationFilter(e.target.value)}
-                className="px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
-              >
-                <option value="all">Any Duration</option>
-                <option value="short">Under 5 min</option>
-                <option value="medium">5-15 min</option>
-                <option value="long">15+ min</option>
-              </select>
-            </div>
+                <select
+                  value={durationFilter}
+                  onChange={(e) => setDurationFilter(e.target.value)}
+                  className="px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
+                >
+                  <option value="all">Any Duration</option>
+                  <option value="short">Under 5 min</option>
+                  <option value="medium">5-15 min</option>
+                  <option value="long">15+ min</option>
+                </select>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -165,8 +175,20 @@ const Media = () => {
         </section>
       )}
 
+      {/* Image Reflections Section */}
+      {showImages && (
+        <section className="section-padding bg-muted">
+          <div className="container-custom px-4 sm:px-6 lg:px-8">
+            <h2 className="font-serif text-2xl font-bold text-primary mb-8">
+              Image Reflections
+            </h2>
+            <ImageReflectionsGallery columns={3} />
+          </div>
+        </section>
+      )}
+
       {/* Empty State */}
-      {filteredAudio.length === 0 && filteredVideo.length === 0 && (
+      {filteredAudio.length === 0 && filteredVideo.length === 0 && !showImages && (
         <section className="section-padding bg-background">
           <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-muted-foreground">No media matches your current filters.</p>
