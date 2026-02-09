@@ -43,6 +43,13 @@
     --beige: 40 33% 93%;
     --cream: 40 33% 97%;
 
+    /* New palette colors */
+    --olive-petal: 90 18% 52%;
+    --golden-clover: 62 35% 68%;
+    --artic-daisy: 22 30% 87%;
+    --rose-blush: 14 35% 73%;
+    --peach-blossom: 355 25% 63%;
+
     /* Shadows */
     --shadow-soft: 0 4px 20px -4px hsl(353 59% 30% / 0.08);
     --shadow-card: 0 8px 30px -8px hsl(353 59% 30% / 0.12);
