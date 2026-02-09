@@ -56,6 +56,11 @@ export default {
         sage: "hsl(var(--sage))",
         beige: "hsl(var(--beige))",
         cream: "hsl(var(--cream))",
+        "olive-petal": "hsl(var(--olive-petal))",
+        "golden-clover": "hsl(var(--golden-clover))",
+        "artic-daisy": "hsl(var(--artic-daisy))",
+        "rose-blush": "hsl(var(--rose-blush))",
+        "peach-blossom": "hsl(var(--peach-blossom))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

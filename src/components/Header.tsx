@@ -18,11 +18,11 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-card border-b border-border">
+    <header className="sticky top-0 z-50 bg-primary border-b border-primary/80">
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 lg:h-20 px-4 sm:px-6 lg:px-8">
           {/* Logo */}
-          <Link to="/" className="font-serif text-xl lg:text-2xl font-semibold text-primary">
+          <Link to="/" className="font-serif text-xl lg:text-2xl font-semibold text-primary-foreground">
             Soulful Reflections
           </Link>
 
@@ -38,7 +38,7 @@ const Header = () => {
           {/* Desktop CTA */}
           <div className="hidden lg:block">
             <Link to="/tools">
-              <Button variant="hero" size="default">
+              <Button variant="outline" size="default" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
                 Get Started
               </Button>
             </Link>
@@ -46,7 +46,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-foreground"
+            className="lg:hidden p-2 text-primary-foreground"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -57,7 +57,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-card border-t border-border animate-fade-in">
+        <div className="lg:hidden bg-primary border-t border-primary-foreground/20 animate-fade-in">
           <nav className="container-custom px-4 py-6 space-y-4">
             {navItems.map((item) => (
               <NavLink

@@ -18,8 +18,8 @@ const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
           cn(
             "text-sm font-medium transition-colors duration-200",
             isActive 
-              ? "text-primary" 
-              : "text-foreground/80 hover:text-primary",
+              ? "text-primary-foreground font-semibold" 
+              : "text-primary-foreground/75 hover:text-primary-foreground",
             className, 
             isActive && activeClassName, 
             isPending && pendingClassName
