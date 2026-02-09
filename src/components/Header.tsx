@@ -35,15 +35,6 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden lg:block">
-            <Link to="/tools">
-              <Button variant="outline" size="default" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                Get Started
-              </Button>
-            </Link>
-          </div>
-
           {/* Mobile Menu Button */}
           <button
             className="lg:hidden p-2 text-primary-foreground"
@@ -69,11 +60,6 @@ const Header = () => {
                 {item.label}
               </NavLink>
             ))}
-            <Link to="/tools" onClick={() => setMobileMenuOpen(false)}>
-              <Button variant="hero" size="lg" className="w-full mt-4">
-                Get Started
-              </Button>
-            </Link>
           </nav>
         </div>
       )}
