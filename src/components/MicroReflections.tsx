@@ -64,9 +64,9 @@ const MicroReflections = () => {
         </div>
 
         {/* Layout: 2 audio columns + 1 video + 1 image */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Audio Reflections — spans 2 columns */}
-          <div className="md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Audio Reflections */}
+          <div>
             <h3 className="font-serif text-xl font-semibold text-primary mb-6">
               Audio Reflections
             </h3>
