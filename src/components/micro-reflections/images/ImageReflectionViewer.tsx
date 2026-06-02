@@ -10,12 +10,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { ImageReflection } from "@/types/imageReflection";
 
 // Import all reflection images
-import insomniaImg from "@/assets/reflections/insomnia-disorder.jpg";
-import bddImg from "@/assets/reflections/body-dysmorphic-disorder.jpg";
-import bipolarImg from "@/assets/reflections/bipolar-disorder.jpg";
-import ptsdImg from "@/assets/reflections/ptsd.jpg";
-import anxietyImg from "@/assets/reflections/anxiety-disorders.jpg";
-import ocdImg from "@/assets/reflections/ocd.jpg";
+import insomniaImg from "@/assets/Micro_Image/insomnia-disorder.jpg";
+import bddImg from "@/assets/Micro_Image/body-dysmorphic-disorder.jpg";
+import bipolarImg from "@/assets/Micro_Image/bipolar-disorder.jpg";
+import ptsdImg from "@/assets/Micro_Image/ptsd.jpg";
+import anxietyImg from "@/assets/Micro_Image/anxiety-disorders.jpg";
+import ocdImg from "@/assets/Micro_Image/ocd.jpg";
 
 // Map image paths to imports
 const imageMap: Record<string, string> = {
