@@ -27,7 +27,7 @@ const tools = [
 
 const AssessmentTools = () => {
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding">
       <div className="container-custom px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-14 max-w-2xl mx-auto">

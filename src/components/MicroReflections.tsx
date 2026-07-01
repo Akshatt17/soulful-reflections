@@ -51,7 +51,7 @@ const MicroReflections = () => {
   const imageScrollRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="section-padding bg-card">
+    <section className="section-padding">
       <div className="container-custom px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-14 max-w-2xl mx-auto">
@@ -72,6 +72,7 @@ const MicroReflections = () => {
             </h3>
             <div
               ref={audioScrollRef}
+              data-lenis-prevent
               className="max-h-[280px] overflow-y-auto space-y-4 pr-2 scrollbar-thin"
             >
               {audioReflections.map((audio) => (

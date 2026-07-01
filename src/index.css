@@ -6,54 +6,64 @@
 
 @layer base {
   :root {
-    --background: 40 33% 93%;
-    --foreground: 353 59% 30%;
+    --background: 42 46% 92%;
+    --foreground: 345 28% 20%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 353 59% 30%;
+    --card: 42 46% 97%;
+    --card-foreground: 345 28% 20%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 353 59% 30%;
+    --popover: 42 46% 97%;
+    --popover-foreground: 345 28% 20%;
 
-    --primary: 353 59% 30%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 352 32% 46%;
+    --primary-foreground: 42 46% 97%;
 
-    --secondary: 120 13% 60%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 88 20% 72%;
+    --secondary-foreground: 92 25% 24%;
 
-    --muted: 350 47% 94%;
-    --muted-foreground: 353 30% 45%;
+    --muted: 42 30% 88%;
+    --muted-foreground: 348 18% 40%;
 
-    --accent: 350 47% 94%;
-    --accent-foreground: 353 59% 30%;
+    --accent: 350 55% 89%;
+    --accent-foreground: 352 35% 34%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 350 30% 85%;
-    --input: 350 30% 85%;
-    --ring: 353 59% 30%;
+    --border: 350 20% 84%;
+    --input: 350 20% 84%;
+    --ring: 352 32% 46%;
 
     --radius: 0.75rem;
 
-    /* Custom brand colors */
+    /* Deep anchor tone (readable text) */
+    --deep-plum: 345 28% 20%;
+    --deep-plum-soft: 348 18% 40%;
+
+    /* Brand tints + deep accents (from the logo + brain image) */
+    --sage: 88 20% 72%;
+    --baby-pink: 350 55% 89%;
+    --forest: 95 25% 26%;
+    --berry: 356 42% 38%;
+    --gold: 42 48% 60%;
+
+    /* Legacy brand colors (kept so other routes don't break) */
     --burgundy: 353 59% 30%;
     --blush: 0 47% 94%;
-    --sage: 120 13% 60%;
     --beige: 40 33% 93%;
     --cream: 40 33% 97%;
 
-    /* New palette colors */
+    /* Peony palette */
     --olive-petal: 90 18% 52%;
     --golden-clover: 62 35% 68%;
     --artic-daisy: 22 30% 87%;
     --rose-blush: 14 35% 73%;
     --peach-blossom: 355 25% 63%;
 
-    /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(353 59% 30% / 0.08);
-    --shadow-card: 0 8px 30px -8px hsl(353 59% 30% / 0.12);
-    --shadow-elevated: 0 12px 40px -12px hsl(353 59% 30% / 0.15);
+    /* Shadows (plum-tinted) */
+    --shadow-soft: 0 4px 20px -4px hsl(345 30% 18% / 0.08);
+    --shadow-card: 0 8px 30px -8px hsl(345 30% 18% / 0.12);
+    --shadow-elevated: 0 12px 40px -12px hsl(345 30% 18% / 0.15);
 
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -69,23 +79,23 @@
   }
 
   .dark {
-    --background: 353 59% 10%;
-    --foreground: 350 47% 94%;
-    --card: 353 59% 15%;
-    --card-foreground: 350 47% 94%;
-    --popover: 353 59% 15%;
-    --popover-foreground: 350 47% 94%;
-    --primary: 350 47% 94%;
-    --primary-foreground: 353 59% 30%;
-    --secondary: 120 13% 40%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 353 40% 20%;
-    --muted-foreground: 350 30% 70%;
-    --accent: 353 40% 20%;
-    --accent-foreground: 350 47% 94%;
-    --border: 353 40% 25%;
-    --input: 353 40% 25%;
-    --ring: 350 47% 94%;
+    --background: 345 30% 10%;
+    --foreground: 22 30% 92%;
+    --card: 345 28% 14%;
+    --card-foreground: 22 30% 92%;
+    --popover: 345 28% 14%;
+    --popover-foreground: 22 30% 92%;
+    --primary: 352 40% 66%;
+    --primary-foreground: 345 30% 12%;
+    --secondary: 92 18% 38%;
+    --secondary-foreground: 42 30% 92%;
+    --muted: 345 16% 20%;
+    --muted-foreground: 42 20% 72%;
+    --accent: 350 40% 70%;
+    --accent-foreground: 345 30% 12%;
+    --border: 345 16% 24%;
+    --input: 345 16% 24%;
+    --ring: 352 40% 66%;
   }
 }
 
@@ -126,6 +136,52 @@
 
   .transition-smooth {
     transition: var(--transition-smooth);
+  }
+
+  .glass {
+    background: hsl(var(--card) / 0.55);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid hsl(var(--border) / 0.6);
+    box-shadow: var(--shadow-card);
+  }
+
+  .glass-strong {
+    background: hsl(var(--card) / 0.82);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid hsl(var(--border) / 0.7);
+    box-shadow: var(--shadow-card);
+  }
+
+  .water-tint {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--artic-daisy)) 0%,
+      hsl(var(--rose-blush) / 0.35) 60%,
+      hsl(var(--olive-petal) / 0.4) 100%
+    );
+  }
+
+  .depth-shadow {
+    box-shadow: 0 30px 60px -24px hsl(var(--deep-plum) / 0.28);
+  }
+
+  .text-anchor {
+    color: hsl(var(--deep-plum));
+  }
+
+  .text-anchor-soft {
+    color: hsl(var(--deep-plum-soft));
+  }
+
+  .reflection {
+    opacity: 0.2;
+    filter: blur(3px);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 60%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 60%);
+    pointer-events: none;
+    user-select: none;
   }
 }
 

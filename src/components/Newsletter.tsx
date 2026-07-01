@@ -15,7 +15,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="section-padding bg-background">
+    <section className="section-padding">
       <div className="container-custom px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto bg-card rounded-2xl p-8 lg:p-12 shadow-elevated text-center">
           <h2 className="font-serif text-2xl sm:text-3xl font-bold text-primary mb-3">

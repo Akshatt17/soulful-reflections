@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+reels/
+
+# Claude Code local tooling
+.claude/

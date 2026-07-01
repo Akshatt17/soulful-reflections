@@ -61,6 +61,13 @@ export default {
         "artic-daisy": "hsl(var(--artic-daisy))",
         "rose-blush": "hsl(var(--rose-blush))",
         "peach-blossom": "hsl(var(--peach-blossom))",
+        "deep-plum": "hsl(var(--deep-plum))",
+        "deep-plum-soft": "hsl(var(--deep-plum-soft))",
+        sage: "hsl(var(--sage))",
+        "baby-pink": "hsl(var(--baby-pink))",
+        forest: "hsl(var(--forest))",
+        berry: "hsl(var(--berry))",
+        gold: "hsl(var(--gold))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -113,6 +120,14 @@ export default {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.5" },
         },
+        "reflection-wobble": {
+          "0%, 100%": { transform: "scaleY(-1) skewX(0deg) translateY(0)" },
+          "50%": { transform: "scaleY(-1) skewX(1.5deg) translateY(1px)" },
+        },
+        "surface-drift": {
+          "0%": { backgroundPosition: "0% 0%" },
+          "100%": { backgroundPosition: "0% 100%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -122,6 +137,8 @@ export default {
         "scale-in": "scale-in 0.4s ease-out forwards",
         shimmer: "shimmer 2s infinite",
         pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "reflection-wobble": "reflection-wobble 7s ease-in-out infinite",
+        "surface-drift": "surface-drift 18s ease-in-out infinite alternate",
       },
     },
   },
