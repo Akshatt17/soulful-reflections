@@ -1,13 +1,16 @@
-/** Number of concurrent ripples the shader tracks. */
-export const RIPPLE_COUNT = 8;
+import { RIPPLE_COUNT } from "@/lib/scene/scene-config";
 
+/**
+ * Fullscreen water shader ported from the ogl WaterScene. Rendered on a clip-space
+ * quad (vertex passes NDC through, ignoring the camera) so Phase 1 reproduces the
+ * original vertical tint + concentric ripples exactly. Ripples are packed into a
+ * single `vec4[]` uniform: (x, y, startTime, strength) with y pointing up.
+ */
 export const waterVertexShader = /* glsl */ `
-attribute vec2 uv;
-attribute vec2 position;
 varying vec2 vUv;
 void main() {
   vUv = uv;
-  gl_Position = vec4(position, 0.0, 1.0);
+  gl_Position = vec4(position.xy, 0.0, 1.0);
 }
 `;
 
@@ -19,14 +22,7 @@ uniform vec2 uResolution;
 uniform float uScrollDepth;
 uniform vec3 uTintSurface;
 uniform vec3 uTintDeep;
-uniform vec4 uR0;
-uniform vec4 uR1;
-uniform vec4 uR2;
-uniform vec4 uR3;
-uniform vec4 uR4;
-uniform vec4 uR5;
-uniform vec4 uR6;
-uniform vec4 uR7;
+uniform vec4 uRipples[${RIPPLE_COUNT}];
 
 varying vec2 vUv;
 
@@ -56,14 +52,9 @@ void main() {
 
   float aspect = uResolution.x / uResolution.y;
   float rip = 0.0;
-  rip += ripple(uv, uR0, aspect, uTime);
-  rip += ripple(uv, uR1, aspect, uTime);
-  rip += ripple(uv, uR2, aspect, uTime);
-  rip += ripple(uv, uR3, aspect, uTime);
-  rip += ripple(uv, uR4, aspect, uTime);
-  rip += ripple(uv, uR5, aspect, uTime);
-  rip += ripple(uv, uR6, aspect, uTime);
-  rip += ripple(uv, uR7, aspect, uTime);
+  for (int i = 0; i < ${RIPPLE_COUNT}; i++) {
+    rip += ripple(uv, uRipples[i], aspect, uTime);
+  }
   col += rip;
 
   gl_FragColor = vec4(col, 1.0);

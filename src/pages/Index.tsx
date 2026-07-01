@@ -5,7 +5,7 @@ import LatestArticles from "@/components/LatestArticles";
 import MicroReflections from "@/components/MicroReflections";
 import Newsletter from "@/components/Newsletter";
 import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
-import WaterScene from "@/components/water/WaterScene";
+import ReflectionScene from "@/components/scene/ReflectionScene";
 import DepthSection from "@/components/landing/DepthSection";
 import LandingHero from "@/components/landing/LandingHero";
 import ReflectionOfWeek from "@/components/landing/ReflectionOfWeek";
@@ -14,7 +14,7 @@ import AboutFounder from "@/components/landing/AboutFounder";
 const Index = () => {
   return (
     <SmoothScrollProvider>
-      <WaterScene>
+      <ReflectionScene>
         <div className="relative z-10 min-h-screen">
           <Header />
           <main>
@@ -46,7 +46,7 @@ const Index = () => {
           </main>
           <Footer />
         </div>
-      </WaterScene>
+      </ReflectionScene>
     </SmoothScrollProvider>
   );
 };

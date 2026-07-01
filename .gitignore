@@ -26,3 +26,6 @@ reels/
 
 # Claude Code local tooling
 .claude/
+
+# Local review-qa reports
+.claude-tmp/
