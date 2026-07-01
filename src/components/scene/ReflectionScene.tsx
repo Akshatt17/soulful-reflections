@@ -1,6 +1,7 @@
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { WaterContext, type WaterApi } from "@/components/water/useWater";
 import { useSceneProgress } from "@/components/scene/useSceneProgress";
 import { RIPPLE_COUNT } from "@/lib/scene/scene-config";
@@ -21,6 +22,7 @@ interface ReflectionSceneProps {
  */
 const ReflectionScene = ({ children }: ReflectionSceneProps) => {
   const reducedMotion = useReducedMotion();
+  const mobile = useIsMobile();
   const [webglOk] = useState(
     () => typeof window !== "undefined" && isWebGLAvailable(),
   );
@@ -89,6 +91,7 @@ const ReflectionScene = ({ children }: ReflectionSceneProps) => {
               progress={progress}
               startTime={startTime}
               visible={visible}
+              mobile={mobile}
             />
           </Suspense>
         )}

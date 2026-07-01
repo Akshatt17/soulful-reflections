@@ -21,3 +21,36 @@ export const CAMERA_END: readonly [number, number, number] = [0, -3.5, 4];
 
 /** Damping smooth-time (seconds) for scroll-driven scene motion — higher = more serene lag. */
 export const SCENE_DAMP = 0.6;
+
+/** Soft brand tints for the drifting petals (rose, peach, baby-pink, gold). */
+export const PETAL_COLORS: readonly (readonly [number, number, number])[] = [
+  [0.82, 0.68, 0.64],
+  [0.72, 0.54, 0.55],
+  [0.98, 0.68, 0.75],
+  [0.79, 0.68, 0.41],
+];
+
+/** Warm candle-light tint for the drifting motes. */
+export const MOTE_COLOR: readonly [number, number, number] = [1.0, 0.95, 0.82];
+
+/** Performance tier: particle counts + effects, chosen from viewport size. */
+export interface SceneTier {
+  petals: number;
+  motes: number;
+  dof: boolean;
+  dprMax: number;
+}
+
+export const DESKTOP_TIER: SceneTier = {
+  petals: 1800,
+  motes: 500,
+  dof: true,
+  dprMax: 1.75,
+};
+
+export const MOBILE_TIER: SceneTier = {
+  petals: 500,
+  motes: 160,
+  dof: false,
+  dprMax: 1.25,
+};
