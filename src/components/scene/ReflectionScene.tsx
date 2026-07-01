@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { WaterContext, type WaterApi } from "@/components/water/useWater";
+import { useSceneProgress } from "@/components/scene/useSceneProgress";
 import { RIPPLE_COUNT } from "@/lib/scene/scene-config";
 import { isWebGLAvailable } from "@/lib/scene/webgl";
 
@@ -25,10 +26,11 @@ const ReflectionScene = ({ children }: ReflectionSceneProps) => {
   );
   const enabled = !reducedMotion && webglOk;
 
+  const progress = useSceneProgress();
+
   // 4 floats per ripple: (x, y, startTime, strength).
   const ripples = useRef<Float32Array>(new Float32Array(RIPPLE_COUNT * 4));
   const writeIndex = useRef(0);
-  const scrollDepth = useRef(0);
   const startTime = useRef(0);
   const [visible, setVisible] = useState(true);
 
@@ -51,12 +53,6 @@ const ReflectionScene = ({ children }: ReflectionSceneProps) => {
     startTime.current = performance.now();
     if (!enabled) return;
 
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      scrollDepth.current = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
-    };
-    onScroll();
-
     let lastMove = 0;
     const onPointerMove = (e: PointerEvent) => {
       const now = performance.now();
@@ -71,12 +67,10 @@ const ReflectionScene = ({ children }: ReflectionSceneProps) => {
 
     const onVisibility = () => setVisible(!document.hidden);
 
-    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("pointermove", onPointerMove);
       document.removeEventListener("visibilitychange", onVisibility);
     };
@@ -92,7 +86,7 @@ const ReflectionScene = ({ children }: ReflectionSceneProps) => {
           <Suspense fallback={null}>
             <SceneCanvas
               ripples={ripples}
-              scrollDepth={scrollDepth}
+              progress={progress}
               startTime={startTime}
               visible={visible}
             />
