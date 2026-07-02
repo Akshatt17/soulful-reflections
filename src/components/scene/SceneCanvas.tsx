@@ -5,6 +5,7 @@ import WaterSurface from "@/components/scene/WaterSurface";
 import CameraRig from "@/components/scene/CameraRig";
 import PetalField from "@/components/scene/PetalField";
 import LightMotes from "@/components/scene/LightMotes";
+import Centerpiece from "@/components/scene/Centerpiece";
 import PostFX from "@/components/scene/PostFX";
 import {
   CAMERA_START,
@@ -20,6 +21,8 @@ interface SceneCanvasProps {
   visible: boolean;
   /** Mobile viewport → lighter tier (fewer particles, DoF off, lower DPR cap). */
   mobile: boolean;
+  /** Fired when the centerpiece morph settles into a new beat. */
+  onBeat: (beat: number) => void;
 }
 
 /**
@@ -34,6 +37,7 @@ const SceneCanvas = ({
   startTime,
   visible,
   mobile,
+  onBeat,
 }: SceneCanvasProps) => {
   const tier = mobile ? MOBILE_TIER : DESKTOP_TIER;
 
@@ -53,6 +57,7 @@ const SceneCanvas = ({
       <WaterSurface ripples={ripples} progress={progress} startTime={startTime} />
       <PetalField count={tier.petals} />
       <LightMotes count={tier.motes} />
+      <Centerpiece count={tier.centerpiece} progress={progress} onBeat={onBeat} />
       <PostFX dof={tier.dof} />
     </Canvas>
   );

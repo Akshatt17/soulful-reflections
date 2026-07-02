@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -51,6 +51,11 @@ const ReflectionScene = ({ children }: ReflectionSceneProps) => {
     [],
   );
 
+  // Each settled beat sends a ripple out from the centerpiece at screen centre.
+  const handleBeat = useCallback(() => {
+    api.spawnRipple(0.5, 0.5, 1.4);
+  }, [api]);
+
   useEffect(() => {
     startTime.current = performance.now();
     if (!enabled) return;
@@ -92,6 +97,7 @@ const ReflectionScene = ({ children }: ReflectionSceneProps) => {
               startTime={startTime}
               visible={visible}
               mobile={mobile}
+              onBeat={handleBeat}
             />
           </Suspense>
         )}

@@ -37,6 +37,7 @@ export const MOTE_COLOR: readonly [number, number, number] = [1.0, 0.95, 0.82];
 export interface SceneTier {
   petals: number;
   motes: number;
+  centerpiece: number;
   dof: boolean;
   dprMax: number;
 }
@@ -44,6 +45,7 @@ export interface SceneTier {
 export const DESKTOP_TIER: SceneTier = {
   petals: 1800,
   motes: 500,
+  centerpiece: 1200,
   dof: true,
   dprMax: 1.75,
 };
@@ -51,6 +53,7 @@ export const DESKTOP_TIER: SceneTier = {
 export const MOBILE_TIER: SceneTier = {
   petals: 500,
   motes: 160,
+  centerpiece: 400,
   dof: false,
   dprMax: 1.25,
 };
