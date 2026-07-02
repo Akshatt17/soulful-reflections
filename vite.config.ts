@@ -16,20 +16,4 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          r3f: [
-            "three",
-            "@react-three/fiber",
-            "@react-three/drei",
-            "@react-three/postprocessing",
-            "postprocessing",
-            "maath",
-          ],
-        },
-      },
-    },
-  },
 }));

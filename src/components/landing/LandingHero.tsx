@@ -8,18 +8,7 @@ const LandingHero = () => (
     aria-label="Welcome"
     className="relative flex min-h-[88vh] items-center justify-center overflow-hidden"
   >
-    {/* Soft light blooms over the live water surface */}
-    <div
-      className="pointer-events-none absolute -top-32 right-[-10%] h-[34rem] w-[34rem] rounded-full opacity-40 blur-3xl"
-      style={{ background: "radial-gradient(circle at center, hsl(var(--baby-pink)) 0%, transparent 70%)" }}
-      aria-hidden="true"
-    />
-    <div
-      className="pointer-events-none absolute -bottom-40 left-[-10%] h-[34rem] w-[34rem] rounded-full opacity-40 blur-3xl"
-      style={{ background: "radial-gradient(circle at center, hsl(var(--sage)) 0%, transparent 70%)" }}
-      aria-hidden="true"
-    />
-
+    {/* The live water scene provides the ambient light behind the hero. */}
     <div className="container-custom relative z-10 px-4 py-24 text-center sm:px-6 lg:px-8">
       <motion.p
         initial={{ opacity: 0, y: 12 }}

@@ -1,3 +1,4 @@
+import { MotionConfig } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AssessmentTools from "@/components/AssessmentTools";
@@ -13,8 +14,9 @@ import AboutFounder from "@/components/landing/AboutFounder";
 
 const Index = () => {
   return (
-    <SmoothScrollProvider>
-      <ReflectionScene>
+    <MotionConfig reducedMotion="user">
+      <SmoothScrollProvider>
+        <ReflectionScene>
         <div className="relative z-10 min-h-screen">
           <Header />
           <main>
@@ -46,8 +48,9 @@ const Index = () => {
           </main>
           <Footer />
         </div>
-      </ReflectionScene>
-    </SmoothScrollProvider>
+        </ReflectionScene>
+      </SmoothScrollProvider>
+    </MotionConfig>
   );
 };
 

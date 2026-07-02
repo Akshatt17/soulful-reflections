@@ -167,3 +167,21 @@ npm i gsap lenis ogl
 ## Pending input for later phases
 - `/tools` remodel: the separate repo URL/path with the liked self-assessment section + the floral-brain image asset.
 - The list of "other functional work" + which articles need updating.
+
+---
+
+# v2 — "Descent & Metamorphosis" scroll experience
+
+The v1 landing above is superseded by a scroll-scrubbed react-three-fiber scene (spec: `~/.claude/plans/i-made-this-site-valiant-hummingbird.md`). The `ogl` water background was replaced by a full R3F scene the camera descends through, with a particle-formed centerpiece that morphs across 6 beats. Built on `redesign/soulful-landing` (v1 checkpoint `ef4874a`). Architecture details live in the memory note `v2-scene-architecture`.
+
+**Phase status:**
+1. **[DONE]** R3F swap-in at water parity (ReflectionScene + SceneCanvas + WaterSurface; ported ripple shader; `spawnRipple` preserved; ogl removed).
+2. **[DONE]** Camera descent + scroll scrub (SmoothScrollProvider publishes one progress ref; CameraRig damped descent; depth tint tracks p).
+3. **[DONE]** Ambient PetalField (curl-noise drift) + LightMotes + PostFX (soft Bloom/Vignette/DoF, DoF off on mobile); perf tiers via `useIsMobile` + AdaptiveDpr.
+4. **[DONE]** Morph spine (beats + morph-targets + Centerpiece; dewdrop→release→bud→bloom→scatter→settle; beat-crossing settle ripples via the single progress ref).
+5. **[DEFERRED]** GLTF centerpiece — swap a real `.glb` into `Centerpiece.tsx` (base-aware via `import.meta.env.BASE_URL`, draco in `public/draco/`, model in `public/models/`). Waiting on the asset.
+6. **[DONE]** Home trim + a11y/mobile polish — hero blur-blobs removed; `MotionConfig reducedMotion="user"`; reduced-motion static `.water-tint` fallback verified (no canvas, legible, native scroll); mobile tier verified; lazy chunk fixed + verified (three not fetched on `/about`, only on `/`); all routes smoke-tested.
+
+**Key fix (Phase 6):** array-form `manualChunks` pulled react-dom into the r3f vendor chunk, forcing the ~1MB three payload onto every route. Removed manualChunks — Vite auto-splits three into the async SceneCanvas chunk, loaded only when the scene mounts.
+
+**Not done / next:** Phase 5 GLB (asset pending — user to provide); deeper content trim of shared sections (kept intact to avoid touching `/old-landing`); then the still-queued `/tools` floral-glass remodel + articles.
