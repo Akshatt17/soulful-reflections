@@ -68,6 +68,7 @@ export default {
         forest: "hsl(var(--forest))",
         berry: "hsl(var(--berry))",
         gold: "hsl(var(--gold))",
+        "pista-green": "hsl(var(--pista-green))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

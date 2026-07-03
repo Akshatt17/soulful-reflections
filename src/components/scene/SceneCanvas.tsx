@@ -55,8 +55,14 @@ const SceneCanvas = ({
       flat
     >
       <AdaptiveDpr pixelated />
-      <ambientLight intensity={1.6} />
-      <directionalLight position={[3, 5, 4]} intensity={1.8} />
+      {/* Lighting only reaches the PBR brain-flower model — the water + particle
+          systems are custom ShaderMaterials that ignore lights, so brightening
+          here never shifts the water. Warm key + cool fill + hemisphere wash keep
+          the model reading like its source render (cream brain, rose flowers). */}
+      <ambientLight intensity={2.4} />
+      <hemisphereLight color="#fff1e6" groundColor="#c7b8a8" intensity={1.6} />
+      <directionalLight position={[3, 5, 4]} intensity={2.6} />
+      <directionalLight position={[-4, 1, -3]} intensity={1.3} />
       <CameraRig progress={progress} />
       <WaterSurface ripples={ripples} progress={progress} startTime={startTime} />
       <PetalField count={tier.petals} />

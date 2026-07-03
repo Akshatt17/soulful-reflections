@@ -2,7 +2,7 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useLayoutEffect, useMemo, useRef } from "react";
 import type { MutableRefObject } from "react";
-import { Box3, Group, Mesh, Vector3 } from "three";
+import { Box3, Color, Group, Mesh, MeshStandardMaterial, Vector3 } from "three";
 import type { Material } from "three";
 import { stageProgressFromP, smoothstep } from "@/lib/scene/beats";
 
@@ -45,6 +45,15 @@ const CenterpieceModel = ({ progress }: CenterpieceModelProps) => {
       for (const m of Array.isArray(mat) ? mat : [mat]) {
         m.transparent = true;
         m.depthWrite = false;
+        // Lift the concave crevices without an HDRI: a gentle self-illumination
+        // from the base-colour map so the cream brain reads bright (like the
+        // source viewer) instead of falling to black where lights can't reach.
+        if (m instanceof MeshStandardMaterial) {
+          m.emissive = new Color(0xffffff);
+          m.emissiveMap = m.map;
+          m.emissiveIntensity = 0.3;
+          m.needsUpdate = true;
+        }
         mats.push(m);
       }
     });
