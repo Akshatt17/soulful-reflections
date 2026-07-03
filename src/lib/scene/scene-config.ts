@@ -45,7 +45,7 @@ export interface SceneTier {
 export const DESKTOP_TIER: SceneTier = {
   petals: 1800,
   motes: 500,
-  centerpiece: 1200,
+  centerpiece: 3200,
   dof: true,
   dprMax: 1.75,
 };
@@ -53,7 +53,7 @@ export const DESKTOP_TIER: SceneTier = {
 export const MOBILE_TIER: SceneTier = {
   petals: 500,
   motes: 160,
-  centerpiece: 400,
+  centerpiece: 1000,
   dof: false,
   dprMax: 1.25,
 };

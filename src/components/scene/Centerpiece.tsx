@@ -15,12 +15,16 @@ import {
   centerpieceFragmentShader,
 } from "@/lib/scene/centerpiece-shader";
 import { buildCenterpieceStages } from "@/lib/scene/morph-targets";
+import { sampleGlbSurface } from "@/lib/scene/sample-glb";
 import {
   stageProgressFromP,
   formTightnessFromStage,
   STAGE_COUNT,
 } from "@/lib/scene/beats";
 import { PETAL_COLORS, SCENE_DAMP } from "@/lib/scene/scene-config";
+
+/** Base-aware URL for the brain-flower model sampled into the settle beat. */
+const CENTERPIECE_MODEL_URL = `${import.meta.env.BASE_URL}models/brain-flower.glb`;
 
 declare global {
   interface Window {
@@ -88,6 +92,27 @@ const Centerpiece = ({ count, progress, onBeat }: CenterpieceProps) => {
       material.dispose();
     };
   }, [geometry, material]);
+
+  // Sample the brain-flower model into the "settle" beat so the petals reassemble
+  // into it. Falls back to the procedural settle form if the model can't load.
+  useEffect(() => {
+    let cancelled = false;
+    sampleGlbSurface(CENTERPIECE_MODEL_URL, count)
+      .then((buf) => {
+        if (cancelled) return;
+        const attr = geometry.getAttribute("aStage5") as InstancedBufferAttribute;
+        (attr.array as Float32Array).set(buf);
+        attr.needsUpdate = true;
+      })
+      .catch((err) => {
+        if (import.meta.env.DEV) {
+          console.warn("Centerpiece model unavailable; using procedural settle", err);
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [geometry, count]);
 
   useFrame(({ clock }, delta) => {
     const mesh = meshRef.current;
