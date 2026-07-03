@@ -15,16 +15,16 @@ import {
   centerpieceFragmentShader,
 } from "@/lib/scene/centerpiece-shader";
 import { buildCenterpieceStages } from "@/lib/scene/morph-targets";
-import { sampleGlbSurface } from "@/lib/scene/sample-glb";
 import {
   stageProgressFromP,
   formTightnessFromStage,
+  smoothstep,
   STAGE_COUNT,
 } from "@/lib/scene/beats";
 import { PETAL_COLORS, SCENE_DAMP } from "@/lib/scene/scene-config";
 
-/** Base-aware URL for the brain-flower model sampled into the settle beat. */
-const CENTERPIECE_MODEL_URL = `${import.meta.env.BASE_URL}models/brain-flower.glb`;
+/** Base opacity of the petal particles before the settle-beat fade-out. */
+const BASE_OPACITY = 0.82;
 
 declare global {
   interface Window {
@@ -93,27 +93,6 @@ const Centerpiece = ({ count, progress, onBeat }: CenterpieceProps) => {
     };
   }, [geometry, material]);
 
-  // Sample the brain-flower model into the "settle" beat so the petals reassemble
-  // into it. Falls back to the procedural settle form if the model can't load.
-  useEffect(() => {
-    let cancelled = false;
-    sampleGlbSurface(CENTERPIECE_MODEL_URL, count)
-      .then((buf) => {
-        if (cancelled) return;
-        const attr = geometry.getAttribute("aStage5") as InstancedBufferAttribute;
-        (attr.array as Float32Array).set(buf);
-        attr.needsUpdate = true;
-      })
-      .catch((err) => {
-        if (import.meta.env.DEV) {
-          console.warn("Centerpiece model unavailable; using procedural settle", err);
-        }
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [geometry, count]);
-
   useFrame(({ clock }, delta) => {
     const mesh = meshRef.current;
     if (!mesh) return;
@@ -130,6 +109,8 @@ const Centerpiece = ({ count, progress, onBeat }: CenterpieceProps) => {
 
     const sp = material.uniforms.uStageProgress.value as number;
     material.uniforms.uFormTightness.value = formTightnessFromStage(sp);
+    // dissolve the petals as the solid model reveals at the final beat
+    material.uniforms.uOpacity.value = BASE_OPACITY * (1 - smoothstep(4.2, 4.9, sp));
 
     const beat = Math.min(Math.round(sp), STAGE_COUNT - 1);
     if (beat !== lastBeat.current) {

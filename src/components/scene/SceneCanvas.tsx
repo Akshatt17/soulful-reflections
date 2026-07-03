@@ -1,11 +1,13 @@
 import { Canvas } from "@react-three/fiber";
 import { AdaptiveDpr } from "@react-three/drei";
+import { Suspense } from "react";
 import type { MutableRefObject } from "react";
 import WaterSurface from "@/components/scene/WaterSurface";
 import CameraRig from "@/components/scene/CameraRig";
 import PetalField from "@/components/scene/PetalField";
 import LightMotes from "@/components/scene/LightMotes";
 import Centerpiece from "@/components/scene/Centerpiece";
+import CenterpieceModel from "@/components/scene/CenterpieceModel";
 import PostFX from "@/components/scene/PostFX";
 import {
   CAMERA_START,
@@ -53,11 +55,16 @@ const SceneCanvas = ({
       flat
     >
       <AdaptiveDpr pixelated />
+      <ambientLight intensity={1.6} />
+      <directionalLight position={[3, 5, 4]} intensity={1.8} />
       <CameraRig progress={progress} />
       <WaterSurface ripples={ripples} progress={progress} startTime={startTime} />
       <PetalField count={tier.petals} />
       <LightMotes count={tier.motes} />
       <Centerpiece count={tier.centerpiece} progress={progress} onBeat={onBeat} />
+      <Suspense fallback={null}>
+        <CenterpieceModel progress={progress} />
+      </Suspense>
       <PostFX dof={tier.dof} />
     </Canvas>
   );

@@ -35,6 +35,12 @@ export const stageProgressFromP = (p: number): number => {
   return STAGE_COUNT - 1;
 };
 
+/** Smooth Hermite interpolation, clamped to [0,1]. */
+export const smoothstep = (edge0: number, edge1: number, x: number): number => {
+  const t = Math.min(Math.max((x - edge0) / (edge1 - edge0), 0), 1);
+  return t * t * (3 - 2 * t);
+};
+
 /** Interpolated form tightness for a continuous stage value. */
 export const formTightnessFromStage = (sp: number): number => {
   const clamped = Math.min(Math.max(sp, 0), STAGE_COUNT - 1);
