@@ -4,8 +4,8 @@ import { STAGE_COUNT } from "@/lib/scene/beats";
  * Baked position buffers for the particle-formed centerpiece — one Float32Array of
  * `count * 3` per beat. Every particle keeps a coherent "character" (its random
  * seeds are reused across all stages) so the morph reads as one form transforming,
- * not a reshuffle. Stage 5 (settle) is a calm resolved bloom standing in for the
- * photographic brain-flower until that asset lands (Phase 5).
+ * not a reshuffle. The forms stand alone: a dewdrop that releases, buds, blooms,
+ * scatters, and settles into a calm resolved bloom at the end of the descent.
  */
 
 /** Deterministic RNG so the forms are stable across reloads. */

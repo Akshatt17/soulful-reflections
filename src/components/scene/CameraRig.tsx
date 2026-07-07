@@ -7,8 +7,14 @@ declare global {
   interface Window {
     /** Dev-only scene readout for verification (camera depth + scroll progress). */
     __sceneDebug?: { cameraY: number; progress: number };
+    /** Dev-only: snap all scroll damping instantly (for browser verification). */
+    __sceneSnap?: boolean;
   }
 }
+
+/** Damping smooth-time, snappable to ~0 in DEV via window.__sceneSnap. */
+export const sceneSmoothTime = (): number =>
+  import.meta.env.DEV && window.__sceneSnap ? 0.0001 : SCENE_DAMP;
 
 interface CameraRigProps {
   progress: MutableRefObject<number>;
@@ -30,7 +36,7 @@ const CameraRig = ({ progress }: CameraRigProps) => {
     const y = CAMERA_START[1] + (CAMERA_END[1] - CAMERA_START[1]) * p;
     const z = CAMERA_START[2] + (CAMERA_END[2] - CAMERA_START[2]) * p;
 
-    easing.damp3(camera.position, [x, y, z], SCENE_DAMP, delta);
+    easing.damp3(camera.position, [x, y, z], sceneSmoothTime(), delta);
     camera.lookAt(0, camera.position.y - 1.5, 0);
 
     if (import.meta.env.DEV) {

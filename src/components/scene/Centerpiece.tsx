@@ -18,12 +18,13 @@ import { buildCenterpieceStages } from "@/lib/scene/morph-targets";
 import {
   stageProgressFromP,
   formTightnessFromStage,
-  smoothstep,
+  dropOffsetFromP,
   STAGE_COUNT,
 } from "@/lib/scene/beats";
-import { PETAL_COLORS, SCENE_DAMP } from "@/lib/scene/scene-config";
+import { PETAL_COLORS } from "@/lib/scene/scene-config";
+import { sceneSmoothTime } from "@/components/scene/CameraRig";
 
-/** Base opacity of the petal particles before the settle-beat fade-out. */
+/** Opacity of the petal particles. */
 const BASE_OPACITY = 0.82;
 
 declare global {
@@ -45,13 +46,15 @@ interface CenterpieceProps {
 /**
  * The particle-formed centerpiece: a dense petal system that morphs through the
  * six baked forms (dewdrop → release → bud → bloom → scatter → settle) scrubbed by
- * damped scroll progress. It rides the camera's look-at point so it stays framed
- * through the descent. A GLTF can later swap in here without touching callers.
+ * damped scroll progress. It rides the droplet travel path (dropOffsetFromP) —
+ * forming upper-right above the surface and drifting down to rest left of centre
+ * as a calm resolved bloom.
  */
 const Centerpiece = ({ count, progress, onBeat }: CenterpieceProps) => {
   const meshRef = useRef<Mesh>(null);
   const camera = useThree((s) => s.camera);
   const lastBeat = useRef(-1);
+  const pDamped = useRef(0);
 
   const { geometry, material } = useMemo(() => {
     const { stages, seeds } = buildCenterpieceStages(count);
@@ -97,20 +100,27 @@ const Centerpiece = ({ count, progress, onBeat }: CenterpieceProps) => {
     const mesh = meshRef.current;
     if (!mesh) return;
 
-    // stay framed at the camera's look-at point through the descent
-    mesh.position.set(0, camera.position.y - 1.5, 0);
+    // ride the droplet path, anchored to the camera's look-at depth
+    easing.damp(pDamped, "current", progress.current, sceneSmoothTime(), delta);
+    const off = dropOffsetFromP(pDamped.current, clock.elapsedTime);
+    mesh.position.set(off[0], camera.position.y - 1.5 + off[1], off[2]);
 
     material.uniforms.uTime.value = clock.elapsedTime;
 
     const forced = import.meta.env.DEV ? window.__forceStage : undefined;
     const target =
       typeof forced === "number" ? forced : stageProgressFromP(progress.current);
-    easing.damp(material.uniforms.uStageProgress, "value", target, SCENE_DAMP, delta);
+    easing.damp(
+      material.uniforms.uStageProgress,
+      "value",
+      target,
+      sceneSmoothTime(),
+      delta,
+    );
 
     const sp = material.uniforms.uStageProgress.value as number;
     material.uniforms.uFormTightness.value = formTightnessFromStage(sp);
-    // dissolve the petals as the solid model reveals at the final beat
-    material.uniforms.uOpacity.value = BASE_OPACITY * (1 - smoothstep(4.2, 4.9, sp));
+    material.uniforms.uOpacity.value = BASE_OPACITY;
 
     const beat = Math.min(Math.round(sp), STAGE_COUNT - 1);
     if (beat !== lastBeat.current) {
