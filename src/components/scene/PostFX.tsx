@@ -11,7 +11,10 @@ interface PostFXProps {
  * dreamy depth. Kept subtle — the mood is serene, not cinematic-heavy.
  */
 const PostFX = ({ dof }: PostFXProps) => (
-  <EffectComposer disableNormalPass>
+  // No normal pass: Bloom/DoF/Vignette only need colour + depth, and the pass
+  // is off by default in @react-three/postprocessing v2.19 (the old
+  // `disableNormalPass` prop no longer exists).
+  <EffectComposer>
     <Bloom
       intensity={0.32}
       luminanceThreshold={0.85}

@@ -11,6 +11,12 @@ const SceneCanvas = lazy(() => import("@/components/scene/SceneCanvas"));
 
 interface ReflectionSceneProps {
   children: ReactNode;
+  /**
+   * "descent" — the landing experience: scroll-scrubbed camera descent with the
+   * morphing petal centerpiece. "ambient" — every other page: the same water,
+   * petals, motes and glow, resting at the surface with no centre object.
+   */
+  variant: "descent" | "ambient";
 }
 
 /**
@@ -20,7 +26,7 @@ interface ReflectionSceneProps {
  * reduced-motion or when WebGL is unavailable. Deliberately imports no three code
  * so the 3D bundle stays in the lazy SceneCanvas chunk.
  */
-const ReflectionScene = ({ children }: ReflectionSceneProps) => {
+const ReflectionScene = ({ children, variant }: ReflectionSceneProps) => {
   const reducedMotion = useReducedMotion();
   const mobile = useIsMobile();
   const [webglOk] = useState(
@@ -97,6 +103,7 @@ const ReflectionScene = ({ children }: ReflectionSceneProps) => {
               startTime={startTime}
               visible={visible}
               mobile={mobile}
+              centerpiece={variant === "descent"}
               onBeat={handleBeat}
             />
           </Suspense>

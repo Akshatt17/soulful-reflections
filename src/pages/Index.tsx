@@ -16,7 +16,7 @@ const Index = () => {
   return (
     <MotionConfig reducedMotion="user">
       <SmoothScrollProvider>
-        <ReflectionScene>
+        <ReflectionScene variant="descent">
         <div className="relative z-10 min-h-screen">
           <Header />
           <main>
