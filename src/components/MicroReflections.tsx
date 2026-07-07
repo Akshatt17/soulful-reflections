@@ -1,8 +1,10 @@
-import { Play, PlayCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, Play, PlayCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 import videoMeditation from "@/assets/video-meditation.jpg";
 import videoBreathing from "@/assets/video-breathing.jpg";
-import { ImageReflectionsGallery } from "@/components/micro-reflections/images";
-import { useRef } from "react";
+import GlassPanel from "@/components/landing/GlassPanel";
+import { fadeInUp } from "@/lib/motion-variants";
 
 const audioReflections = [
   {
@@ -45,119 +47,86 @@ const videoReflections = [
   },
 ];
 
+/** One compact right-aligned media pane; the full library lives at /media. */
 const MicroReflections = () => {
-  const audioScrollRef = useRef<HTMLDivElement>(null);
-  const videoScrollRef = useRef<HTMLDivElement>(null);
-  const imageScrollRef = useRef<HTMLDivElement>(null);
-
   return (
-    <section className="section-padding">
-      <div className="container-custom px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-14 max-w-2xl mx-auto">
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-4">
+    <div className="px-4 py-16 sm:px-6 lg:px-16 lg:py-24">
+      <GlassPanel className="max-w-xl p-8 sm:p-10 md:ml-auto md:mr-[4%]">
+        <motion.div variants={fadeInUp}>
+          <h2 className="font-serif text-3xl font-bold text-primary sm:text-4xl">
             Micro-Reflections
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Brief moments of mindfulness to integrate into your daily routine.
+          <p className="mt-3 text-base leading-relaxed text-foreground/80">
+            Brief moments of mindfulness to fold into your day.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Layout: 2 audio columns + 1 video + 1 image */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Audio Reflections */}
-          <div>
-            <h3 className="font-serif text-xl font-semibold text-primary mb-6">
-              Audio Reflections
-            </h3>
+        <motion.div
+          variants={fadeInUp}
+          data-lenis-prevent
+          className="scrollbar-thin mt-8 max-h-[220px] space-y-2 overflow-y-auto pr-2"
+        >
+          {audioReflections.map((audio) => (
             <div
-              ref={audioScrollRef}
-              data-lenis-prevent
-              className="max-h-[280px] overflow-y-auto space-y-4 pr-2 scrollbar-thin"
+              key={audio.title}
+              className="group flex cursor-pointer items-center gap-4 rounded-xl p-3 transition-colors duration-200 hover:bg-card/50"
             >
-              {audioReflections.map((audio) => (
-                <div
-                  key={audio.title}
-                  className="flex items-center gap-4 bg-muted/50 rounded-xl p-5 hover:bg-muted transition-colors duration-200 cursor-pointer group"
-                >
-                  <button className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-200">
-                    <Play className="w-5 h-5 text-primary-foreground ml-0.5" />
-                  </button>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-medium text-foreground truncate">
-                      {audio.title}
-                    </h4>
-                    <p className="text-sm text-muted-foreground truncate">
-                      {audio.description}
-                    </p>
-                  </div>
-                  <span className="text-sm font-medium text-muted-foreground flex-shrink-0">
-                    {audio.duration}
-                  </span>
-                </div>
-              ))}
+              <button
+                aria-label={`Play ${audio.title}`}
+                className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-primary transition-transform duration-200 group-hover:scale-105"
+              >
+                <Play className="ml-0.5 h-4 w-4 text-primary-foreground" />
+              </button>
+              <div className="min-w-0 flex-1">
+                <h4 className="truncate text-sm font-medium text-foreground">
+                  {audio.title}
+                </h4>
+                <p className="truncate text-xs text-foreground/70">
+                  {audio.description}
+                </p>
+              </div>
+              <span className="flex-shrink-0 text-xs font-medium text-foreground/60">
+                {audio.duration}
+              </span>
             </div>
-          </div>
+          ))}
+        </motion.div>
 
-          {/* Video Reflections — horizontal scroll */}
-          <div className="overflow-hidden">
-            <h3 className="font-serif text-xl font-semibold text-primary mb-6">
-              Video Reflections
-            </h3>
+        <motion.div variants={fadeInUp} className="mt-6 grid grid-cols-2 gap-4">
+          {videoReflections.map((video) => (
             <div
-              ref={videoScrollRef}
-              className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-thin pb-2"
+              key={video.title}
+              className="group cursor-pointer overflow-hidden rounded-xl"
             >
-              {videoReflections.map((video) => (
-                <div
-                  key={video.title}
-                  className="min-w-full snap-center rounded-xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-300 cursor-pointer group"
-                >
-                  <div className="relative aspect-video">
-                    <img
-                      src={video.thumbnail}
-                      alt={video.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-foreground/20 flex items-center justify-center">
-                      <div className="w-14 h-14 bg-card/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-                        <PlayCircle className="w-9 h-9 text-primary" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-muted p-4">
-                    <h4 className="font-medium text-foreground mb-1">
-                      {video.title}
-                    </h4>
-                    <p className="text-sm text-muted-foreground">
-                      {video.description}
-                    </p>
+              <div className="relative aspect-video">
+                <img
+                  src={video.thumbnail}
+                  alt={video.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-foreground/20">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-card/90 transition-transform duration-200 group-hover:scale-110">
+                    <PlayCircle className="h-6 w-6 text-primary" />
                   </div>
                 </div>
-              ))}
+              </div>
+              <p className="mt-2 truncate text-xs font-medium text-foreground">
+                {video.title}
+              </p>
             </div>
-          </div>
+          ))}
+        </motion.div>
 
-          {/* Image Reflections — horizontal scroll */}
-          <div className="overflow-hidden">
-            <h3 className="font-serif text-xl font-semibold text-primary mb-6">
-              Image Reflections
-            </h3>
-            <div
-              ref={imageScrollRef}
-              className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-thin pb-2"
-            >
-              <div className="min-w-full snap-center">
-                <ImageReflectionsGallery limit={1} columns={2} />
-              </div>
-              <div className="min-w-full snap-center">
-                <ImageReflectionsGallery limit={1} columns={2} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <motion.div variants={fadeInUp} className="mt-8">
+          <Link
+            to="/media"
+            className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-primary transition-colors hover:text-berry"
+          >
+            Explore the full library <ArrowRight className="h-4 w-4" />
+          </Link>
+        </motion.div>
+      </GlassPanel>
+    </div>
   );
 };
 

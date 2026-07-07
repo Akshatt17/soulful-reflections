@@ -1,5 +1,8 @@
+import { motion } from "framer-motion";
 import { Heart, Brain, Activity } from "lucide-react";
 import { Link } from "react-router-dom";
+import GlassPanel from "@/components/landing/GlassPanel";
+import { fadeInUp } from "@/lib/motion-variants";
 
 const tools = [
   {
@@ -25,53 +28,48 @@ const tools = [
   },
 ];
 
+/** A slim left-aligned stack of glass cards; the scene keeps the right half. */
 const AssessmentTools = () => {
   return (
-    <section className="section-padding">
-      <div className="container-custom px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-14 max-w-2xl mx-auto">
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-4">
+    <div className="px-4 py-16 sm:px-6 lg:px-16 lg:py-24">
+      <div className="max-w-xl md:ml-[4%]">
+        <motion.div variants={fadeInUp} className="radial-tint mb-8 py-4">
+          <h2 className="font-serif text-3xl font-bold text-primary sm:text-4xl">
             Self-Assessment Tools
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Explore our collection of thoughtfully designed tools to support your journey of self-discovery.
+          <p className="mt-3 text-base leading-relaxed text-foreground/80">
+            Thoughtfully designed check-ins to support your journey of
+            self-discovery.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Tools Grid */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {tools.map((tool, index) => (
-            <div
-              key={tool.title}
-              className="bg-card rounded-2xl p-8 shadow-card hover:shadow-elevated transition-all duration-300 hover:-translate-y-1"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              {/* Icon */}
-              <div className="w-14 h-14 bg-sage/20 rounded-full flex items-center justify-center mb-6">
-                <tool.icon className="w-7 h-7 text-sage" />
-              </div>
-
-              {/* Content */}
-              <h3 className="font-serif text-xl font-bold text-primary mb-3">
-                {tool.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed mb-5">
-                {tool.description}
-              </p>
-
-              {/* Link */}
-              <Link
-                to={`/tools/${tool.id}`}
-                className="text-primary font-medium hover:underline underline-offset-4 transition-all duration-200"
-              >
-                {tool.link}
-              </Link>
-            </div>
+        <div className="space-y-4">
+          {tools.map((tool) => (
+            <motion.div key={tool.id} variants={fadeInUp}>
+              <GlassPanel hover className="flex items-start gap-5 p-6">
+                <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-sage/25">
+                  <tool.icon className="h-5 w-5 text-forest" aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-lg font-semibold leading-snug text-primary">
+                    {tool.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-foreground/80">
+                    {tool.description}
+                  </p>
+                  <Link
+                    to={`/tools/${tool.id}`}
+                    className="mt-3 inline-block text-sm font-medium text-primary underline-offset-4 transition-all duration-200 hover:underline"
+                  >
+                    {tool.link}
+                  </Link>
+                </div>
+              </GlassPanel>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
