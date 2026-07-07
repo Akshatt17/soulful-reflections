@@ -139,6 +139,35 @@
     transition: var(--transition-smooth);
   }
 
+  /* The approved glass pane (docs/design/theme.md §3) — the single source of
+     truth for the treatment. Rendered via <GlassPanel> or these classes. */
+  .glass-panel {
+    background: rgba(243, 235, 217, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(243, 235, 217, 0.3);
+    box-shadow: 0 8px 32px rgba(72, 35, 14, 0.08);
+    border-radius: 16px;
+  }
+
+  /* Approved hover for interactive panes: brighten + lift, calm 0.4s ease. */
+  .glass-panel-hover {
+    transition: background 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .glass-panel-hover:hover {
+    background: rgba(243, 235, 217, 0.7);
+    transform: translateY(-2px);
+  }
+
+  /* Soft radial tint behind text that sits on the bare scene, sans panel. */
+  .radial-tint {
+    background: radial-gradient(
+      ellipse at center,
+      rgba(238, 229, 213, 0.65) 0%,
+      rgba(238, 229, 213, 0) 70%
+    );
+  }
+
   .glass {
     background: hsl(var(--card) / 0.55);
     backdrop-filter: blur(16px) saturate(140%);
