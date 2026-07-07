@@ -53,19 +53,21 @@ const Media = () => {
   return (
     <PageLayout>
       {/* Hero */}
-      <section className="bg-muted py-16">
+      <section className="py-16">
         <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
-            Micro Reflections
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Brief moments of mindfulness through audio, video, and visual content designed to support your daily wellbeing.
-          </p>
+          <div className="radial-tint mx-auto max-w-2xl py-6">
+            <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
+              Micro Reflections
+            </h1>
+            <p className="text-lg text-foreground/80">
+              Brief moments of mindfulness through audio, video, and visual content designed to support your daily wellbeing.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Filters */}
-      <section className="bg-card border-b border-border">
+      <section className="glass border-b border-border/40">
         <div className="container-custom px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Type Filter */}
@@ -106,7 +108,7 @@ const Media = () => {
                 <select
                   value={categoryFilter}
                   onChange={(e) => setCategoryFilter(e.target.value)}
-                  className="px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
+                  className="px-4 py-2 rounded-lg border border-border/60 bg-card/60 text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
                 >
                   <option value="all">All Topics</option>
                   {categories.map((cat) => (
@@ -117,7 +119,7 @@ const Media = () => {
                 <select
                   value={durationFilter}
                   onChange={(e) => setDurationFilter(e.target.value)}
-                  className="px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
+                  className="px-4 py-2 rounded-lg border border-border/60 bg-card/60 text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
                 >
                   <option value="all">Any Duration</option>
                   <option value="short">Under 5 min</option>
@@ -132,9 +134,9 @@ const Media = () => {
 
       {/* Audio Section */}
       {filteredAudio.length > 0 && (
-        <section className="section-padding bg-card">
+        <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8">
-            <h2 className="font-serif text-2xl font-bold text-primary mb-8">
+            <h2 className="radial-tint inline-block font-serif text-2xl font-bold text-primary mb-8 px-4 py-2">
               Audio Reflections
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
@@ -154,9 +156,9 @@ const Media = () => {
 
       {/* Video Section */}
       {filteredVideo.length > 0 && (
-        <section className="section-padding bg-background">
+        <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8">
-            <h2 className="font-serif text-2xl font-bold text-primary mb-8">
+            <h2 className="radial-tint inline-block font-serif text-2xl font-bold text-primary mb-8 px-4 py-2">
               Video Reflections
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -177,9 +179,9 @@ const Media = () => {
 
       {/* Image Reflections Section */}
       {showImages && (
-        <section className="section-padding bg-muted">
+        <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8">
-            <h2 className="font-serif text-2xl font-bold text-primary mb-8">
+            <h2 className="radial-tint inline-block font-serif text-2xl font-bold text-primary mb-8 px-4 py-2">
               Image Reflections
             </h2>
             <ImageReflectionsGallery columns={3} />
@@ -189,9 +191,9 @@ const Media = () => {
 
       {/* Empty State */}
       {filteredAudio.length === 0 && filteredVideo.length === 0 && !showImages && (
-        <section className="section-padding bg-background">
+        <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-muted-foreground">No media matches your current filters.</p>
+            <p className="text-foreground/80">No media matches your current filters.</p>
             <Button
               variant="outline"
               className="mt-4"

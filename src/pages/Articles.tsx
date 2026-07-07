@@ -78,20 +78,22 @@ const Articles = () => {
   return (
     <PageLayout>
       {/* Page Header */}
-      <section className="bg-muted py-16 lg:py-20">
+      <section className="py-16 lg:py-20">
         <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
-            Reflections
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A dedicated space for long-form reading. Explore insights on mindfulness, 
-            self-care, and personal growth at your own pace.
-          </p>
+          <div className="radial-tint mx-auto max-w-2xl py-6">
+            <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
+              Reflections
+            </h1>
+            <p className="text-lg text-foreground/80">
+              A dedicated space for long-form reading. Explore insights on mindfulness,
+              self-care, and personal growth at your own pace.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Filter & Sort Bar */}
-      <section className="bg-card border-b border-border sticky top-16 lg:top-20 z-40">
+      <section className="glass border-b border-border/40 sticky top-16 lg:top-20 z-40">
         <div className="container-custom px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             {/* Topic Filters */}
@@ -103,7 +105,7 @@ const Articles = () => {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                     selectedCategory === cat
                       ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                      : "bg-card/50 text-foreground/70 hover:bg-primary/10 hover:text-primary"
                   }`}
                 >
                   {cat}
@@ -121,13 +123,13 @@ const Articles = () => {
                   placeholder="Search articles..."
                   value={searchQuery}
                   onChange={handleSearchChange}
-                  className="pl-10 bg-muted border-border"
+                  className="pl-10 bg-card/60 border-border/60"
                 />
               </div>
 
               {/* Sort Dropdown */}
               <Select value={sortBy} onValueChange={handleSortChange}>
-                <SelectTrigger className="w-36 bg-muted border-border">
+                <SelectTrigger className="w-36 bg-card/60 border-border/60">
                   <SlidersHorizontal className="h-4 w-4 mr-2" />
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
@@ -143,7 +145,7 @@ const Articles = () => {
       </section>
 
       {/* Articles Grid */}
-      <section className="section-padding bg-background">
+      <section className="section-padding">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           {paginatedArticles.length === 0 ? (
             <div className="text-center py-16">

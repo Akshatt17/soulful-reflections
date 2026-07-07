@@ -34,11 +34,11 @@ const ArticleDetail = () => {
   return (
     <PageLayout>
       {/* Hero Image */}
-      <section className="bg-muted">
+      <section>
         <div className="container-custom px-4 sm:px-6 lg:px-8 py-8">
           <Link
             to="/articles"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
+            className="inline-flex items-center gap-2 text-foreground/70 hover:text-primary transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Articles
@@ -54,12 +54,12 @@ const ArticleDetail = () => {
       </section>
 
       {/* Article Content */}
-      <section className="section-padding bg-card">
+      <section className="section-padding">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
+          <div className="glass-panel max-w-3xl mx-auto p-6 sm:p-10">
             {/* Meta */}
-            <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-muted-foreground">
-              <span className="text-xs font-semibold tracking-wider text-sage uppercase">
+            <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-foreground/70">
+              <span className="text-xs font-semibold tracking-wider text-forest uppercase">
                 {article.category}
               </span>
               <span className="flex items-center gap-1">
@@ -93,7 +93,7 @@ const ArticleDetail = () => {
                 {article.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-muted rounded-full text-sm text-muted-foreground"
+                    className="px-3 py-1 bg-card/50 rounded-full text-sm text-foreground/70"
                   >
                     #{tag}
                   </span>
@@ -102,7 +102,7 @@ const ArticleDetail = () => {
             )}
 
             {/* Author Box */}
-            <div className="mt-10 bg-muted rounded-2xl p-6 flex items-start gap-4">
+            <div className="mt-10 bg-card/50 rounded-2xl p-6 flex items-start gap-4">
               <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
                 <img
                   src={article.author.avatar}
@@ -115,7 +115,7 @@ const ArticleDetail = () => {
                   <User className="w-4 h-4 text-muted-foreground" />
                   <span className="font-semibold text-foreground">{article.author.name}</span>
                 </div>
-                <p className="text-sm text-muted-foreground">{article.author.bio}</p>
+                <p className="text-sm text-foreground/75">{article.author.bio}</p>
               </div>
             </div>
           </div>
@@ -124,9 +124,9 @@ const ArticleDetail = () => {
 
       {/* Related Articles */}
       {relatedArticles.length > 0 && (
-        <section className="section-padding bg-background">
+        <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8">
-            <h2 className="font-serif text-2xl font-bold text-primary mb-8 text-center">
+            <h2 className="radial-tint font-serif text-2xl font-bold text-primary mb-8 py-3 text-center">
               Related Articles
             </h2>
             <div className="grid md:grid-cols-3 gap-8">
@@ -147,13 +147,13 @@ const ArticleDetail = () => {
       )}
 
       {/* Soft Call-to-Action */}
-      <section className="section-padding bg-muted">
+      <section className="section-padding">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center">
+          <div className="radial-tint max-w-2xl mx-auto text-center py-6">
             <h3 className="font-serif text-2xl font-bold text-primary mb-4">
               Ready to Explore Yourself Further?
             </h3>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-foreground/80 mb-6">
               Our self-assessment tools can help you gain deeper insights into your emotional patterns and well-being.
             </p>
             <Link to="/tools">

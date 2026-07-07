@@ -36,7 +36,7 @@ const ImageReflectionCard = ({
     <div
       onClick={onClick}
       className={cn(
-        "group cursor-pointer rounded-xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-300",
+        "glass-panel glass-panel-hover group cursor-pointer overflow-hidden",
         className
       )}
     >
@@ -56,11 +56,11 @@ const ImageReflectionCard = ({
       </div>
 
       {/* Content */}
-      <div className="bg-muted p-4">
+      <div className="p-4">
         <h4 className="font-serif font-semibold text-foreground mb-2 line-clamp-1">
           {reflection.title}
         </h4>
-        <p className="text-sm text-muted-foreground line-clamp-2">
+        <p className="text-sm text-foreground/75 line-clamp-2">
           {reflection.description}
         </p>
       </div>

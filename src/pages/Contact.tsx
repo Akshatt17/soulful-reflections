@@ -22,19 +22,21 @@ const Contact = () => {
 
   return (
     <PageLayout>
-      <section className="bg-muted py-16">
+      <section className="py-16">
         <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">Contact Us</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+          <div className="radial-tint mx-auto max-w-2xl py-6">
+            <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">Contact Us</h1>
+            <p className="text-lg text-foreground/80">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+          </div>
         </div>
       </section>
-      <section className="section-padding bg-card">
+      <section className="section-padding">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl mx-auto">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div><label className="block text-sm font-medium mb-2">Name</label><Input required placeholder="Your name" /></div>
-              <div><label className="block text-sm font-medium mb-2">Email</label><Input required type="email" placeholder="you@example.com" /></div>
-              <div><label className="block text-sm font-medium mb-2">Message</label><Textarea required rows={5} placeholder="How can we help?" /></div>
+            <form onSubmit={handleSubmit} className="glass-panel space-y-6 p-8">
+              <div><label className="block text-sm font-medium mb-2">Name</label><Input required placeholder="Your name" className="bg-card/60 border-border/60" /></div>
+              <div><label className="block text-sm font-medium mb-2">Email</label><Input required type="email" placeholder="you@example.com" className="bg-card/60 border-border/60" /></div>
+              <div><label className="block text-sm font-medium mb-2">Message</label><Textarea required rows={5} placeholder="How can we help?" className="bg-card/60 border-border/60" /></div>
               <Button type="submit" variant="hero" size="lg" className="w-full" disabled={loading}>{loading ? "Sending..." : "Send Message"}</Button>
             </form>
             <div className="mt-10"><CrisisBox /></div>

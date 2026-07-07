@@ -25,12 +25,12 @@ const VideoDetail = () => {
 
   return (
     <PageLayout>
-      <section className="section-padding bg-background">
+      <section className="section-padding">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <Link
               to="/media"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-foreground/70 hover:text-primary transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Media Library
@@ -49,12 +49,12 @@ const VideoDetail = () => {
             </div>
 
             {/* Info */}
-            <div className="bg-card rounded-2xl shadow-card p-8">
+            <div className="glass-panel p-8">
               <div className="flex items-center gap-4 mb-4">
-                <span className="text-xs font-semibold tracking-wider text-sage uppercase">
+                <span className="text-xs font-semibold tracking-wider text-forest uppercase">
                   {video.category}
                 </span>
-                <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1 text-sm text-foreground/70">
                   <Clock className="w-4 h-4" />
                   {video.duration}
                 </span>
@@ -62,7 +62,7 @@ const VideoDetail = () => {
               <h1 className="font-serif text-3xl font-bold text-primary mb-4">
                 {video.title}
               </h1>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-foreground/80 leading-relaxed">
                 {video.description}
               </p>
             </div>

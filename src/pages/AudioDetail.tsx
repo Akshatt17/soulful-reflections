@@ -83,28 +83,28 @@ const AudioDetail = () => {
 
   return (
     <PageLayout>
-      <section className="section-padding bg-background">
+      <section className="section-padding">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
             <Link
               to="/media"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-foreground/70 hover:text-primary transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Media Library
             </Link>
 
-            <div className="bg-card rounded-2xl shadow-card p-8">
-              <span className="text-xs font-semibold tracking-wider text-sage uppercase">
+            <div className="glass-panel p-8">
+              <span className="text-xs font-semibold tracking-wider text-forest uppercase">
                 {audio.category}
               </span>
               <h1 className="font-serif text-3xl font-bold text-primary mt-2 mb-4">
                 {audio.title}
               </h1>
-              <p className="text-muted-foreground mb-8">{audio.description}</p>
+              <p className="text-foreground/80 mb-8">{audio.description}</p>
 
               {/* Audio Player */}
-              <div className="bg-muted rounded-xl p-6">
+              <div className="bg-card/50 rounded-xl p-6">
                 {/* Hidden audio element - uses placeholder since no real audio */}
                 <audio ref={audioRef} src={audio.audioUrl} preload="metadata" />
 
@@ -156,11 +156,11 @@ const AudioDetail = () => {
                 <h2 className="font-serif text-xl font-bold text-primary mb-4">
                   Transcript
                 </h2>
-                <div className="bg-muted rounded-xl p-6">
-                  <p className="text-muted-foreground leading-relaxed">
+                <div className="bg-card/50 rounded-xl p-6">
+                  <p className="text-foreground/80 leading-relaxed">
                     {audio.transcript}
                   </p>
-                  <p className="text-sm text-muted-foreground/60 mt-4 italic">
+                  <p className="text-sm text-foreground/60 mt-4 italic">
                     Full transcript available upon request...
                   </p>
                 </div>
