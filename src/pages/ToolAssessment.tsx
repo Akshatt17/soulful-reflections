@@ -1,35 +1,29 @@
 import { useState, useMemo } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import PageLayout from "@/components/PageLayout";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 
 // Assessment components and utilities
 import { IntroScreen, QuizScreen, ResultsScreen } from "@/components/assessment";
-import { 
-  getAssessment, 
-  hasAssessment, 
-  getAssessmentResult 
+import {
+  getAssessment,
+  hasAssessment,
+  getAssessmentResult
 } from "@/data/assessments";
+import type { AssessmentConfig } from "@/types/assessment";
 
 type Screen = "intro" | "quiz" | "results";
 
 const ToolAssessment = () => {
   const { toolId } = useParams<{ toolId: string }>();
-  const navigate = useNavigate();
 
   // Get the assessment configuration
   const config = toolId ? getAssessment(toolId) : undefined;
 
-  // State
-  const [screen, setScreen] = useState<Screen>("intro");
-  const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [consent, setConsent] = useState(false);
-  const [showEmailCapture, setShowEmailCapture] = useState(false);
-
-  // Tool not found or not supported
+  // Tool not found or not supported. Guarding here (before AssessmentFlow's
+  // hooks ever mount) keeps the hook order unconditional; keying by toolId
+  // resets the flow's state when switching between tools.
   if (!toolId || !hasAssessment(toolId) || !config) {
     return (
       <PageLayout>
@@ -37,9 +31,9 @@ const ToolAssessment = () => {
           <h1 className="font-serif text-3xl font-bold text-primary mb-4">
             Tool Not Found
           </h1>
-          <p className="text-muted-foreground mb-8">
-            {toolId && !hasAssessment(toolId) 
-              ? "This assessment is coming soon." 
+          <p className="text-foreground/80 mb-8">
+            {toolId && !hasAssessment(toolId)
+              ? "This assessment is coming soon."
               : "The assessment you're looking for doesn't exist."
             }
           </p>
@@ -50,6 +44,22 @@ const ToolAssessment = () => {
       </PageLayout>
     );
   }
+
+  return <AssessmentFlow key={toolId} config={config} />;
+};
+
+interface AssessmentFlowProps {
+  config: AssessmentConfig;
+}
+
+const AssessmentFlow = ({ config }: AssessmentFlowProps) => {
+  // State
+  const [screen, setScreen] = useState<Screen>("intro");
+  const [answers, setAnswers] = useState<Record<number, number>>({});
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [consent, setConsent] = useState(false);
+  const [showEmailCapture, setShowEmailCapture] = useState(false);
 
   // Get assessment result (handles standard and custom scoring like MDQ)
   const assessmentResult = useMemo(() => {
@@ -114,13 +124,13 @@ const ToolAssessment = () => {
 
   return (
     <PageLayout>
-      <section className="section-padding bg-background min-h-[70vh]">
+      <section className="section-padding min-h-[70vh]">
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             {/* Back Link */}
             <Link
               to="/tools"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-foreground/70 hover:text-primary transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Tools
