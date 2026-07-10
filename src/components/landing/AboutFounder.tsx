@@ -40,7 +40,7 @@ const AboutFounder = () => (
             Dr. Niharika Bhaskar
           </h2>
           <p className="mt-1 text-xs uppercase tracking-[0.2em] text-accent-foreground">
-            Practicing Psychiatrist · Founder, SR
+            Practicing Psychiatrist · Founder, The Velvet Mind
           </p>
         </div>
       </motion.div>
