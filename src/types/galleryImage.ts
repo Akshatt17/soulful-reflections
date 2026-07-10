@@ -1,4 +1,4 @@
-export interface ImageReflection {
+export interface GalleryImage {
   id: string;
   slug: string;
   title: string;
@@ -9,6 +9,6 @@ export interface ImageReflection {
   publishedDate: string;
 }
 
-export interface ImageReflectionsData {
-  imageReflections: ImageReflection[];
+export interface GalleryImagesData {
+  images: GalleryImage[];
 }

@@ -72,7 +72,7 @@ const QuestionRow = ({
                 "focus:outline-none focus:ring-2 focus:ring-primary/50",
                 selectedValue === option.value
                   ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-card text-muted-foreground",
+                  : "border-border/60 bg-card/60 text-foreground/75",
                 // Flexible sizing for long labels; compact for short (numeric)
                 useFlexibleButtons
                   ? "px-3 py-2 sm:px-4 sm:py-2.5 text-sm text-center whitespace-normal leading-tight min-w-[5rem] max-w-[10rem] inline-flex items-center justify-center"

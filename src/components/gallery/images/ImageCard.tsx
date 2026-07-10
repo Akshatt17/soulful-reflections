@@ -1,13 +1,13 @@
-import { ImageReflection } from "@/types/imageReflection";
+import { GalleryImage } from "@/types/galleryImage";
 import { cn } from "@/lib/utils";
 
-// Import all reflection images
-import insomniaImg from "@/assets/reflections/insomnia-disorder.jpg";
-import bddImg from "@/assets/reflections/body-dysmorphic-disorder.jpg";
-import bipolarImg from "@/assets/reflections/bipolar-disorder.jpg";
-import ptsdImg from "@/assets/reflections/ptsd.jpg";
-import anxietyImg from "@/assets/reflections/anxiety-disorders.jpg";
-import ocdImg from "@/assets/reflections/ocd.jpg";
+// Import all image images
+import insomniaImg from "@/assets/gallery/insomnia-disorder.jpg";
+import bddImg from "@/assets/gallery/body-dysmorphic-disorder.jpg";
+import bipolarImg from "@/assets/gallery/bipolar-disorder.jpg";
+import ptsdImg from "@/assets/gallery/ptsd.jpg";
+import anxietyImg from "@/assets/gallery/anxiety-disorders.jpg";
+import ocdImg from "@/assets/gallery/ocd.jpg";
 
 // Map image paths to imports
 const imageMap: Record<string, string> = {
@@ -19,24 +19,24 @@ const imageMap: Record<string, string> = {
   "ocd.jpg": ocdImg,
 };
 
-interface ImageReflectionCardProps {
-  reflection: ImageReflection;
+interface ImageCardProps {
+  image: GalleryImage;
   onClick: () => void;
   className?: string;
 }
 
-const ImageReflectionCard = ({
-  reflection,
+const ImageCard = ({
+  image,
   onClick,
   className,
-}: ImageReflectionCardProps) => {
-  const imageSrc = imageMap[reflection.imagePath] || "";
+}: ImageCardProps) => {
+  const imageSrc = imageMap[image.imagePath] || "";
 
   return (
     <div
       onClick={onClick}
       className={cn(
-        "group cursor-pointer rounded-xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-300",
+        "glass-panel glass-panel-hover group cursor-pointer overflow-hidden",
         className
       )}
     >
@@ -44,28 +44,28 @@ const ImageReflectionCard = ({
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={imageSrc}
-          alt={reflection.title}
+          alt={image.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
         <div className="absolute bottom-3 left-3 right-3">
           <span className="inline-block px-2 py-1 text-xs font-medium bg-card/90 text-primary rounded-full">
-            {reflection.category}
+            {image.category}
           </span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="bg-muted p-4">
+      <div className="p-4">
         <h4 className="font-serif font-semibold text-foreground mb-2 line-clamp-1">
-          {reflection.title}
+          {image.title}
         </h4>
-        <p className="text-sm text-muted-foreground line-clamp-2">
-          {reflection.description}
+        <p className="text-sm text-foreground/75 line-clamp-2">
+          {image.description}
         </p>
       </div>
     </div>
   );
 };
 
-export default ImageReflectionCard;
+export default ImageCard;

@@ -4,22 +4,22 @@ import { AlertTriangle, Info } from "lucide-react";
 const Disclaimer = () => (
   <PageLayout>
     {/* Hero Section */}
-    <section className="bg-muted py-16">
-      <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
+    <section className="py-16">
+      <div className="container-custom radial-tint px-4 py-6 sm:px-6 lg:px-8 text-center">
         <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
           <Info className="w-8 h-8 text-primary" />
         </div>
         <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
           Medical Disclaimer
         </h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-lg text-foreground/80 max-w-2xl mx-auto">
           Important information about the nature of our content and services.
         </p>
       </div>
     </section>
 
     {/* Disclaimer Content */}
-    <section className="section-padding bg-card">
+    <section className="section-padding">
       <div className="container-custom px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <div className="space-y-8">
@@ -31,7 +31,7 @@ const Disclaimer = () => (
                   <h2 className="font-serif text-xl font-bold text-foreground mb-3">
                     Not Medical Advice
                   </h2>
-                  <p className="text-muted-foreground">
+                  <p className="text-foreground/80">
                     The content on this website is for informational and educational purposes only. 
                     It is not intended to be a substitute for professional medical advice, diagnosis, 
                     or treatment. Always seek the advice of your physician or other qualified health 
@@ -41,11 +41,11 @@ const Disclaimer = () => (
               </div>
             </div>
 
-            <div className="bg-background rounded-2xl p-6 border border-border">
+            <div className="glass-panel p-6">
               <h2 className="font-serif text-2xl font-bold text-primary mb-4">
                 Self-Assessment Tools
               </h2>
-              <div className="prose prose-lg max-w-none text-muted-foreground">
+              <div className="prose prose-lg max-w-none text-foreground/80">
                 <p className="mb-4">
                   Our self-assessment tools are designed for self-reflection and personal insight. 
                   They are <strong>not diagnostic instruments</strong> and should not be used as a 
@@ -60,11 +60,11 @@ const Disclaimer = () => (
               </div>
             </div>
 
-            <div className="bg-background rounded-2xl p-6 border border-border">
+            <div className="glass-panel p-6">
               <h2 className="font-serif text-2xl font-bold text-primary mb-4">
                 Content & Articles
               </h2>
-              <div className="prose prose-lg max-w-none text-muted-foreground">
+              <div className="prose prose-lg max-w-none text-foreground/80">
                 <p className="mb-4">
                   The articles, guides, and resources provided on this site are meant to offer 
                   general information and support for personal growth and well-being.
@@ -77,11 +77,11 @@ const Disclaimer = () => (
               </div>
             </div>
 
-            <div className="bg-background rounded-2xl p-6 border border-border">
+            <div className="glass-panel p-6">
               <h2 className="font-serif text-2xl font-bold text-primary mb-4">
                 Professional Help
               </h2>
-              <div className="prose prose-lg max-w-none text-muted-foreground">
+              <div className="prose prose-lg max-w-none text-foreground/80">
                 <p className="mb-4">
                   If you are experiencing significant distress, mental health concerns, or are in 
                   crisis, please seek help from a qualified mental health professional immediately.
@@ -92,13 +92,13 @@ const Disclaimer = () => (
               </div>
             </div>
 
-            <div className="bg-background rounded-2xl p-6 border border-border">
+            <div className="glass-panel p-6">
               <h2 className="font-serif text-2xl font-bold text-primary mb-4">
                 Limitation of Liability
               </h2>
-              <div className="prose prose-lg max-w-none text-muted-foreground">
+              <div className="prose prose-lg max-w-none text-foreground/80">
                 <p>
-                  Soulful Reflections and its creators are not liable for any damages or negative 
+                  The Velvet Mind and its creators are not liable for any damages or negative 
                   consequences arising from the use of information provided on this website. 
                   Use of this site is at your own risk.
                 </p>
@@ -106,7 +106,7 @@ const Disclaimer = () => (
             </div>
           </div>
 
-          <p className="text-sm text-muted-foreground mt-8 text-center">
+          <p className="text-sm text-foreground/60 mt-8 text-center">
             Last updated: December 2024
           </p>
         </div>

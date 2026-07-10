@@ -1,39 +1,43 @@
 import { useState, useMemo } from "react";
 import PageLayout from "@/components/PageLayout";
-import { AudioCard, VideoCard } from "@/components/MediaCard";
+import { VideoCard } from "@/components/MediaCard";
+// Audio pieces are temporarily removed from the site (kept for later):
+// import { AudioCard } from "@/components/MediaCard";
 import { Button } from "@/components/ui/button";
 import mediaData from "@/data/media.json";
-import { ImageReflectionsGallery } from "@/components/micro-reflections/images";
+import { ImageGallery } from "@/components/gallery/images";
 
 type MediaType = "all" | "audio" | "video" | "images";
 
-const Media = () => {
+const Gallery = () => {
   const [mediaType, setMediaType] = useState<MediaType>("all");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [durationFilter, setDurationFilter] = useState<string>("all");
 
   // Extract unique categories
   const categories = useMemo(() => {
-    const audioCategories = mediaData.audio.map((a) => a.category);
+    // Audio categories omitted while audio pieces are disabled:
+    // const audioCategories = mediaData.audio.map((a) => a.category);
     const videoCategories = mediaData.video.map((v) => v.category);
-    return [...new Set([...audioCategories, ...videoCategories])];
+    return [...new Set([...videoCategories])];
   }, []);
 
-  // Filter media
-  const filteredAudio = useMemo(() => {
-    if (mediaType === "video" || mediaType === "images") return [];
-    return mediaData.audio.filter((item) => {
-      if (categoryFilter !== "all" && item.category !== categoryFilter) return false;
-      if (durationFilter !== "all") {
-        const mins = parseInt(item.duration.split(":")[0]);
-        if (durationFilter === "short" && mins >= 5) return false;
-        if (durationFilter === "medium" && (mins < 5 || mins >= 15)) return false;
-        if (durationFilter === "long" && mins < 15) return false;
-      }
-      return true;
-    });
-  }, [mediaType, categoryFilter, durationFilter]);
+  // Audio pieces are temporarily removed from the site (kept for later):
+  // const filteredAudio = useMemo(() => {
+  //   if (mediaType === "video" || mediaType === "images") return [];
+  //   return mediaData.audio.filter((item) => {
+  //     if (categoryFilter !== "all" && item.category !== categoryFilter) return false;
+  //     if (durationFilter !== "all") {
+  //       const mins = parseInt(item.duration.split(":")[0]);
+  //       if (durationFilter === "short" && mins >= 5) return false;
+  //       if (durationFilter === "medium" && (mins < 5 || mins >= 15)) return false;
+  //       if (durationFilter === "long" && mins < 15) return false;
+  //     }
+  //     return true;
+  //   });
+  // }, [mediaType, categoryFilter, durationFilter]);
 
+  // Filter media
   const filteredVideo = useMemo(() => {
     if (mediaType === "audio" || mediaType === "images") return [];
     return mediaData.video.filter((item) => {
@@ -53,19 +57,21 @@ const Media = () => {
   return (
     <PageLayout>
       {/* Hero */}
-      <section className="bg-muted py-16">
+      <section className="py-16">
         <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
-            Micro Reflections
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Brief moments of mindfulness through audio, video, and visual content designed to support your daily wellbeing.
-          </p>
+          <div className="radial-tint mx-auto max-w-2xl py-6">
+            <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
+              Gallery
+            </h1>
+            <p className="text-lg text-foreground/80">
+              Brief moments of mindfulness through video and visual content designed to support your daily wellbeing.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Filters */}
-      <section className="bg-card border-b border-border">
+      <section>
         <div className="container-custom px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Type Filter */}
@@ -77,6 +83,7 @@ const Media = () => {
               >
                 All
               </Button>
+              {/* Audio pieces are temporarily removed from the site (kept for later):
               <Button
                 variant={mediaType === "audio" ? "hero" : "outline"}
                 size="sm"
@@ -84,6 +91,7 @@ const Media = () => {
               >
                 Audio
               </Button>
+              */}
               <Button
                 variant={mediaType === "video" ? "hero" : "outline"}
                 size="sm"
@@ -106,7 +114,7 @@ const Media = () => {
                 <select
                   value={categoryFilter}
                   onChange={(e) => setCategoryFilter(e.target.value)}
-                  className="px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
+                  className="px-4 py-2 rounded-lg border border-border/60 bg-card/60 text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
                 >
                   <option value="all">All Topics</option>
                   {categories.map((cat) => (
@@ -117,7 +125,7 @@ const Media = () => {
                 <select
                   value={durationFilter}
                   onChange={(e) => setDurationFilter(e.target.value)}
-                  className="px-4 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
+                  className="px-4 py-2 rounded-lg border border-border/60 bg-card/60 text-foreground text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none"
                 >
                   <option value="all">Any Duration</option>
                   <option value="short">Under 5 min</option>
@@ -130,12 +138,12 @@ const Media = () => {
         </div>
       </section>
 
-      {/* Audio Section */}
+      {/* Audio pieces are temporarily removed from the site (kept for later):
       {filteredAudio.length > 0 && (
-        <section className="section-padding bg-card">
+        <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8">
-            <h2 className="font-serif text-2xl font-bold text-primary mb-8">
-              Audio Reflections
+            <h2 className="radial-tint inline-block font-serif text-2xl font-bold text-primary mb-8 px-4 py-2">
+              Audio
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
               {filteredAudio.map((audio) => (
@@ -151,13 +159,14 @@ const Media = () => {
           </div>
         </section>
       )}
+      */}
 
       {/* Video Section */}
       {filteredVideo.length > 0 && (
-        <section className="section-padding bg-background">
+        <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8">
-            <h2 className="font-serif text-2xl font-bold text-primary mb-8">
-              Video Reflections
+            <h2 className="radial-tint inline-block font-serif text-2xl font-bold text-primary mb-8 px-4 py-2">
+              Videos
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredVideo.map((video) => (
@@ -166,7 +175,7 @@ const Media = () => {
                   slug={video.slug}
                   title={video.title}
                   description={video.description}
-                  thumbnail={video.thumbnail}
+                  youtubeId={video.youtubeId}
                   duration={video.duration}
                 />
               ))}
@@ -175,23 +184,23 @@ const Media = () => {
         </section>
       )}
 
-      {/* Image Reflections Section */}
+      {/* Images Section */}
       {showImages && (
-        <section className="section-padding bg-muted">
+        <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8">
-            <h2 className="font-serif text-2xl font-bold text-primary mb-8">
-              Image Reflections
+            <h2 className="radial-tint inline-block font-serif text-2xl font-bold text-primary mb-8 px-4 py-2">
+              Images
             </h2>
-            <ImageReflectionsGallery columns={3} />
+            <ImageGallery columns={3} />
           </div>
         </section>
       )}
 
       {/* Empty State */}
-      {filteredAudio.length === 0 && filteredVideo.length === 0 && !showImages && (
-        <section className="section-padding bg-background">
+      {filteredVideo.length === 0 && !showImages && (
+        <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-muted-foreground">No media matches your current filters.</p>
+            <p className="text-foreground/80">No media matches your current filters.</p>
             <Button
               variant="outline"
               className="mt-4"
@@ -210,4 +219,4 @@ const Media = () => {
   );
 };
 
-export default Media;
+export default Gallery;

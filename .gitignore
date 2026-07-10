@@ -22,3 +22,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Raw source media/docs (compressed copies live in src/assets/*)
+reels/
+/Articles/
+/Video/
+
+# Claude Code local tooling
+.claude/
+
+# Local review-qa reports
+.claude-tmp/

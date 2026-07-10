@@ -83,7 +83,7 @@ export const ociRConfig: AssessmentConfig = {
   ],
 
   intro: {
-    subtitle: "Soulful Reflections",
+    subtitle: "The Velvet Mind",
     title: "OCI-R – Obsessive-Compulsive Inventory–Revised (Reflective Version)",
     tagline: "A gentle note before you begin",
     about: "This self-check is written in a softer, reflective tone and is inspired by the OCI-R (Obsessive-Compulsive Inventory–Revised), a widely used screening measure for obsessive-compulsive symptoms. It is not a diagnosis. A higher score suggests stronger OCD-like symptoms and is a sign to consider a professional assessment—especially if these experiences consume time or cause distress.",

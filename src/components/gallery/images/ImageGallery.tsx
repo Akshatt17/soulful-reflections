@@ -1,27 +1,27 @@
 import { useState, useCallback } from "react";
-import ImageReflectionCard from "./ImageReflectionCard";
-import ImageReflectionViewer from "./ImageReflectionViewer";
-import { ImageReflection } from "@/types/imageReflection";
-import imageReflectionsData from "@/data/imageReflections.json";
+import ImageCard from "./ImageCard";
+import ImageViewer from "./ImageViewer";
+import { GalleryImage } from "@/types/galleryImage";
+import galleryImagesData from "@/data/galleryImages.json";
 
-interface ImageReflectionsGalleryProps {
+interface ImageGalleryProps {
   /** Limit number of items shown (for homepage preview) */
   limit?: number;
   /** Grid columns: 2, 3, or 4 */
   columns?: 2 | 3 | 4;
 }
 
-const ImageReflectionsGallery = ({
+const ImageGallery = ({
   limit,
   columns = 3,
-}: ImageReflectionsGalleryProps) => {
+}: ImageGalleryProps) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const reflections: ImageReflection[] = imageReflectionsData.imageReflections;
-  const displayedReflections = limit ? reflections.slice(0, limit) : reflections;
+  const images: GalleryImage[] = galleryImagesData.images;
+  const displayedImages = limit ? images.slice(0, limit) : images;
 
-  const selectedReflection =
-    selectedIndex !== null ? reflections[selectedIndex] : null;
+  const selectedImage =
+    selectedIndex !== null ? images[selectedIndex] : null;
 
   const handleOpen = useCallback((index: number) => {
     setSelectedIndex(index);
@@ -38,10 +38,10 @@ const ImageReflectionsGallery = ({
   }, [selectedIndex]);
 
   const handleNext = useCallback(() => {
-    if (selectedIndex !== null && selectedIndex < reflections.length - 1) {
+    if (selectedIndex !== null && selectedIndex < images.length - 1) {
       setSelectedIndex(selectedIndex + 1);
     }
-  }, [selectedIndex, reflections.length]);
+  }, [selectedIndex, images.length]);
 
   const gridCols = {
     2: "grid-cols-1 sm:grid-cols-2",
@@ -52,28 +52,28 @@ const ImageReflectionsGallery = ({
   return (
     <>
       <div className={`grid ${gridCols[columns]} gap-6`}>
-        {displayedReflections.map((reflection, index) => (
-          <ImageReflectionCard
-            key={reflection.id}
-            reflection={reflection}
+        {displayedImages.map((image, index) => (
+          <ImageCard
+            key={image.id}
+            image={image}
             onClick={() => handleOpen(index)}
           />
         ))}
       </div>
 
-      <ImageReflectionViewer
-        reflection={selectedReflection}
+      <ImageViewer
+        image={selectedImage}
         isOpen={selectedIndex !== null}
         onClose={handleClose}
         onPrevious={handlePrevious}
         onNext={handleNext}
         hasPrevious={selectedIndex !== null && selectedIndex > 0}
         hasNext={
-          selectedIndex !== null && selectedIndex < reflections.length - 1
+          selectedIndex !== null && selectedIndex < images.length - 1
         }
       />
     </>
   );
 };
 
-export default ImageReflectionsGallery;
+export default ImageGallery;

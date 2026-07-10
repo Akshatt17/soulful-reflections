@@ -41,18 +41,18 @@ interface ToolCardProps {
   ctaText?: string;
 }
 
-const ToolCard = ({ id, title, description, icon, duration, ctaText = "Begin Reflection" }: ToolCardProps) => {
+const ToolCard = ({ id, title, description, icon, duration, ctaText = "Start Assessment" }: ToolCardProps) => {
   const IconComponent = iconMap[icon] || Activity;
 
   return (
-    <div className="bg-card rounded-2xl p-8 shadow-card hover:shadow-elevated transition-all duration-300 hover:-translate-y-1">
-      <div className="w-14 h-14 bg-sage/20 rounded-full flex items-center justify-center mb-6">
-        <IconComponent className="w-7 h-7 text-sage" />
+    <div className="glass-panel glass-panel-hover p-8">
+      <div className="w-14 h-14 bg-sage/25 rounded-full flex items-center justify-center mb-6">
+        <IconComponent className="w-7 h-7 text-forest" />
       </div>
       <h3 className="font-serif text-xl font-bold text-primary mb-3">{title}</h3>
-      <p className="text-muted-foreground leading-relaxed mb-4">{description}</p>
+      <p className="text-foreground/80 leading-relaxed mb-4">{description}</p>
       {duration && (
-        <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-5">
+        <div className="flex items-center gap-1.5 text-sm text-foreground/60 mb-5">
           <Clock className="w-4 h-4" />
           <span>{duration}</span>
         </div>

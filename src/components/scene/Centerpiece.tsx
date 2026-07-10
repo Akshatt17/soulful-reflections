@@ -1,0 +1,137 @@
+import { useFrame, useThree } from "@react-three/fiber";
+import { easing } from "maath";
+import { useEffect, useMemo, useRef } from "react";
+import type { MutableRefObject } from "react";
+import {
+  InstancedBufferAttribute,
+  InstancedBufferGeometry,
+  Mesh,
+  PlaneGeometry,
+  ShaderMaterial,
+  Vector3,
+} from "three";
+import {
+  centerpieceVertexShader,
+  centerpieceFragmentShader,
+} from "@/lib/scene/centerpiece-shader";
+import { buildCenterpieceStages } from "@/lib/scene/morph-targets";
+import {
+  stageProgressFromP,
+  formTightnessFromStage,
+  dropOffsetFromP,
+  STAGE_COUNT,
+} from "@/lib/scene/beats";
+import { PETAL_COLORS } from "@/lib/scene/scene-config";
+import { sceneSmoothTime } from "@/components/scene/CameraRig";
+
+/** Opacity of the petal particles. */
+const BASE_OPACITY = 0.82;
+
+declare global {
+  interface Window {
+    /** Dev-only centerpiece readout for verification (morph stage + settled beat). */
+    __morphDebug?: { stage: number; beat: number };
+    /** Dev-only override to force a morph stage (0..5) regardless of scroll. */
+    __forceStage?: number;
+  }
+}
+
+interface CenterpieceProps {
+  count: number;
+  progress: MutableRefObject<number>;
+  /** Fired when the morph settles into a new beat, so a ripple can spread. */
+  onBeat: (beat: number) => void;
+}
+
+/**
+ * The particle-formed centerpiece: a dense petal system that morphs through the
+ * six baked forms (dewdrop → release → bud → bloom → scatter → settle) scrubbed by
+ * damped scroll progress. It rides the droplet travel path (dropOffsetFromP) —
+ * forming upper-right above the surface and drifting down to rest left of centre
+ * as a calm resolved bloom.
+ */
+const Centerpiece = ({ count, progress, onBeat }: CenterpieceProps) => {
+  const meshRef = useRef<Mesh>(null);
+  const camera = useThree((s) => s.camera);
+  const lastBeat = useRef(-1);
+  const pDamped = useRef(0);
+
+  const { geometry, material } = useMemo(() => {
+    const { stages, seeds } = buildCenterpieceStages(count);
+    const plane = new PlaneGeometry(1, 1);
+    const geo = new InstancedBufferGeometry();
+    geo.setIndex(plane.getIndex());
+    geo.setAttribute("position", plane.getAttribute("position"));
+    geo.setAttribute("uv", plane.getAttribute("uv"));
+    for (let s = 0; s < STAGE_COUNT; s++) {
+      geo.setAttribute(`aStage${s}`, new InstancedBufferAttribute(stages[s], 3));
+    }
+    geo.setAttribute("aSeed", new InstancedBufferAttribute(seeds, 1));
+    geo.instanceCount = count;
+
+    const mat = new ShaderMaterial({
+      vertexShader: centerpieceVertexShader,
+      fragmentShader: centerpieceFragmentShader,
+      transparent: true,
+      depthWrite: false,
+      uniforms: {
+        uTime: { value: 0 },
+        uStageProgress: { value: 0 },
+        uFormTightness: { value: 0.55 },
+        uDriftAmp: { value: 0.35 },
+        uDriftFreq: { value: 0.4 },
+        uDriftSpeed: { value: 0.06 },
+        uOpacity: { value: 0.82 },
+        uPalette: { value: PETAL_COLORS.map((c) => new Vector3(c[0], c[1], c[2])) },
+      },
+    });
+
+    return { geometry: geo, material: mat };
+  }, [count]);
+
+  useEffect(() => {
+    return () => {
+      geometry.dispose();
+      material.dispose();
+    };
+  }, [geometry, material]);
+
+  useFrame(({ clock }, delta) => {
+    const mesh = meshRef.current;
+    if (!mesh) return;
+
+    // ride the droplet path, anchored to the camera's look-at depth
+    easing.damp(pDamped, "current", progress.current, sceneSmoothTime(), delta);
+    const off = dropOffsetFromP(pDamped.current, clock.elapsedTime);
+    mesh.position.set(off[0], camera.position.y - 1.5 + off[1], off[2]);
+
+    material.uniforms.uTime.value = clock.elapsedTime;
+
+    const forced = import.meta.env.DEV ? window.__forceStage : undefined;
+    const target =
+      typeof forced === "number" ? forced : stageProgressFromP(progress.current);
+    easing.damp(
+      material.uniforms.uStageProgress,
+      "value",
+      target,
+      sceneSmoothTime(),
+      delta,
+    );
+
+    const sp = material.uniforms.uStageProgress.value as number;
+    material.uniforms.uFormTightness.value = formTightnessFromStage(sp);
+    material.uniforms.uOpacity.value = BASE_OPACITY;
+
+    const beat = Math.min(Math.round(sp), STAGE_COUNT - 1);
+    if (beat !== lastBeat.current) {
+      lastBeat.current = beat;
+      onBeat(beat);
+    }
+
+    if (import.meta.env.DEV) window.__morphDebug = { stage: sp, beat };
+  });
+
+  return <mesh ref={meshRef} geometry={geometry} material={material} frustumCulled={false} />;
+};
+
+export default Centerpiece;

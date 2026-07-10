@@ -60,25 +60,25 @@ const ResultsScreen = ({
 
   return (
     <div className="text-center">
-      <div className="w-20 h-20 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-6">
-        <CheckCircle className="w-10 h-10 text-sage" />
+      <div className="w-20 h-20 bg-sage/25 rounded-full flex items-center justify-center mx-auto mb-6">
+        <CheckCircle className="w-10 h-10 text-forest" />
       </div>
 
       <h1 className="font-serif text-3xl font-bold text-primary mb-2">
-        Your Reflection Results
+        Your Results
       </h1>
-      <p className="text-muted-foreground mb-8">
+      <p className="text-foreground/75 mb-8">
         <Lock className="w-4 h-4 inline mr-1" />
         Your responses are private and stored only on your device
       </p>
 
       {/* Score display */}
-      <div className="bg-card rounded-2xl p-6 mb-6 shadow-soft">
+      <div className="glass-panel p-6 mb-6">
         <div className="text-center mb-4">
           <div className="text-5xl font-bold text-primary mb-2">
             {scoreInterpretation.scoreDisplayValue ?? totalScore}
           </div>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-foreground/70">
             {scoreInterpretation.scoreDisplaySubtitle ?? `out of ${displayMax}`}
           </div>
         </div>
@@ -86,17 +86,17 @@ const ResultsScreen = ({
           <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-3">
             <span className="font-semibold text-primary">{scoreInterpretation.title}</span>
           </div>
-          <p className="text-muted-foreground">{scoreInterpretation.description}</p>
+          <p className="text-foreground/80">{scoreInterpretation.description}</p>
         </div>
       </div>
 
-      {/* Soulful Reflection */}
-      <div className="bg-sage/10 border border-sage/20 rounded-2xl p-6 mb-6 text-left">
+      {/* Reflection */}
+      <div className="glass-panel p-6 mb-6 text-left">
         <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-          <Heart className="w-5 h-5 text-sage" />
-          Soulful Reflection
+          <Heart className="w-5 h-5 text-forest" />
+          Reflection
         </h3>
-        <p className="text-muted-foreground italic">{scoreInterpretation.reflection}</p>
+        <p className="text-foreground/80 italic">{scoreInterpretation.reflection}</p>
       </div>
 
       {/* Question 9 Warning (PHQ-9 specific) */}
@@ -106,7 +106,7 @@ const ResultsScreen = ({
             <AlertTriangle className="w-6 h-6 text-destructive flex-shrink-0 mt-0.5" />
             <div>
               <h3 className="font-semibold text-foreground mb-2">Important Notice About Question 9</h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-foreground/75">
                 You indicated experiencing thoughts about harming yourself. Regardless of your total score, 
                 please seek help immediately. <strong>Your safety matters more than any number.</strong>
               </p>
@@ -122,7 +122,7 @@ const ResultsScreen = ({
             <AlertTriangle className="w-6 h-6 text-destructive flex-shrink-0 mt-0.5" />
             <div>
               <h3 className="font-semibold text-foreground mb-2">{config.crisis.title}</h3>
-              <p className="text-sm text-muted-foreground mb-3">
+              <p className="text-sm text-foreground/80 mb-3">
                 {config.crisis.message}
               </p>
               <div className="space-y-2 text-sm">
@@ -142,20 +142,20 @@ const ResultsScreen = ({
       )}
 
       {/* Gentle Reminder - shown in ALL results */}
-      <div className="bg-blush/30 border border-primary/20 rounded-2xl p-6 mb-6 text-left">
+      <div className="glass-panel border-primary/20 p-6 mb-6 text-left">
         <h3 className="font-semibold text-foreground mb-2">A Gentle Reminder</h3>
-        <p className="text-muted-foreground">
+        <p className="text-foreground/80">
           {config.gentleReminder}
         </p>
       </div>
 
       {/* Save Results Option */}
       {!showEmailCapture ? (
-        <div className="bg-card border border-border rounded-2xl p-6 mb-6">
+        <div className="glass-panel p-6 mb-6">
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <div className="flex-1 text-left">
               <h3 className="font-semibold text-foreground mb-1">Save Your Results</h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-foreground/75">
                 Receive a copy of your results via email to keep for yourself.
               </p>
             </div>
@@ -166,7 +166,7 @@ const ResultsScreen = ({
           </div>
         </div>
       ) : (
-        <form onSubmit={onEmailSubmit} className="bg-card border border-border rounded-2xl p-6 mb-6 text-left">
+        <form onSubmit={onEmailSubmit} className="glass-panel p-6 mb-6 text-left">
           <h3 className="font-semibold text-foreground mb-4">Enter Your Email</h3>
           <div className="space-y-4">
             <div>
@@ -219,26 +219,26 @@ const ResultsScreen = ({
       )}
 
       {/* Suggested Resources */}
-      <div className="bg-muted rounded-2xl p-6 mb-8 text-left">
+      <div className="glass-panel p-6 mb-8 text-left">
         <h3 className="font-semibold text-foreground mb-4">You May Find These Helpful</h3>
         <div className="grid gap-3">
           <Link 
             to="/articles" 
-            className="flex items-center gap-3 p-3 bg-card rounded-xl hover:bg-primary/5 transition-colors"
+            className="flex items-center gap-3 p-3 bg-card/50 rounded-xl hover:bg-primary/10 transition-colors"
           >
             <BookOpen className="w-5 h-5 text-primary" />
             <span className="text-foreground">Explore related articles</span>
           </Link>
           <Link 
-            to="/media" 
-            className="flex items-center gap-3 p-3 bg-card rounded-xl hover:bg-primary/5 transition-colors"
+            to="/gallery" 
+            className="flex items-center gap-3 p-3 bg-card/50 rounded-xl hover:bg-primary/10 transition-colors"
           >
             <Eye className="w-5 h-5 text-primary" />
             <span className="text-foreground">Listen to audio reflections</span>
           </Link>
           <Link 
             to="/tools" 
-            className="flex items-center gap-3 p-3 bg-card rounded-xl hover:bg-primary/5 transition-colors"
+            className="flex items-center gap-3 p-3 bg-card/50 rounded-xl hover:bg-primary/10 transition-colors"
           >
             <Wrench className="w-5 h-5 text-primary" />
             <span className="text-foreground">Try other self-reflection tools</span>

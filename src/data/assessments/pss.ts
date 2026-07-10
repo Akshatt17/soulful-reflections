@@ -79,7 +79,7 @@ export const pssConfig: AssessmentConfig = {
   ],
   
   intro: {
-    subtitle: "Soulful Reflections",
+    subtitle: "The Velvet Mind",
     title: "PSS — Perceived Stress Scale",
     tagline: "Gentle Check-In",
     about: "This is a reflective tool to help you notice how stressful life has felt recently. It is not a diagnosis.",

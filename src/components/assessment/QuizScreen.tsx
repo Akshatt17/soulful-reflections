@@ -39,7 +39,7 @@ const QuizScreen = ({
     ));
     
     return (
-      <div className="bg-muted rounded-xl p-4 mb-6">
+      <div className="glass-panel p-4 mb-6">
         <div className={`flex flex-wrap items-center justify-center ${responseLabels.length >= 5 ? 'gap-3' : 'gap-4'} text-sm`}>
           {items}
         </div>
@@ -49,12 +49,12 @@ const QuizScreen = ({
 
   return (
     <div>
-      <div className="text-center mb-8">
-        <p className="text-sm text-muted-foreground mb-2">Soulful Reflections</p>
+      <div className="radial-tint text-center mb-8 py-4">
+        <p className="text-sm text-foreground/70 mb-2">The Velvet Mind</p>
         <h1 className="font-serif text-2xl lg:text-3xl font-bold text-primary mb-2">
           {config.quizHeader}
         </h1>
-        <p className="text-muted-foreground">
+        <p className="text-foreground/80">
           {config.quizSubheader}
         </p>
       </div>
@@ -64,15 +64,15 @@ const QuizScreen = ({
 
       {/* Reverse scoring note (for PSS-like assessments) */}
       {hasPositiveItems && (
-        <div className="bg-sage/10 border border-sage/20 rounded-xl p-4 mb-6 text-sm">
-          <p className="text-muted-foreground">
+        <div className="glass-panel p-4 mb-6 text-sm">
+          <p className="text-foreground/80">
             <strong className="text-foreground">Note:</strong> Items marked as "(positive item)" are reverse-scored automatically in the final calculation.
           </p>
         </div>
       )}
 
       {/* Questions */}
-      <div className="bg-card rounded-2xl p-4 sm:p-6 shadow-soft mb-6">
+      <div className="glass-panel p-4 sm:p-6 mb-6">
         {questions.map((question, index) => {
           // For PHQ-9, question 9 (index 8) is the self-harm question
           const isLastQuestionHighlighted = 

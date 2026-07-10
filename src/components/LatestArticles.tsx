@@ -1,92 +1,76 @@
-import { Button } from "@/components/ui/button";
-import articleYoga from "@/assets/article-yoga.jpg";
-import articleJournaling from "@/assets/article-journaling.jpg";
-import articleNature from "@/assets/article-nature.jpg";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import GlassPanel from "@/components/landing/GlassPanel";
+import { fadeInUp } from "@/lib/motion-variants";
+import { resolveArticleImage } from "@/lib/article-images";
+import articlesData from "@/data/articles.json";
 
-const articles = [
-  {
-    image: articleYoga,
-    category: "Mindfulness",
-    title: "5 Morning Rituals for a Centered Day",
-    description: "Transform your mornings with simple practices that set a positive tone for the entire day ahead.",
-    link: "#",
-  },
-  {
-    image: articleJournaling,
-    category: "Self-Care",
-    title: "The Power of Journaling for Mental Clarity",
-    description: "Discover how putting pen to paper can unlock insights and promote emotional well-being.",
-    link: "#",
-  },
-  {
-    image: articleNature,
-    category: "Wellness",
-    title: "Nature's Role in Mental Health",
-    description: "Explore the healing benefits of spending time outdoors and reconnecting with the natural world.",
-    link: "#",
-  },
-];
+// The three most recent articles, freshest first.
+const articles = [...articlesData]
+  .sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime())
+  .slice(0, 3)
+  .map((a) => ({
+    image: resolveArticleImage(a.heroImage),
+    category: a.category,
+    title: a.title,
+    description: a.excerpt,
+    link: `/articles/${a.slug}`,
+  }));
 
+/** Right-aligned reading list; the settling brain keeps the left of the frame. */
 const LatestArticles = () => {
   return (
-    <section className="section-padding bg-background">
-      <div className="container-custom px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-14 max-w-2xl mx-auto">
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-4">
+    <div className="px-4 py-16 sm:px-6 lg:px-16 lg:py-24">
+      <div className="max-w-xl md:ml-auto md:mr-[4%]">
+        <motion.div variants={fadeInUp} className="radial-tint mb-8 py-4">
+          <h2 className="font-serif text-3xl font-bold text-primary sm:text-4xl">
             Latest Articles
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="mt-3 text-base leading-relaxed text-foreground/80">
             Insights and guidance to support your personal growth journey.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Articles Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {articles.map((article, index) => (
-            <article
-              key={article.title}
-              className="bg-card rounded-2xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 group"
-            >
-              {/* Image */}
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={article.image}
-                  alt={article.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <span className="text-xs font-semibold tracking-wider text-sage uppercase">
-                  {article.category}
-                </span>
-                <h3 className="font-serif text-xl font-bold text-primary mt-2 mb-3 line-clamp-2">
-                  {article.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
-                  {article.description}
-                </p>
-                <a
-                  href={article.link}
-                  className="text-primary font-medium hover:underline underline-offset-4 transition-all duration-200"
-                >
-                  Read More →
-                </a>
-              </div>
-            </article>
+        <div className="space-y-4">
+          {articles.map((article) => (
+            <motion.div key={article.title} variants={fadeInUp}>
+              <GlassPanel hover className="group overflow-hidden">
+                <Link to={article.link} className="flex items-stretch gap-0">
+                  <div className="h-auto w-28 flex-shrink-0 overflow-hidden sm:w-36">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-forest">
+                      {article.category}
+                    </span>
+                    <h3 className="mt-1 font-serif text-lg font-semibold leading-snug text-primary">
+                      {article.title}
+                    </h3>
+                    <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-foreground/80">
+                      {article.description}
+                    </p>
+                  </div>
+                </Link>
+              </GlassPanel>
+            </motion.div>
           ))}
         </div>
 
-        {/* View All Button */}
-        <div className="text-center">
-          <Button variant="sage" size="lg">
-            View All Articles
-          </Button>
-        </div>
+        <motion.div variants={fadeInUp} className="mt-8 text-right">
+          <Link
+            to="/articles"
+            className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-primary transition-colors hover:text-berry"
+          >
+            View all articles <ArrowRight className="h-4 w-4" />
+          </Link>
+        </motion.div>
       </div>
-    </section>
+    </div>
   );
 };
 

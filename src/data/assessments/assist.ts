@@ -155,7 +155,7 @@ export const assistConfig: AssessmentConfig = {
   ],
 
   intro: {
-    subtitle: "Soulful Reflections",
+    subtitle: "The Velvet Mind",
     title: "ASSIST (WHO) – Substance Use Self-Check (Reflective Version)",
     tagline: "A gentle note before you begin",
     about: "This questionnaire is adapted in a softer, reflective tone from the WHO ASSIST (Alcohol, Smoking and Substance Involvement Screening Test). It is meant to help you notice patterns of substance use and its impact. It is not a diagnosis. If your results suggest moderate to high risk, it's a sign to reach out for professional support.",

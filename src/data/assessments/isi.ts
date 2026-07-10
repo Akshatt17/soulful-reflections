@@ -83,7 +83,7 @@ export const isiConfig: AssessmentConfig = {
   ],
 
   intro: {
-    subtitle: "Soulful Reflections",
+    subtitle: "The Velvet Mind",
     title: "ISI – Insomnia Severity Index (Reflective Sleep Check-In)",
     tagline: "A gentle note before you begin",
     about: "This self-check is adapted in a softer, reflective tone from the Insomnia Severity Index (ISI). It helps you understand how sleep has been feeling for you recently—both at night and during the day. It is not a diagnosis. If your score suggests moderate to severe insomnia, seeking professional help can make a real difference.",

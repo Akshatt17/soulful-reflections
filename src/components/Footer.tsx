@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const footerLinks = [
   { label: "About", href: "/about" },
   { label: "Articles", href: "/articles" },
-  { label: "Media Library", href: "/media" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Resources", href: "/resources" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Disclaimer", href: "/disclaimer" },
@@ -18,31 +18,34 @@ const socialLinks = [
   { icon: Facebook, href: "#", label: "Facebook" },
 ];
 
+/** A floating translucent slab — the scene (or page tint) shows through it. */
 const Footer = () => {
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="container-custom px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-3 gap-10 lg:gap-16">
+    <footer className="px-4 pb-6 pt-10 sm:px-6 lg:px-8">
+      <div className="glass-panel mx-auto max-w-6xl px-6 py-10 sm:px-10">
+        <div className="grid gap-10 md:grid-cols-3 lg:gap-14">
           {/* Brand Column */}
           <div>
-            <h3 className="font-serif text-2xl font-semibold mb-4">
-              Soulful Reflections
+            <h3 className="mb-3 font-serif text-2xl font-semibold text-foreground">
+              The Velvet Mind
             </h3>
-            <p className="text-primary-foreground/80 leading-relaxed">
-              A sanctuary for healing, reflection, and personal growth. 
+            <p className="text-sm leading-relaxed text-foreground/75">
+              A sanctuary for healing, reflection, and personal growth.
               Supporting your journey toward inner peace and transformation.
             </p>
           </div>
 
           {/* Links Column */}
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <nav className="space-y-3">
+            <h4 className="mb-3 font-serif text-base font-semibold text-foreground">
+              Quick Links
+            </h4>
+            <nav className="grid grid-cols-2 gap-x-6 gap-y-2">
               {footerLinks.map((link) => (
                 <Link
                   key={link.label}
                   to={link.href}
-                  className="block text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-200"
+                  className="text-sm text-foreground/75 transition-colors duration-200 hover:text-primary"
                 >
                   {link.label}
                 </Link>
@@ -52,43 +55,39 @@ const Footer = () => {
 
           {/* Social Column */}
           <div>
-            <h4 className="font-semibold mb-4">Connect With Us</h4>
-            <div className="flex gap-4">
+            <h4 className="mb-3 font-serif text-base font-semibold text-foreground">
+              Connect With Us
+            </h4>
+            <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-primary-foreground/20 transition-colors duration-200"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-foreground/15 text-primary transition-colors duration-200 hover:bg-card/60"
                 >
-                  <social.icon className="w-5 h-5" />
+                  <social.icon className="h-5 w-5" />
                 </a>
               ))}
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Crisis Disclaimer */}
-      <div className="bg-primary-foreground/10 border-t border-primary-foreground/20">
-        <div className="container-custom px-4 sm:px-6 lg:px-8 py-6">
-          <div className="bg-primary-foreground/5 rounded-xl p-4 text-center">
-            <p className="text-sm text-primary-foreground/80">
-              <strong>Crisis Support:</strong> If you are in crisis or experiencing thoughts of self-harm, 
-              please reach out to a crisis helpline immediately. In the US, call or text 988 for the 
-              Suicide and Crisis Lifeline. This website is not a substitute for professional mental health care.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Copyright */}
-      <div className="border-t border-primary-foreground/20">
-        <div className="container-custom px-4 sm:px-6 lg:px-8 py-4">
-          <p className="text-center text-sm text-primary-foreground/60">
-            © {new Date().getFullYear()} Soulful Reflections. All rights reserved.
+        {/* Crisis Disclaimer */}
+        <div className="mt-10 border-t border-foreground/10 pt-6">
+          <p className="text-center text-xs leading-relaxed text-foreground/70">
+            <strong className="text-foreground/90">Crisis Support:</strong> If
+            you are in crisis or experiencing thoughts of self-harm, please
+            reach out to a crisis helpline immediately. In the US, call or text
+            988 for the Suicide and Crisis Lifeline. This website is not a
+            substitute for professional mental health care.
           </p>
         </div>
+
+        {/* Copyright */}
+        <p className="mt-6 text-center text-xs text-foreground/50">
+          © {new Date().getFullYear()} The Velvet Mind. All rights reserved.
+        </p>
       </div>
     </footer>
   );
