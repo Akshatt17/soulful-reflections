@@ -3,6 +3,7 @@ import PageLayout from "@/components/PageLayout";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock } from "lucide-react";
 import mediaData from "@/data/media.json";
+import { resolveVideoFile, resolveVideoPoster } from "@/lib/video-assets";
 
 const VideoDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -36,15 +37,16 @@ const VideoDetail = () => {
               Back to Media Library
             </Link>
 
-            {/* Video Player */}
-            <div className="aspect-video rounded-2xl overflow-hidden shadow-elevated mb-8">
-              <iframe
-                src={video.videoUrl}
+            {/* Video Player — portrait reel, don't letterbox */}
+            <div className="mx-auto mb-8 w-full max-w-sm aspect-[9/16] rounded-2xl overflow-hidden shadow-elevated bg-foreground/90">
+              <video
+                src={resolveVideoFile(video.videoFile)}
+                poster={resolveVideoPoster(video.poster)}
                 title={video.title}
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                loading="lazy"
+                className="w-full h-full object-contain"
+                controls
+                playsInline
+                preload="metadata"
               />
             </div>
 

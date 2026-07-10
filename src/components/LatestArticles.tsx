@@ -1,34 +1,22 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import GlassPanel from "@/components/landing/GlassPanel";
 import { fadeInUp } from "@/lib/motion-variants";
-import articleYoga from "@/assets/article-yoga.jpg";
-import articleJournaling from "@/assets/article-journaling.jpg";
-import articleNature from "@/assets/article-nature.jpg";
+import { resolveArticleImage } from "@/lib/article-images";
+import articlesData from "@/data/articles.json";
 
-const articles = [
-  {
-    image: articleYoga,
-    category: "Mindfulness",
-    title: "5 Morning Rituals for a Centered Day",
-    description: "Transform your mornings with simple practices that set a positive tone for the entire day ahead.",
-    link: "#",
-  },
-  {
-    image: articleJournaling,
-    category: "Self-Care",
-    title: "The Power of Journaling for Mental Clarity",
-    description: "Discover how putting pen to paper can unlock insights and promote emotional well-being.",
-    link: "#",
-  },
-  {
-    image: articleNature,
-    category: "Wellness",
-    title: "Nature's Role in Mental Health",
-    description: "Explore the healing benefits of spending time outdoors and reconnecting with the natural world.",
-    link: "#",
-  },
-];
+// The three most recent articles, freshest first.
+const articles = [...articlesData]
+  .sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime())
+  .slice(0, 3)
+  .map((a) => ({
+    image: resolveArticleImage(a.heroImage),
+    category: a.category,
+    title: a.title,
+    description: a.excerpt,
+    link: `/articles/${a.slug}`,
+  }));
 
 /** Right-aligned reading list; the settling brain keeps the left of the frame. */
 const LatestArticles = () => {
@@ -48,7 +36,7 @@ const LatestArticles = () => {
           {articles.map((article) => (
             <motion.div key={article.title} variants={fadeInUp}>
               <GlassPanel hover className="group overflow-hidden">
-                <a href={article.link} className="flex items-stretch gap-0">
+                <Link to={article.link} className="flex items-stretch gap-0">
                   <div className="h-auto w-28 flex-shrink-0 overflow-hidden sm:w-36">
                     <img
                       src={article.image}
@@ -67,19 +55,19 @@ const LatestArticles = () => {
                       {article.description}
                     </p>
                   </div>
-                </a>
+                </Link>
               </GlassPanel>
             </motion.div>
           ))}
         </div>
 
         <motion.div variants={fadeInUp} className="mt-8 text-right">
-          <a
-            href="#"
+          <Link
+            to="/articles"
             className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-primary transition-colors hover:text-berry"
           >
             View all articles <ArrowRight className="h-4 w-4" />
-          </a>
+          </Link>
         </motion.div>
       </div>
     </div>

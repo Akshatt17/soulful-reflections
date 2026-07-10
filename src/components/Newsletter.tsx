@@ -20,7 +20,7 @@ const Newsletter = () => {
 
   return (
     <div className="px-4 py-16 sm:px-6 lg:px-16 lg:py-24">
-      <GlassPanel className="max-w-md p-8 sm:p-10 md:ml-auto md:mr-[8%]">
+      <GlassPanel className="max-w-xl p-8 sm:p-10 md:ml-auto md:mr-[4%]">
         <motion.h2
           variants={fadeInUp}
           className="font-serif text-2xl font-bold text-primary sm:text-3xl"

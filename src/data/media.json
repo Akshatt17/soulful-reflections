@@ -59,47 +59,39 @@
   "video": [
     {
       "id": "1",
-      "slug": "guided-visualization",
-      "title": "Guided Visualization",
-      "description": "A journey through calming imagery to reduce stress.",
-      "duration": "15:00",
-      "category": "Visualization",
-      "thumbnail": "/placeholder.svg",
-      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      "publishedDate": "2024-01-12"
+      "slug": "male-depression",
+      "title": "How Men Disappear Into Depression",
+      "description": "The quiet, easily-missed ways depression shows up in men — and why it so often goes unspoken.",
+      "duration": "0:39",
+      "category": "Mental Health",
+      "orientation": "portrait",
+      "videoFile": "male-depression.mp4",
+      "poster": "male-depression.jpg",
+      "publishedDate": "2025-06-25"
     },
     {
       "id": "2",
-      "slug": "breath-work-basics",
-      "title": "Breath Work Basics",
-      "description": "Foundation techniques for relaxation and stress relief.",
-      "duration": "12:30",
-      "category": "Breathing",
-      "thumbnail": "/placeholder.svg",
-      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      "publishedDate": "2024-01-10"
+      "slug": "ocd",
+      "title": "OCD",
+      "description": "A short, honest look at what OCD really is — beyond the tidy-desk stereotypes.",
+      "duration": "0:27",
+      "category": "Mental Health",
+      "orientation": "portrait",
+      "videoFile": "ocd.mp4",
+      "poster": "ocd.jpg",
+      "publishedDate": "2025-06-18"
     },
     {
       "id": "3",
-      "slug": "yoga-for-anxiety",
-      "title": "Gentle Yoga for Anxiety",
-      "description": "Calming poses to soothe your nervous system.",
-      "duration": "20:00",
-      "category": "Movement",
-      "thumbnail": "/placeholder.svg",
-      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      "publishedDate": "2024-01-08"
-    },
-    {
-      "id": "4",
-      "slug": "sleep-meditation",
-      "title": "Sleep Meditation Journey",
-      "description": "Drift into peaceful sleep with this guided meditation.",
-      "duration": "25:00",
-      "category": "Sleep",
-      "thumbnail": "/placeholder.svg",
-      "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      "publishedDate": "2024-01-05"
+      "slug": "anhedonia",
+      "title": "Anhedonia",
+      "description": "When joy goes quiet: a brief reflection on why nothing feels enjoyable anymore.",
+      "duration": "0:09",
+      "category": "Understanding Emotions",
+      "orientation": "portrait",
+      "videoFile": "anhedonia.mp4",
+      "poster": "anhedonia.jpg",
+      "publishedDate": "2025-06-11"
     }
   ]
 }

@@ -8,7 +8,7 @@ import { fadeInUp } from "@/lib/motion-variants";
 /** Compact founder pane, kept left so the scene stays open on the right. */
 const AboutFounder = () => (
   <div className="px-4 py-16 sm:px-6 lg:px-16 lg:py-24">
-    <GlassPanel className="max-w-2xl p-8 sm:p-10 md:ml-[4%]">
+    <GlassPanel className="max-w-xl p-8 sm:p-10 md:ml-[4%]">
       <motion.p
         variants={fadeInUp}
         className="mb-6 text-[11px] uppercase tracking-[0.32em] text-primary"

@@ -4,6 +4,7 @@ import ArticleCard from "@/components/ArticleCard";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
 import articlesData from "@/data/articles.json";
+import { resolveArticleImage, resolveAuthorAvatar } from "@/lib/article-images";
 
 const ArticleDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -45,7 +46,7 @@ const ArticleDetail = () => {
           </Link>
           <div className="aspect-[21/9] rounded-2xl overflow-hidden shadow-elevated">
             <img
-              src={article.heroImage}
+              src={resolveArticleImage(article.heroImage)}
               alt={article.title}
               className="w-full h-full object-cover"
             />
@@ -105,7 +106,7 @@ const ArticleDetail = () => {
             <div className="mt-10 bg-card/50 rounded-2xl p-6 flex items-start gap-4">
               <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
                 <img
-                  src={article.author.avatar}
+                  src={resolveAuthorAvatar(article.author.avatar)}
                   alt={article.author.name}
                   className="w-full h-full object-cover"
                 />

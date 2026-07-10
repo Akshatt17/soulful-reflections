@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { resolveArticleImage } from "@/lib/article-images";
 
 interface ArticleCardProps {
   slug: string;
@@ -14,7 +15,7 @@ const ArticleCard = ({ slug, title, category, excerpt, heroImage, readTime }: Ar
     <article className="glass-panel glass-panel-hover overflow-hidden group">
       <div className="aspect-[4/3] overflow-hidden">
         <img
-          src={heroImage}
+          src={resolveArticleImage(heroImage)}
           alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"

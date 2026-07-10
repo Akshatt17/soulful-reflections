@@ -62,7 +62,8 @@ const SceneCanvas = ({
       <WaterSurface ripples={ripples} progress={progress} startTime={startTime} />
       <PetalField count={tier.petals} />
       <LightMotes count={tier.motes} />
-      {centerpiece && (
+      {/* Morphing centerpiece hidden pending redesign — remove `false &&` to restore. */}
+      {false && centerpiece && (
         <Centerpiece count={tier.centerpiece} progress={progress} onBeat={onBeat} />
       )}
       <PostFX dof={tier.dof} />

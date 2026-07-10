@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route } from  "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import IndexOld from "./pages/IndexOld";
 import About from "./pages/About";
@@ -11,7 +12,8 @@ import ArticleDetail from "./pages/ArticleDetail";
 import Tools from "./pages/Tools";
 import ToolAssessment from "./pages/ToolAssessment";
 import Media from "./pages/Media";
-import AudioDetail from "./pages/AudioDetail";
+// Audio reflections are temporarily removed from the site (kept for later):
+// import AudioDetail from "./pages/AudioDetail";
 import VideoDetail from "./pages/VideoDetail";
 import Resources from "./pages/Resources";
 import Contact from "./pages/Contact";
@@ -29,6 +31,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <HashRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/new-landing" element={<Index />} />
@@ -39,7 +42,8 @@ const App = () => (
           <Route path="/tools" element={<Tools />} />
           <Route path="/tools/:toolId" element={<ToolAssessment />} />
           <Route path="/media" element={<Media />} />
-          <Route path="/media/audio/:slug" element={<AudioDetail />} />
+          {/* Audio reflections are temporarily removed from the site (kept for later):
+          <Route path="/media/audio/:slug" element={<AudioDetail />} /> */}
           <Route path="/media/video/:slug" element={<VideoDetail />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/contact" element={<Contact />} />

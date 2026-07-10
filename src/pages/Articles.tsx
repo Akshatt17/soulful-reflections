@@ -93,7 +93,7 @@ const Articles = () => {
       </section>
 
       {/* Filter & Sort Bar */}
-      <section className="glass border-b border-border/40 sticky top-16 lg:top-20 z-40">
+      <section>
         <div className="container-custom px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             {/* Topic Filters */}

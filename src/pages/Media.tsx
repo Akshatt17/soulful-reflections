@@ -1,6 +1,8 @@
 import { useState, useMemo } from "react";
 import PageLayout from "@/components/PageLayout";
-import { AudioCard, VideoCard } from "@/components/MediaCard";
+import { VideoCard } from "@/components/MediaCard";
+// Audio reflections are temporarily removed from the site (kept for later):
+// import { AudioCard } from "@/components/MediaCard";
 import { Button } from "@/components/ui/button";
 import mediaData from "@/data/media.json";
 import { ImageReflectionsGallery } from "@/components/micro-reflections/images";
@@ -14,26 +16,28 @@ const Media = () => {
 
   // Extract unique categories
   const categories = useMemo(() => {
-    const audioCategories = mediaData.audio.map((a) => a.category);
+    // Audio categories omitted while audio reflections are disabled:
+    // const audioCategories = mediaData.audio.map((a) => a.category);
     const videoCategories = mediaData.video.map((v) => v.category);
-    return [...new Set([...audioCategories, ...videoCategories])];
+    return [...new Set([...videoCategories])];
   }, []);
 
-  // Filter media
-  const filteredAudio = useMemo(() => {
-    if (mediaType === "video" || mediaType === "images") return [];
-    return mediaData.audio.filter((item) => {
-      if (categoryFilter !== "all" && item.category !== categoryFilter) return false;
-      if (durationFilter !== "all") {
-        const mins = parseInt(item.duration.split(":")[0]);
-        if (durationFilter === "short" && mins >= 5) return false;
-        if (durationFilter === "medium" && (mins < 5 || mins >= 15)) return false;
-        if (durationFilter === "long" && mins < 15) return false;
-      }
-      return true;
-    });
-  }, [mediaType, categoryFilter, durationFilter]);
+  // Audio reflections are temporarily removed from the site (kept for later):
+  // const filteredAudio = useMemo(() => {
+  //   if (mediaType === "video" || mediaType === "images") return [];
+  //   return mediaData.audio.filter((item) => {
+  //     if (categoryFilter !== "all" && item.category !== categoryFilter) return false;
+  //     if (durationFilter !== "all") {
+  //       const mins = parseInt(item.duration.split(":")[0]);
+  //       if (durationFilter === "short" && mins >= 5) return false;
+  //       if (durationFilter === "medium" && (mins < 5 || mins >= 15)) return false;
+  //       if (durationFilter === "long" && mins < 15) return false;
+  //     }
+  //     return true;
+  //   });
+  // }, [mediaType, categoryFilter, durationFilter]);
 
+  // Filter media
   const filteredVideo = useMemo(() => {
     if (mediaType === "audio" || mediaType === "images") return [];
     return mediaData.video.filter((item) => {
@@ -60,14 +64,14 @@ const Media = () => {
               Micro Reflections
             </h1>
             <p className="text-lg text-foreground/80">
-              Brief moments of mindfulness through audio, video, and visual content designed to support your daily wellbeing.
+              Brief moments of mindfulness through video and visual content designed to support your daily wellbeing.
             </p>
           </div>
         </div>
       </section>
 
       {/* Filters */}
-      <section className="glass border-b border-border/40">
+      <section>
         <div className="container-custom px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Type Filter */}
@@ -79,6 +83,7 @@ const Media = () => {
               >
                 All
               </Button>
+              {/* Audio reflections are temporarily removed from the site (kept for later):
               <Button
                 variant={mediaType === "audio" ? "hero" : "outline"}
                 size="sm"
@@ -86,6 +91,7 @@ const Media = () => {
               >
                 Audio
               </Button>
+              */}
               <Button
                 variant={mediaType === "video" ? "hero" : "outline"}
                 size="sm"
@@ -132,7 +138,7 @@ const Media = () => {
         </div>
       </section>
 
-      {/* Audio Section */}
+      {/* Audio reflections are temporarily removed from the site (kept for later):
       {filteredAudio.length > 0 && (
         <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8">
@@ -153,6 +159,7 @@ const Media = () => {
           </div>
         </section>
       )}
+      */}
 
       {/* Video Section */}
       {filteredVideo.length > 0 && (
@@ -168,7 +175,7 @@ const Media = () => {
                   slug={video.slug}
                   title={video.title}
                   description={video.description}
-                  thumbnail={video.thumbnail}
+                  poster={video.poster}
                   duration={video.duration}
                 />
               ))}
@@ -190,7 +197,7 @@ const Media = () => {
       )}
 
       {/* Empty State */}
-      {filteredAudio.length === 0 && filteredVideo.length === 0 && !showImages && (
+      {filteredVideo.length === 0 && !showImages && (
         <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-foreground/80">No media matches your current filters.</p>
