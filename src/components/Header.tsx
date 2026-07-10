@@ -23,7 +23,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 lg:h-20 px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link to="/" className="font-serif text-xl lg:text-2xl font-semibold text-foreground">
-            Soulful Reflections
+            The Velvet Mind
           </Link>
 
           {/* Desktop Navigation */}

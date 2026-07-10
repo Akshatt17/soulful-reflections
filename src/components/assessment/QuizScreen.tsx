@@ -50,7 +50,7 @@ const QuizScreen = ({
   return (
     <div>
       <div className="radial-tint text-center mb-8 py-4">
-        <p className="text-sm text-foreground/70 mb-2">Soulful Reflections</p>
+        <p className="text-sm text-foreground/70 mb-2">The Velvet Mind</p>
         <h1 className="font-serif text-2xl lg:text-3xl font-bold text-primary mb-2">
           {config.quizHeader}
         </h1>

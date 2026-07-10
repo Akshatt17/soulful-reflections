@@ -64,7 +64,7 @@ const ScoringDialog = ({ config }: ScoringDialogProps) => {
                   {band.description}
                 </p>
                 <p className="text-sm text-primary italic">
-                  <strong>Soulful Reflection:</strong> {band.reflection}
+                  <strong>Reflection:</strong> {band.reflection}
                 </p>
               </div>
             ))}

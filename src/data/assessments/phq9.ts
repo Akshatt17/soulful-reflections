@@ -94,7 +94,7 @@ export const phq9Config: AssessmentConfig = {
   ],
   
   intro: {
-    subtitle: "Soulful Reflections",
+    subtitle: "The Velvet Mind",
     title: "PHQ-9: Gentle Check-In for Low Mood",
     tagline: "A self-reflection tool for the past 2 weeks",
     about: "This questionnaire helps you notice patterns in mood, energy, sleep, and self-worth over the past two weeks. It is not a diagnosis. It is a screening and reflection tool that can guide you toward support if needed.",

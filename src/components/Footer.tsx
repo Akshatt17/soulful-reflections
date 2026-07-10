@@ -27,7 +27,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div>
             <h3 className="mb-3 font-serif text-2xl font-semibold text-foreground">
-              Soulful Reflections
+              The Velvet Mind
             </h3>
             <p className="text-sm leading-relaxed text-foreground/75">
               A sanctuary for healing, reflection, and personal growth.
@@ -86,7 +86,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <p className="mt-6 text-center text-xs text-foreground/50">
-          © {new Date().getFullYear()} Soulful Reflections. All rights reserved.
+          © {new Date().getFullYear()} The Velvet Mind. All rights reserved.
         </p>
       </div>
     </footer>

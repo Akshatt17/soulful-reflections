@@ -65,7 +65,7 @@ const ResultsScreen = ({
       </div>
 
       <h1 className="font-serif text-3xl font-bold text-primary mb-2">
-        Your Reflection Results
+        Your Results
       </h1>
       <p className="text-foreground/75 mb-8">
         <Lock className="w-4 h-4 inline mr-1" />
@@ -90,11 +90,11 @@ const ResultsScreen = ({
         </div>
       </div>
 
-      {/* Soulful Reflection */}
+      {/* Reflection */}
       <div className="glass-panel p-6 mb-6 text-left">
         <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
           <Heart className="w-5 h-5 text-forest" />
-          Soulful Reflection
+          Reflection
         </h3>
         <p className="text-foreground/80 italic">{scoreInterpretation.reflection}</p>
       </div>

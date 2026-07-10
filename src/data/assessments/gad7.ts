@@ -81,7 +81,7 @@ export const gad7Config: AssessmentConfig = {
   ],
   
   intro: {
-    subtitle: "Soulful Reflections",
+    subtitle: "The Velvet Mind",
     title: "GAD-7: A Gentle Check-In for Anxiety",
     tagline: "Generalized Anxiety Disorder-7 (GAD-7)",
     about: "This short self-reflection tool helps you notice how often anxiety-related feelings and thoughts have been showing up in your life over the last 2 weeks.",

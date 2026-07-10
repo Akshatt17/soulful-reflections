@@ -93,8 +93,8 @@ const Privacy = () => (
               <div className="prose prose-lg max-w-none text-foreground/80">
                 <p>
                   If you have any questions about this Privacy Policy, please contact us at{" "}
-                  <a href="mailto:privacy@soulfulreflections.com" className="text-primary hover:underline">
-                    privacy@soulfulreflections.com
+                  <a href="mailto:privacy@thevelvetmind.com" className="text-primary hover:underline">
+                    privacy@thevelvetmind.com
                   </a>
                 </p>
               </div>

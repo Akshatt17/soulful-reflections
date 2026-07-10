@@ -43,10 +43,10 @@ const LandingHero = () => {
               className="font-serif leading-[0.92] tracking-tight text-foreground"
             >
               <span className="block text-[clamp(2.75rem,11vw,9rem)] font-light italic">
-                Soulful
+                The Velvet
               </span>
-              <span className="block text-[clamp(2.5rem,12vw,11rem)] font-bold uppercase tracking-tighter text-primary">
-                Reflections
+              <span className="block text-[clamp(4rem,18vw,16rem)] font-bold uppercase tracking-tight text-primary">
+                Mind
               </span>
             </motion.h1>
           </Reflected>

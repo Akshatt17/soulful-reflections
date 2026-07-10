@@ -13,7 +13,7 @@ const AboutFounder = () => (
         variants={fadeInUp}
         className="mb-6 text-[11px] uppercase tracking-[0.32em] text-primary"
       >
-        About Soulful Reflections
+        About The Velvet Mind
       </motion.p>
 
       <motion.p

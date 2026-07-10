@@ -26,7 +26,7 @@ const Index = () => {
               <ReflectionOfWeek />
             </DepthSection>
 
-            <DepthSection ariaLabel="About Soulful Reflections">
+            <DepthSection ariaLabel="About The Velvet Mind">
               <AboutFounder />
             </DepthSection>
 

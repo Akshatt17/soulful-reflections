@@ -11,14 +11,14 @@ const About = () => {
           <div className="max-w-4xl mx-auto">
             <div className="radial-tint text-center py-6 animate-fade-in-up">
               <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-primary leading-tight text-balance mb-8">
-                About Soulful Reflections
+                About The Velvet Mind
               </h1>
             </div>
             <div className="glass-panel p-8 sm:p-10 space-y-6 text-lg text-foreground/85 leading-relaxed animate-fade-in-up" style={{
             animationDelay: "0.1s"
           }}>
               <p>
-                Soulful Reflections is a space for people who think deeply, feel intensely, and often find themselves searching for meaning in their emotions. It is meant for moments when you don't need answers immediately—but need understanding first.
+                The Velvet Mind is a space for people who think deeply, feel intensely, and often find themselves searching for meaning in their emotions. It is meant for moments when you don't need answers immediately—but need understanding first.
               </p>
               <p>
                 Here, thoughts are explored without rushing, emotions are acknowledged without labeling them as right or wrong, and the mind is seen as something to be understood rather than fixed. It is a place to read slowly, reflect quietly, and reconnect with yourself in a way that feels grounding and honest.
@@ -59,7 +59,7 @@ const About = () => {
                 What We Believe
               </span>
               <p className="text-lg text-foreground mt-4 mb-6">
-                At Soulful Reflections, we believe that:
+                At The Velvet Mind, we believe that:
               </p>
               <ul className="space-y-5">
                 <li className="flex items-start gap-4">
@@ -187,7 +187,7 @@ const About = () => {
               </div>
 
               <p className="text-foreground/80 leading-relaxed">
-                With years of clinical experience and a deep commitment to destigmatizing mental health, Dr. Niharika created Soulful Reflections to extend support beyond the consultation room.
+                With years of clinical experience and a deep commitment to destigmatizing mental health, Dr. Niharika created The Velvet Mind to extend support beyond the consultation room.
               </p>
             </div>
           </div>
@@ -209,7 +209,7 @@ const About = () => {
             <div className="glass-panel p-8 lg:p-12">
               <div className="prose prose-lg max-w-none text-foreground/85 space-y-6">
                 <p className="text-xl text-foreground font-medium leading-relaxed">
-                  Soulful Reflections grew from something I kept witnessing again and again—people struggling to find words for what they were feeling inside.
+                  The Velvet Mind grew from something I kept witnessing again and again—people struggling to find words for what they were feeling inside.
                 </p>
                 <p>
                   As a psychiatrist, I often noticed that long before any diagnosis entered the conversation, people wanted something much simpler and much deeper: to be heard, to feel understood, and to make sense of their emotions without fear or self-judgment. Many carried questions they had never voiced out loud. Many were afraid of labels, yet quietly searching for clarity and reassurance.
@@ -221,7 +221,7 @@ const About = () => {
                 {/* Pull Quote */}
                 <blockquote className="border-l-4 border-primary pl-6 my-8 py-2">
                   <p className="text-xl font-serif text-primary italic">
-                    "I created Soulful Reflections with the hope that you feel a little less afraid of your own mind."
+                    "I created The Velvet Mind with the hope that you feel a little less afraid of your own mind."
                   </p>
                 </blockquote>
 

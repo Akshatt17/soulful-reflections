@@ -127,7 +127,7 @@ export const mdqConfig: AssessmentConfig = {
   ],
 
   intro: {
-    subtitle: "Soulful Reflections",
+    subtitle: "The Velvet Mind",
     title: "MDQ – Mood Disorder Questionnaire (Reflective Mood Check-In)",
     tagline: "A gentle note before you begin",
     about: "This self-check is written in a softer, reflective tone based on the Mood Disorder Questionnaire (MDQ), a commonly used screening tool for possible bipolar spectrum symptoms. It is not a diagnosis. A positive screen simply means it may be worth having a professional evaluation—especially if mood shifts have impacted your life, relationships, sleep, or decisions.",

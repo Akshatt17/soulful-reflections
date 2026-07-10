@@ -98,7 +98,7 @@ const Disclaimer = () => (
               </h2>
               <div className="prose prose-lg max-w-none text-foreground/80">
                 <p>
-                  Soulful Reflections and its creators are not liable for any damages or negative 
+                  The Velvet Mind and its creators are not liable for any damages or negative 
                   consequences arising from the use of information provided on this website. 
                   Use of this site is at your own risk.
                 </p>
