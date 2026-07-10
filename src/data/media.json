@@ -65,8 +65,7 @@
       "duration": "0:39",
       "category": "Mental Health",
       "orientation": "portrait",
-      "videoFile": "male-depression.mp4",
-      "poster": "male-depression.jpg",
+      "youtubeId": "REPLACE_WITH_YOUTUBE_ID",
       "publishedDate": "2025-06-25"
     },
     {
@@ -77,8 +76,7 @@
       "duration": "0:27",
       "category": "Mental Health",
       "orientation": "portrait",
-      "videoFile": "ocd.mp4",
-      "poster": "ocd.jpg",
+      "youtubeId": "REPLACE_WITH_YOUTUBE_ID",
       "publishedDate": "2025-06-18"
     },
     {
@@ -89,8 +87,7 @@
       "duration": "0:09",
       "category": "Understanding Emotions",
       "orientation": "portrait",
-      "videoFile": "anhedonia.mp4",
-      "poster": "anhedonia.jpg",
+      "youtubeId": "REPLACE_WITH_YOUTUBE_ID",
       "publishedDate": "2025-06-11"
     }
   ]

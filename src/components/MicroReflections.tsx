@@ -3,7 +3,7 @@ import { ArrowRight, PlayCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import GlassPanel from "@/components/landing/GlassPanel";
 import { fadeInUp } from "@/lib/motion-variants";
-import { resolveVideoPoster } from "@/lib/video-assets";
+import { youtubeThumb } from "@/lib/youtube";
 import mediaData from "@/data/media.json";
 
 // Audio reflections are temporarily removed from the site (kept for later):
@@ -19,7 +19,7 @@ import mediaData from "@/data/media.json";
 const videoReflections = mediaData.video.slice(0, 3).map((v) => ({
   slug: v.slug,
   title: v.title,
-  poster: v.poster,
+  youtubeId: v.youtubeId,
 }));
 
 /** One compact right-aligned media pane; the full library lives at /media. */
@@ -43,9 +43,9 @@ const MicroReflections = () => {
               to={`/media/video/${video.slug}`}
               className="group block overflow-hidden rounded-xl"
             >
-              <div className="relative aspect-[9/16]">
+              <div className="relative aspect-video">
                 <img
-                  src={resolveVideoPoster(video.poster)}
+                  src={youtubeThumb(video.youtubeId)}
                   alt={video.title}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />

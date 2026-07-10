@@ -3,7 +3,7 @@ import PageLayout from "@/components/PageLayout";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock } from "lucide-react";
 import mediaData from "@/data/media.json";
-import { resolveVideoFile, resolveVideoPoster } from "@/lib/video-assets";
+import { youtubeEmbedUrl } from "@/lib/youtube";
 
 const VideoDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -37,16 +37,21 @@ const VideoDetail = () => {
               Back to Media Library
             </Link>
 
-            {/* Video Player — portrait reel, don't letterbox */}
-            <div className="mx-auto mb-8 w-full max-w-sm aspect-[9/16] rounded-2xl overflow-hidden shadow-elevated bg-foreground/90">
-              <video
-                src={resolveVideoFile(video.videoFile)}
-                poster={resolveVideoPoster(video.poster)}
+            {/* Video Player — YouTube embed; frame follows orientation */}
+            <div
+              className={`mx-auto mb-8 w-full overflow-hidden rounded-2xl shadow-elevated bg-foreground/90 ${
+                video.orientation === "portrait"
+                  ? "max-w-sm aspect-[9/16]"
+                  : "max-w-3xl aspect-video"
+              }`}
+            >
+              <iframe
+                src={youtubeEmbedUrl(video.youtubeId)}
                 title={video.title}
-                className="w-full h-full object-contain"
-                controls
-                playsInline
-                preload="metadata"
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
               />
             </div>
 

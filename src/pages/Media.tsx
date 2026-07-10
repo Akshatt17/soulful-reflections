@@ -175,7 +175,7 @@ const Media = () => {
                   slug={video.slug}
                   title={video.title}
                   description={video.description}
-                  poster={video.poster}
+                  youtubeId={video.youtubeId}
                   duration={video.duration}
                 />
               ))}

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Play, PlayCircle } from "lucide-react";
-import { resolveVideoPoster } from "@/lib/video-assets";
+import { youtubeThumb } from "@/lib/youtube";
 
 interface AudioCardProps {
   slug: string;
@@ -33,19 +33,19 @@ interface VideoCardProps {
   slug: string;
   title: string;
   description: string;
-  poster: string;
+  youtubeId: string;
   duration?: string;
 }
 
-export const VideoCard = ({ slug, title, description, poster, duration }: VideoCardProps) => {
+export const VideoCard = ({ slug, title, description, youtubeId, duration }: VideoCardProps) => {
   return (
     <Link
       to={`/media/video/${slug}`}
       className="glass-panel glass-panel-hover overflow-hidden cursor-pointer group block"
     >
-      <div className="relative aspect-[9/16]">
+      <div className="relative aspect-video">
         <img
-          src={resolveVideoPoster(poster)}
+          src={youtubeThumb(youtubeId)}
           alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
