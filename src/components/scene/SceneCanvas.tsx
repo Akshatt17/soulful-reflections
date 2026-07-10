@@ -5,7 +5,8 @@ import WaterSurface from "@/components/scene/WaterSurface";
 import CameraRig from "@/components/scene/CameraRig";
 import PetalField from "@/components/scene/PetalField";
 import LightMotes from "@/components/scene/LightMotes";
-import Centerpiece from "@/components/scene/Centerpiece";
+// Morphing centerpiece hidden pending redesign — restore this import with the block below.
+// import Centerpiece from "@/components/scene/Centerpiece";
 import PostFX from "@/components/scene/PostFX";
 import {
   CAMERA_START,
@@ -62,10 +63,11 @@ const SceneCanvas = ({
       <WaterSurface ripples={ripples} progress={progress} startTime={startTime} />
       <PetalField count={tier.petals} />
       <LightMotes count={tier.motes} />
-      {/* Morphing centerpiece hidden pending redesign — remove `false &&` to restore. */}
-      {false && centerpiece && (
+      {/* Morphing centerpiece hidden pending redesign. Restore by uncommenting the
+          import above and this block (props `centerpiece`/`onBeat` are still passed in).
+      {centerpiece && (
         <Centerpiece count={tier.centerpiece} progress={progress} onBeat={onBeat} />
-      )}
+      )} */}
       <PostFX dof={tier.dof} />
     </Canvas>
   );
