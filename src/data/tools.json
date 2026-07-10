@@ -2,7 +2,7 @@
   "tools": [
     {
       "id": "phq9",
-      "title": "PHQ-9 Self-Reflection Questionnaire",
+      "title": "PHQ-9 Questionnaire",
       "description": "A brief set of questions to help you reflect on how you've been feeling emotionally over the past two weeks.",
       "icon": "Heart",
       "color": "sage",

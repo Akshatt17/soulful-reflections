@@ -4,13 +4,13 @@ import GlassPanel from "@/components/landing/GlassPanel";
 import { fadeInUp } from "@/lib/motion-variants";
 
 /** Leans left while the dewdrop drifts down the right side of the scene. */
-const ReflectionOfWeek = () => (
+const QuoteOfWeek = () => (
   <div className="px-4 py-16 sm:px-6 lg:px-16 lg:py-24">
     <GlassPanel className="max-w-xl p-8 sm:p-10 md:ml-[4%]">
       <motion.div variants={fadeInUp} className="mb-6 flex items-center gap-3">
         <Sparkles className="h-4 w-4 text-primary" aria-hidden="true" />
         <p className="text-[11px] uppercase tracking-[0.32em] text-primary">
-          Reflection for the week
+          Quote of the week
         </p>
       </motion.div>
       <motion.p
@@ -30,4 +30,4 @@ const ReflectionOfWeek = () => (
   </div>
 );
 
-export default ReflectionOfWeek;
+export default QuoteOfWeek;

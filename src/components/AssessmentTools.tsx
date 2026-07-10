@@ -8,23 +8,23 @@ const tools = [
   {
     icon: Heart,
     id: "phq9",
-    title: "PHQ-9 Self-Reflection Questionnaire",
+    title: "PHQ-9 Questionnaire",
     description: "A brief set of questions to help you reflect on how you've been feeling emotionally over the past two weeks.",
-    link: "Begin Reflection →",
+    link: "Start Assessment →",
   },
   {
     icon: Brain,
     id: "gad7",
     title: "GAD-7: A Gentle Check-In for Anxiety",
     description: "A short self-reflection tool to help you notice how often anxiety-related feelings and thoughts have been showing up.",
-    link: "Begin Reflection →",
+    link: "Start Assessment →",
   },
   {
     icon: Activity,
     id: "pss",
     title: "PSS — Perceived Stress Scale",
     description: "A reflective tool to help you notice how stressful life has felt recently over the last month.",
-    link: "Begin Reflection →",
+    link: "Start Assessment →",
   },
 ];
 

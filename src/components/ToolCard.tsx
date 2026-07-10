@@ -41,7 +41,7 @@ interface ToolCardProps {
   ctaText?: string;
 }
 
-const ToolCard = ({ id, title, description, icon, duration, ctaText = "Begin Reflection" }: ToolCardProps) => {
+const ToolCard = ({ id, title, description, icon, duration, ctaText = "Start Assessment" }: ToolCardProps) => {
   const IconComponent = iconMap[icon] || Activity;
 
   return (

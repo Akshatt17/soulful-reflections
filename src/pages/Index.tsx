@@ -9,7 +9,7 @@ import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
 import ReflectionScene from "@/components/scene/ReflectionScene";
 import DepthSection from "@/components/landing/DepthSection";
 import LandingHero from "@/components/landing/LandingHero";
-import ReflectionOfWeek from "@/components/landing/ReflectionOfWeek";
+import QuoteOfWeek from "@/components/landing/QuoteOfWeek";
 import AboutFounder from "@/components/landing/AboutFounder";
 
 const Index = () => {
@@ -22,8 +22,8 @@ const Index = () => {
           <main>
             <LandingHero />
 
-            <DepthSection ariaLabel="Reflection for the week">
-              <ReflectionOfWeek />
+            <DepthSection ariaLabel="Quote of the week">
+              <QuoteOfWeek />
             </DepthSection>
 
             <DepthSection ariaLabel="About The Velvet Mind">

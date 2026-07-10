@@ -8,7 +8,7 @@ const ReflectionSection = () => {
         {/* Section Header */}
         <div className="text-center mb-14">
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-primary mb-4">
-            Reflection of the Week
+            Quote of the Week
           </h2>
           <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
         </div>

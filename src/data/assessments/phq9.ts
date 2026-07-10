@@ -2,7 +2,7 @@ import { AssessmentConfig } from "@/types/assessment";
 
 export const phq9Config: AssessmentConfig = {
   id: "phq9",
-  title: "PHQ-9 Self-Reflection Questionnaire",
+  title: "PHQ-9 Questionnaire",
   shortTitle: "PHQ-9: Gentle Check-In for Low Mood",
   description: "A brief set of questions to help you reflect on how you've been feeling emotionally over the past two weeks.",
   icon: "Heart",
