@@ -1,6 +1,6 @@
 // Static hero-image imports so Vite fingerprints them and they resolve under the
 // GitHub Pages base path. `articles.json` stores only the filename (the map key),
-// mirroring the imageReflections.json -> imagePath convention.
+// mirroring the galleryImages.json -> imagePath convention.
 import emotionsUnleashed from "@/assets/articles/emotions-unleashed.jpeg";
 import redefiningLove from "@/assets/articles/redefining-love.jpeg";
 import whenTheHealerNeedsHealing from "@/assets/articles/when-the-healer-needs-healing.jpeg";

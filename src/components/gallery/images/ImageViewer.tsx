@@ -7,15 +7,15 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ImageReflection } from "@/types/imageReflection";
+import { GalleryImage } from "@/types/galleryImage";
 
-// Import all reflection images
-import insomniaImg from "@/assets/reflections/insomnia-disorder.jpg";
-import bddImg from "@/assets/reflections/body-dysmorphic-disorder.jpg";
-import bipolarImg from "@/assets/reflections/bipolar-disorder.jpg";
-import ptsdImg from "@/assets/reflections/ptsd.jpg";
-import anxietyImg from "@/assets/reflections/anxiety-disorders.jpg";
-import ocdImg from "@/assets/reflections/ocd.jpg";
+// Import all image images
+import insomniaImg from "@/assets/gallery/insomnia-disorder.jpg";
+import bddImg from "@/assets/gallery/body-dysmorphic-disorder.jpg";
+import bipolarImg from "@/assets/gallery/bipolar-disorder.jpg";
+import ptsdImg from "@/assets/gallery/ptsd.jpg";
+import anxietyImg from "@/assets/gallery/anxiety-disorders.jpg";
+import ocdImg from "@/assets/gallery/ocd.jpg";
 
 // Map image paths to imports
 const imageMap: Record<string, string> = {
@@ -27,8 +27,8 @@ const imageMap: Record<string, string> = {
   "ocd.jpg": ocdImg,
 };
 
-interface ImageReflectionViewerProps {
-  reflection: ImageReflection | null;
+interface ImageViewerProps {
+  image: GalleryImage | null;
   isOpen: boolean;
   onClose: () => void;
   onPrevious: () => void;
@@ -37,18 +37,18 @@ interface ImageReflectionViewerProps {
   hasNext: boolean;
 }
 
-const ImageReflectionViewer = ({
-  reflection,
+const ImageViewer = ({
+  image,
   isOpen,
   onClose,
   onPrevious,
   onNext,
   hasPrevious,
   hasNext,
-}: ImageReflectionViewerProps) => {
-  if (!reflection) return null;
+}: ImageViewerProps) => {
+  if (!image) return null;
 
-  const imageSrc = imageMap[reflection.imagePath] || "";
+  const imageSrc = imageMap[image.imagePath] || "";
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft" && hasPrevious) {
@@ -65,7 +65,7 @@ const ImageReflectionViewer = ({
         onKeyDown={handleKeyDown}
       >
         <DialogHeader className="sr-only">
-          <DialogTitle>{reflection.title}</DialogTitle>
+          <DialogTitle>{image.title}</DialogTitle>
         </DialogHeader>
 
         {/* Scrollable container for entire content */}
@@ -76,7 +76,7 @@ const ImageReflectionViewer = ({
               <div className="relative">
                 <img
                   src={imageSrc}
-                  alt={reflection.title}
+                  alt={image.title}
                   className="w-full max-h-[45vh] object-contain"
                 />
                 {/* Decorative gradient overlay at bottom */}
@@ -91,7 +91,7 @@ const ImageReflectionViewer = ({
                   onClick={onPrevious}
                   disabled={!hasPrevious}
                   className="h-14 w-14 rounded-full bg-card/90 hover:bg-card shadow-elevated ml-3 disabled:opacity-30 backdrop-blur-sm border border-border/50"
-                  aria-label="Previous reflection"
+                  aria-label="Previous image"
                 >
                   <ChevronLeft className="h-7 w-7 text-primary" />
                 </Button>
@@ -103,7 +103,7 @@ const ImageReflectionViewer = ({
                   onClick={onNext}
                   disabled={!hasNext}
                   className="h-14 w-14 rounded-full bg-card/90 hover:bg-card shadow-elevated mr-3 disabled:opacity-30 backdrop-blur-sm border border-border/50"
-                  aria-label="Next reflection"
+                  aria-label="Next image"
                 >
                   <ChevronRight className="h-7 w-7 text-primary" />
                 </Button>
@@ -116,20 +116,20 @@ const ImageReflectionViewer = ({
               <div className="flex items-center gap-3 mb-5">
                 <div className="h-px flex-1 bg-gradient-to-r from-primary/30 to-transparent max-w-12" />
                 <span className="inline-flex items-center px-4 py-1.5 text-sm font-semibold bg-gradient-to-r from-primary/15 to-sage/15 text-primary rounded-full border border-primary/20">
-                  {reflection.category}
+                  {image.category}
                 </span>
                 <div className="h-px flex-1 bg-gradient-to-l from-primary/30 to-transparent max-w-12" />
               </div>
 
               {/* Title with decorative underline */}
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-foreground mb-2 text-center">
-                {reflection.title}
+                {image.title}
               </h2>
               <div className="w-20 h-1 bg-gradient-to-r from-primary via-sage to-accent rounded-full mx-auto mb-6" />
 
               {/* Full text content with styled paragraphs */}
               <div className="prose prose-lg max-w-none">
-                {reflection.fullText.split("\n\n").map((paragraph, index) => (
+                {image.fullText.split("\n\n").map((paragraph, index) => (
                   <p
                     key={index}
                     className="text-muted-foreground leading-relaxed mb-4 last:mb-0 text-base sm:text-lg"
@@ -153,4 +153,4 @@ const ImageReflectionViewer = ({
   );
 };
 
-export default ImageReflectionViewer;
+export default ImageViewer;

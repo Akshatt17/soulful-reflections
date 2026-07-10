@@ -1,28 +1,28 @@
 import { useState, useMemo } from "react";
 import PageLayout from "@/components/PageLayout";
 import { VideoCard } from "@/components/MediaCard";
-// Audio reflections are temporarily removed from the site (kept for later):
+// Audio pieces are temporarily removed from the site (kept for later):
 // import { AudioCard } from "@/components/MediaCard";
 import { Button } from "@/components/ui/button";
 import mediaData from "@/data/media.json";
-import { ImageReflectionsGallery } from "@/components/micro-reflections/images";
+import { ImageGallery } from "@/components/gallery/images";
 
 type MediaType = "all" | "audio" | "video" | "images";
 
-const Media = () => {
+const Gallery = () => {
   const [mediaType, setMediaType] = useState<MediaType>("all");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [durationFilter, setDurationFilter] = useState<string>("all");
 
   // Extract unique categories
   const categories = useMemo(() => {
-    // Audio categories omitted while audio reflections are disabled:
+    // Audio categories omitted while audio pieces are disabled:
     // const audioCategories = mediaData.audio.map((a) => a.category);
     const videoCategories = mediaData.video.map((v) => v.category);
     return [...new Set([...videoCategories])];
   }, []);
 
-  // Audio reflections are temporarily removed from the site (kept for later):
+  // Audio pieces are temporarily removed from the site (kept for later):
   // const filteredAudio = useMemo(() => {
   //   if (mediaType === "video" || mediaType === "images") return [];
   //   return mediaData.audio.filter((item) => {
@@ -61,7 +61,7 @@ const Media = () => {
         <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
           <div className="radial-tint mx-auto max-w-2xl py-6">
             <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
-              Micro Reflections
+              Gallery
             </h1>
             <p className="text-lg text-foreground/80">
               Brief moments of mindfulness through video and visual content designed to support your daily wellbeing.
@@ -83,7 +83,7 @@ const Media = () => {
               >
                 All
               </Button>
-              {/* Audio reflections are temporarily removed from the site (kept for later):
+              {/* Audio pieces are temporarily removed from the site (kept for later):
               <Button
                 variant={mediaType === "audio" ? "hero" : "outline"}
                 size="sm"
@@ -138,12 +138,12 @@ const Media = () => {
         </div>
       </section>
 
-      {/* Audio reflections are temporarily removed from the site (kept for later):
+      {/* Audio pieces are temporarily removed from the site (kept for later):
       {filteredAudio.length > 0 && (
         <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8">
             <h2 className="radial-tint inline-block font-serif text-2xl font-bold text-primary mb-8 px-4 py-2">
-              Audio Reflections
+              Audio
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
               {filteredAudio.map((audio) => (
@@ -166,7 +166,7 @@ const Media = () => {
         <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8">
             <h2 className="radial-tint inline-block font-serif text-2xl font-bold text-primary mb-8 px-4 py-2">
-              Video Reflections
+              Videos
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredVideo.map((video) => (
@@ -184,14 +184,14 @@ const Media = () => {
         </section>
       )}
 
-      {/* Image Reflections Section */}
+      {/* Images Section */}
       {showImages && (
         <section className="section-padding">
           <div className="container-custom px-4 sm:px-6 lg:px-8">
             <h2 className="radial-tint inline-block font-serif text-2xl font-bold text-primary mb-8 px-4 py-2">
-              Image Reflections
+              Images
             </h2>
-            <ImageReflectionsGallery columns={3} />
+            <ImageGallery columns={3} />
           </div>
         </section>
       )}
@@ -219,4 +219,4 @@ const Media = () => {
   );
 };
 
-export default Media;
+export default Gallery;

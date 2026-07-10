@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AssessmentTools from "@/components/AssessmentTools";
 import LatestArticles from "@/components/LatestArticles";
-import MicroReflections from "@/components/MicroReflections";
+import GalleryPreview from "@/components/GalleryPreview";
 import Newsletter from "@/components/Newsletter";
 import SmoothScrollProvider from "@/providers/SmoothScrollProvider";
 import ReflectionScene from "@/components/scene/ReflectionScene";
@@ -38,8 +38,8 @@ const Index = () => {
               <LatestArticles />
             </DepthSection>
 
-            <DepthSection ariaLabel="Micro-reflections">
-              <MicroReflections />
+            <DepthSection ariaLabel="Gallery">
+              <GalleryPreview />
             </DepthSection>
 
             <DepthSection ariaLabel="Newsletter">

@@ -12,7 +12,7 @@ interface AudioCardProps {
 export const AudioCard = ({ slug, title, description, duration }: AudioCardProps) => {
   return (
     <Link
-      to={`/media/audio/${slug}`}
+      to={`/gallery/audio/${slug}`}
       className="glass-panel glass-panel-hover flex items-center gap-4 p-5 cursor-pointer group"
     >
       <button className="w-12 h-12 bg-primary rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-200">
@@ -40,7 +40,7 @@ interface VideoCardProps {
 export const VideoCard = ({ slug, title, description, youtubeId, duration }: VideoCardProps) => {
   return (
     <Link
-      to={`/media/video/${slug}`}
+      to={`/gallery/video/${slug}`}
       className="glass-panel glass-panel-hover overflow-hidden cursor-pointer group block"
     >
       <div className="relative aspect-video">

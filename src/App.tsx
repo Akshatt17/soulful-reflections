@@ -11,8 +11,8 @@ import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
 import Tools from "./pages/Tools";
 import ToolAssessment from "./pages/ToolAssessment";
-import Media from "./pages/Media";
-// Audio reflections are temporarily removed from the site (kept for later):
+import Gallery from "./pages/Gallery";
+// Audio pieces are temporarily removed from the site (kept for later):
 // import AudioDetail from "./pages/AudioDetail";
 import VideoDetail from "./pages/VideoDetail";
 import Resources from "./pages/Resources";
@@ -41,10 +41,10 @@ const App = () => (
           <Route path="/articles/:slug" element={<ArticleDetail />} />
           <Route path="/tools" element={<Tools />} />
           <Route path="/tools/:toolId" element={<ToolAssessment />} />
-          <Route path="/media" element={<Media />} />
-          {/* Audio reflections are temporarily removed from the site (kept for later):
-          <Route path="/media/audio/:slug" element={<AudioDetail />} /> */}
-          <Route path="/media/video/:slug" element={<VideoDetail />} />
+          <Route path="/gallery" element={<Gallery />} />
+          {/* Audio pieces are temporarily removed from the site (kept for later):
+          <Route path="/gallery/audio/:slug" element={<AudioDetail />} /> */}
+          <Route path="/gallery/video/:slug" element={<VideoDetail />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />

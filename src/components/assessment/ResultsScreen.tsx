@@ -230,7 +230,7 @@ const ResultsScreen = ({
             <span className="text-foreground">Explore related articles</span>
           </Link>
           <Link 
-            to="/media" 
+            to="/gallery" 
             className="flex items-center gap-3 p-3 bg-card/50 rounded-xl hover:bg-primary/10 transition-colors"
           >
             <Eye className="w-5 h-5 text-primary" />

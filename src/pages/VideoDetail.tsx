@@ -16,7 +16,7 @@ const VideoDetail = () => {
           <h1 className="font-serif text-3xl font-bold text-primary mb-4">
             Video Not Found
           </h1>
-          <Link to="/media">
+          <Link to="/gallery">
             <Button variant="hero">Back to Media</Button>
           </Link>
         </div>
@@ -30,7 +30,7 @@ const VideoDetail = () => {
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <Link
-              to="/media"
+              to="/gallery"
               className="inline-flex items-center gap-2 text-foreground/70 hover:text-primary transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />

@@ -41,7 +41,7 @@ const AudioDetail = () => {
           <h1 className="font-serif text-3xl font-bold text-primary mb-4">
             Audio Not Found
           </h1>
-          <Link to="/media">
+          <Link to="/gallery">
             <Button variant="hero">Back to Media</Button>
           </Link>
         </div>
@@ -87,7 +87,7 @@ const AudioDetail = () => {
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto">
             <Link
-              to="/media"
+              to="/gallery"
               className="inline-flex items-center gap-2 text-foreground/70 hover:text-primary transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />

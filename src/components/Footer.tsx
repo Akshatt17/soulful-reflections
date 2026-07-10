@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const footerLinks = [
   { label: "About", href: "/about" },
   { label: "Articles", href: "/articles" },
-  { label: "Media Library", href: "/media" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Resources", href: "/resources" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Disclaimer", href: "/disclaimer" },
