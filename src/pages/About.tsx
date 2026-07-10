@@ -247,7 +247,7 @@ const About = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/articles">
                 <Button variant="hero" size="xl">
-                  Read Reflections
+                  Read Articles
                 </Button>
               </Link>
               <Link to="/tools">

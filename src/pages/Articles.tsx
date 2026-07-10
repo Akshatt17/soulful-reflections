@@ -82,7 +82,7 @@ const Articles = () => {
         <div className="container-custom px-4 sm:px-6 lg:px-8 text-center">
           <div className="radial-tint mx-auto max-w-2xl py-6">
             <h1 className="font-serif text-4xl lg:text-5xl font-bold text-primary mb-4">
-              Reflections
+              Articles
             </h1>
             <p className="text-lg text-foreground/80">
               A dedicated space for long-form reading. Explore insights on mindfulness,

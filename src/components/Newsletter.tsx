@@ -25,7 +25,7 @@ const Newsletter = () => {
           variants={fadeInUp}
           className="font-serif text-2xl font-bold text-primary sm:text-3xl"
         >
-          Weekly Reflections in Your Inbox
+          Weekly Articles in Your Inbox
         </motion.h2>
         <motion.p
           variants={fadeInUp}
