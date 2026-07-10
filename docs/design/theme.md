@@ -1,4 +1,4 @@
-# Soulful Reflections — Theme & Design System
+# The Velvet Mind — Theme & Design System
 
 The single reference for how every page and section of the site should look,
 move, and layer. The landing page already follows it; apply it to the other
