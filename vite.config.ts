@@ -9,7 +9,9 @@ export default defineConfig(({ mode }) => ({
     port: Number(process.env.PORT) || 8080,
   },
   plugins: [react()],
-  base: mode === "production" ? "/soulful-reflections/" : "/",
+  // Project-site path on GitHub Pages; must match the repo name.
+  // On a custom domain this becomes "/" — see "Deployment" in README.md.
+  base: mode === "production" ? "/the-velvet-mind/" : "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
