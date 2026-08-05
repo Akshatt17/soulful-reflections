@@ -42,9 +42,9 @@ The site was renamed **Soulful Reflections → The Velvet Mind**. Product surfac
 
 The word "reflection" *deliberately survives* where it means optical reflection or the ordinary English noun — do not rename these: `ReflectionScene.tsx`, `Reflected.tsx`, the `reflection-wobble` keyframe and `.reflection` CSS class, and the `reflection: string` field on assessment result bands. `src/data/media.json` also keeps its name; it holds media, not brand.
 
-Deploy paths still say `soulful-reflections` (`vite.config.ts` `base`, `package.json` `homepage`) because they must match the GitHub repo name. Change them only together with a repo rename.
+The repo, the local folder, and the deploy paths were all renamed to `the-velvet-mind` on 2026-08-05. `vite.config.ts` `base` and `package.json` `homepage` must keep matching the GitHub repo name; a custom domain would change both to `/` (steps in README.md → Deployment).
 
 ## Conventions
 - Strict TypeScript; type every signature; prefer functional, pure code; keep diffs minimal and scoped.
 - Commit messages: imperative mood, subject ≤50 chars, **no AI signatures, no emojis**; one logical change per commit.
-- Default working branch for this redesign: `redesign/soulful-landing` (and `redesign/soulful-landing-handoff`). Do not push, open PRs, merge, or rebase `main` without being asked.
+- The redesign is merged: `main` is the live site and every push to it deploys. Work on a branch off `main`; do not push to, merge into, or rebase `main` without being asked.
